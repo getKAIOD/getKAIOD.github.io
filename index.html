@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAIOD | Just A Baseplate (Free)</title>
+    <title>KAIOD | Just A Baseplate</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,95 +11,57 @@
     
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; scroll-behavior: smooth; }
-        
         body { background: #0a0a0f; color: #ffffff; min-height: 100vh; line-height: 1.6; overflow-x: hidden; }
 
-        /* Arka Plan Neonları ve Grid Deseni */
         .glow-green { position: fixed; width: 600px; height: 600px; background: rgba(0,255,136,0.08); filter: blur(150px); top: -10%; left: 20%; z-index: -1; pointer-events: none; }
         .glow-blue { position: fixed; width: 500px; height: 500px; background: rgba(0,191,255,0.08); filter: blur(120px); bottom: 0; right: 10%; z-index: -1; pointer-events: none; }
-
-        body::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            z-index: -2;
-            mask-image: radial-gradient(circle at center, black 20%, transparent 100%);
-        }
 
         nav { position: sticky; top: 0; z-index: 100; background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; }
         .logo { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; background: linear-gradient(90deg, #00ff88, #00e5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .nav-links { display: flex; gap: 30px; list-style: none; }
         .nav-links a { text-decoration: none; color: #a1a1aa; font-weight: 600; transition: 0.3s; }
-        .nav-links a:hover { color: #00ff88; text-shadow: 0 0 10px rgba(0,255,136,0.5); }
-        .nav-btn { padding: 10px 20px; background: #00ff88; color: #050508; border-radius: 10px; font-weight: 800; text-decoration: none; transition: 0.3s; }
-        .nav-btn:hover { box-shadow: 0 0 20px rgba(0,255,136,0.5); transform: scale(1.05); }
+        .nav-links a:hover { color: #00ff88; }
+        .nav-btn { padding: 10px 20px; background: #00ff88; color: #050508; border-radius: 10px; font-weight: 800; text-decoration: none; transition: 0.3s; cursor: pointer; border: none; }
+        .nav-btn:hover { box-shadow: 0 0 20px rgba(0,255,136,0.5); }
+        
+        .user-profile { display: none; align-items: center; gap: 10px; }
+        .user-avatar { width: 30px; height: 30px; border-radius: 50%; background: #00e5ff; display: flex; justify-content: center; align-items: center; font-weight: 800; color: #000; }
+        .user-name { font-size: 0.9rem; font-weight: 700; color: #fff; }
+
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 999; justify-content: center; align-items: center; }
+        .modal { background: #12121a; border: 1px solid rgba(0,255,136,0.3); border-radius: 20px; padding: 40px; width: 400px; max-width: 90%; text-align: center; box-shadow: 0 0 50px rgba(0,255,136,0.3); position: relative; }
+        .modal h2 { margin-bottom: 20px; }
+        .modal p { font-size: 0.9rem; color: #a1a1aa; margin-bottom: 15px; }
+        .modal input { width: 100%; padding: 15px; margin-bottom: 15px; background: #1e1e2e; border: 1px solid #52525b; border-radius: 10px; color: #fff; outline: none; }
+        .modal input:focus { border-color: #00ff88; }
+        .modal button { width: 100%; padding: 15px; background: #00ff88; color: #050508; border-radius: 10px; font-weight: 800; cursor: pointer; border: none; margin-top: 5px; transition: 0.3s; }
+        .modal button:hover { box-shadow: 0 0 20px rgba(0,255,136,0.5); }
+        .modal .cancel-btn { background: #3f3f46; margin-top: 10px; }
+        .modal .cancel-btn:hover { box-shadow: none; }
 
         .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 20px; }
         .hero h1 { font-size: 6rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; background: linear-gradient(90deg, #00ff88, #00e5ff, #00ff88); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 4s linear infinite; }
         .hero p { color: #a1a1aa; font-size: 1.5rem; margin-bottom: 40px; max-width: 800px; }
-        .hero .subtitle { color: #52525b; font-size: 1rem; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 20px; }
         @keyframes shine { to { background-position: 200% center; } }
-
-        .btn-main { padding: 20px 40px; background: linear-gradient(135deg, #00ff88, #00e5ff); color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: 0.3s; display: inline-block; margin-bottom: 20px; box-shadow: 0 0 30px rgba(0,255,136,0.4); }
+        
+        .btn-main { padding: 20px 40px; background: linear-gradient(135deg, #00ff88, #00e5ff); color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: 0.3s; display: inline-block; margin-bottom: 20px; box-shadow: 0 0 30px rgba(0,255,136,0.4); cursor: pointer; border: none; }
         .btn-main:hover { transform: translateY(-5px); box-shadow: 0 0 60px rgba(0,255,136,0.6); }
-        .btn-secondary { display: inline-block; color: #fff; text-decoration: none; border: 1px solid #3f3f46; padding: 15px 30px; border-radius: 12px; font-weight: 600; transition: 0.3s; }
-        .btn-secondary:hover { border-color: #00ff88; color: #00ff88; transform: translateY(-3px); }
-
-        .editor-window { width: 100%; max-width: 700px; margin-top: 50px; background: rgba(20, 20, 30, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.8); overflow: hidden; text-align: left; }
-        .editor-top { background: rgba(0,0,0,0.3); padding: 12px 16px; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); color: #71717a; font-size: 0.9rem; }
-        .editor-content { padding: 20px; font-family: monospace; font-size: 1.1rem; color: #d4d4d8; }
-        .editor-buttons { padding: 15px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px; justify-content: flex-end; }
-        .btn-exec { padding: 8px 20px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; }
+        .btn-secondary { display: inline-block; color: #fff; text-decoration: none; border: 1px solid #3f3f46; padding: 15px 30px; border-radius: 12px; font-weight: 600; transition: 0.3s; cursor: pointer; }
+        .btn-secondary:hover { border-color: #00ff88; color: #00ff88; }
 
         .section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.05); }
         .section-title { font-size: 3rem; font-weight: 800; margin-bottom: 20px; }
         .section-desc { color: #a1a1aa; font-size: 1.2rem; margin-bottom: 50px; max-width: 800px; }
-        
-        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-
+        .grid-2, .grid-3 { display: grid; gap: 30px; }
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
         .card { background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; transition: 0.3s; cursor: default; }
-        .card:hover { border-color: rgba(0,255,136,0.4); transform: translateY(-5px); background: rgba(0,255,136,0.03); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        .card:hover { border-color: rgba(0,255,136,0.4); transform: translateY(-5px); }
         .card-icon { font-size: 3rem; margin-bottom: 20px; }
-        .card h3 { font-size: 1.5rem; margin-bottom: 10px; }
-        .card p { color: #a1a1aa; font-size: 0.95rem; }
 
-        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
-        .timeline-item { padding: 20px; background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; margin-bottom: 20px; transition: 0.3s; }
-        .timeline-item:hover { border-color: #00ff88; }
-        .timeline-item h3 { color: #00ff88; margin-bottom: 10px; }
-        
-        .doc-step { padding: 20px; background: rgba(0, 191, 255, 0.05); border: 1px solid rgba(0,191,255,0.2); border-radius: 16px; margin-bottom: 20px; transition: 0.3s; }
-        .doc-step:hover { transform: translateY(-3px); border-color: #00e5ff; }
-        .doc-step h3 { color: #00e5ff; margin-bottom: 10px; }
-
-        .download-section { text-align: center; padding: 50px; background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; }
-        .download-title { font-size: 3rem; font-weight: 800; margin-bottom: 10px; }
-        .download-desc { color: #a1a1aa; margin-bottom: 30px; }
-        .download-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .download-btn { padding: 20px 40px; background: #00ff88; color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: 0.3s; display: inline-block; box-shadow: 0 0 40px rgba(0,255,136,0.4); }
-        .download-btn:hover { transform: scale(1.05); box-shadow: 0 0 60px rgba(0,255,136,0.6); }
-        .contact-email { margin-top: 30px; font-size: 1rem; color: #a1a1aa; }
-        .contact-email a { color: #00e5ff; text-decoration: none; font-weight: 700; }
-
-        /* İletişim Formu Bölümü */
-        .form-section { background: rgba(20, 20, 30, 0.7); border: 1px solid rgba(255,255,255,0.1); padding: 50px; border-radius: 30px; max-width: 800px; margin: 0 auto; }
-        .form-title { font-size: 2.5rem; margin-bottom: 10px; background: linear-gradient(90deg, #00ff88, #00e5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .form-desc { color: #a1a1aa; margin-bottom: 30px; }
-        
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: #d4d4d8; }
-        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-family: inherit; outline: none; transition: 0.3s; font-size: 1rem; }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: #00ff88; box-shadow: 0 0 15px rgba(0,255,136,0.2); }
-        .form-group textarea { resize: vertical; min-height: 120px; }
-        
-        .submit-btn { width: 100%; padding: 20px; background: linear-gradient(135deg, #00ff88, #00e5ff); color: #050508; border: none; border-radius: 16px; font-weight: 800; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
-        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(0,255,136,0.6); }
-        .redirect-note { margin-top: 15px; font-size: 0.9rem; color: #00e5ff; display: none; }
+        .dashboard-section { display: none; background: rgba(0, 191, 255, 0.05); border: 2px solid rgba(0, 191, 255, 0.2); border-radius: 30px; padding: 40px; margin-bottom: 50px; }
+        .dashboard-title { color: #00e5ff; margin-bottom: 10px; font-size: 2.5rem; }
+        .voice-btn { padding: 20px 50px; background: linear-gradient(135deg, #00ff88, #00e5ff); color: #000; border-radius: 16px; font-weight: 800; font-size: 1.5rem; text-decoration: none; transition: 0.3s; display: inline-block; margin-top: 20px; }
 
         .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; }
         .faq-question { font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; }
@@ -107,20 +69,15 @@
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; color: #a1a1aa; }
         .faq-item.active .faq-answer { max-height: 300px; padding-top: 20px; }
 
-        footer { padding: 60px 40px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #52525b; }
-        .footer-links { margin-top: 20px; display: flex; gap: 30px; justify-content: center; }
-        .footer-links a { color: #a1a1aa; text-decoration: none; transition: 0.3s; }
-        .footer-links a:hover { color: #00ff88; }
-
-        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        footer { padding: 60px 40px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #52525b; }
         @media (max-width: 800px) {
             .hero h1 { font-size: 3.5rem; }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
             nav { padding: 15px 20px; }
             .nav-links { display: none; }
-            .form-section { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -133,35 +90,59 @@
         <div class="logo">KAIOD</div>
         <ul class="nav-links">
             <li><a href="#features">Features</a></li>
-            <li><a href="#workflow">Workflow</a></li>
-            <li><a href="#changelog">Changelog</a></li>
-            <li><a href="#docs">Docs</a></li>
             <li><a href="#download">Download</a></li>
-            <li><a href="#contact">Contact</a></li>
             <li><a href="#faq">FAQ</a></li>
         </ul>
-        <a href="#download" class="nav-btn">Download Free</a>
+        <div class="nav-actions">
+            <a href="#download" class="nav-btn">Download Free</a>
+            <button id="loginBtn" onclick="openLogin()" class="nav-btn" style="background: #00e5ff;">Login with Gmail</button>
+            <div id="userProfile" class="user-profile">
+                <div class="user-avatar">G</div>
+                <span class="user-name">Guest</span>
+                <button id="logoutBtn" style="background: none; border: 1px solid #52525b; color: #fff; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Logout</button>
+            </div>
+        </div>
     </nav>
+
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <h2>Login with Gmail</h2>
+            <p>Enter your email. We'll send you a secure magic link. Click the link in your email to login automatically.</p>
+            <input type="email" id="emailInput" placeholder="example@gmail.com" required>
+            <button onclick="sendEmailLink()">Send Magic Link</button>
+            <button onclick="closeLogin()" class="cancel-btn">Cancel</button>
+        </div>
+    </div>
 
     <section class="hero">
         <p class="subtitle">JUST A BASEPLATE</p>
         <h1>KAIOD</h1>
         <p>A powerful script built to bypass anti-fling.<br> Fast execution, broad APIs, and a modern interface.</p>
-        
-        <a href="#download" class="btn-main">Download Free</a>
+        <button onclick="loginAction()" class="btn-main">Login to Voice Chat</button>
         <a href="#features" class="btn-secondary">Explore Features</a>
+    </section>
 
-        <div class="editor-window reveal">
-            <div class="editor-top">
-                <div style="color: #00ff88;">Untitled Tab ×</div>
-                <div style="font-size: 0.8rem;">KAIOD CLIENT</div>
-            </div>
-            <div class="editor-content">
-                <div><span style="color:#00ff88;">print</span><span style="color:#fff;">(</span><span style="color:#fbbf24;">"Hello World!"</span><span style="color:#fff;">);</span></div>
-                <div style="margin-top:20px; color:#71717a;">-- Executing KAIOD...</div>
-            </div>
-            <div class="editor-buttons">
-                <button class="btn-exec">Execute</button>
+    <section id="dashboard" class="section">
+        <div class="dashboard-section" id="dashboardContent">
+            <h2 class="dashboard-title">🚀 Exclusive Member Dashboard</h2>
+            <p class="dashboard-desc" style="color: #a1a1aa; margin-bottom: 20px;">You are logged in! Enjoy exclusive perks.</p>
+            
+            <h3 style="color: #fff; margin-bottom: 15px;">Join Live Voice Room</h3>
+            <a href="https://meet.jit.si/KAIOD" target="_blank" class="voice-btn">🔊 Join KAIOD Voice Room</a>
+
+            <div class="grid-2" style="margin-top: 40px;">
+                <div class="card">
+                    <div class="card-icon">💬</div>
+                    <h3>Exclusive Discord</h3>
+                    <p>Join our official Discord community for support, leaks, and chatting.</p>
+                    <a href="#" class="btn-secondary" style="margin-top: 15px; display: inline-block;">Join Server</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🛡️</div>
+                    <h3>KAIOD v4.1 (BETA)</h3>
+                    <p>Test the upcoming ultra-fast Anti-Fling Bypass update before everyone else!</p>
+                    <a href="#download" class="btn-secondary" style="margin-top: 15px; display: inline-block;">Get Beta Access</a>
+                </div>
             </div>
         </div>
     </section>
@@ -169,223 +150,134 @@
     <section id="features" class="section reveal">
         <p class="section-desc">01 / CAPABILITIES</p>
         <h2 class="section-title">The environment modern scripts expect.</h2>
-        <p class="section-desc">Powerful execution environment, anti-fling bypass, and advanced control. Designed to dominate the game.</p>
-        
         <div class="grid-3">
-            <div class="card">
-                <div class="card-icon">🛡️</div>
-                <h3>Anti-Fling Bypass</h3>
-                <p>Effectively bypasses anti-fling protections, ensuring your actions always land without being kicked.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">⚡</div>
-                <h3>Speed</h3>
-                <p>Never Get Lags! Optimized for high-performance execution in game.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🎯</div>
-                <h3>Custom Kill Speed</h3>
-                <p>Adjust your attack speed and power with dedicated dual sliders.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🔓</div>
-                <h3>Keyless & Modern UI</h3>
-                <p>No keys needed. Clean, modern, and stylish interface built for the latest Roblox UI.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">👁️</div>
-                <h3>Target ESP</h3>
-                <p>Advanced target tracking, distance labels, and highlight boxes.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🚀</div>
-                <h3>Advanced Physics</h3>
-                <p>Drag, Fling, Freeze, Spin, and Blackhole actions with multiple modes.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="workflow" class="section reveal">
-        <p class="section-desc">02 / WORKFLOW</p>
-        <h2 class="section-title">From source to execution.</h2>
-        <p class="section-desc">Write or load a script, attach a client, execute, then read the output. No extra windows.</p>
-
-        <div class="grid-2">
-            <div class="card">
-                <div class="card-icon">01</div>
-                <h3>Write + Execute</h3>
-                <p>Load your script into the editor, toggle your target, and hit execute.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">02</div>
-                <h3>Action Menu</h3>
-                <p>Unlock a wide variety of actions (Spin, Toss, Earthquake) and controls.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="changelog" class="section reveal">
-        <p class="section-desc">03 / CHANGELOG</p>
-        <h2 class="section-title">Version History.</h2>
-        <p class="section-desc">Updates and improvements made to KAIOD over time.</p>
-
-        <div class="timeline">
-            <div class="timeline-item">
-                <h3>v4.0 - Ultimate Edition</h3>
-                <p>Added Anti-Fling Bypass mechanics, improved FE sliding, and modern Glassmorphism UI.</p>
-            </div>
-            <div class="timeline-item">
-                <h3>v3.9 - Stability Patch</h3>
-                <p>Fixed crash bugs on "Just a Baseplate", optimized drag and loop functions for smoother execution.</p>
-            </div>
-            <div class="timeline-item">
-                <h3>v3.2 - CFrame Drag</h3>
-                <p>Implemented new CFrame-based dragging for better control and hit registration.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="docs" class="section reveal">
-        <p class="section-desc">04 / DOCUMENTATION</p>
-        <h2 class="section-title">How to use KAIOD.</h2>
-        <p class="section-desc">Follow these simple steps to get started.</p>
-
-        <div class="grid-2">
-            <div class="doc-step">
-                <h3>Step 1: Get the Script</h3>
-                <p>Copy the script from the Download section below (RScripts or HaxHell link).</p>
-            </div>
-            <div class="doc-step">
-                <h3>Step 2: Use an Executor</h3>
-                <p>Open your favorite Roblox executor (Wave, Fluxus, etc.) and paste the script into the editor.</p>
-            </div>
-            <div class="doc-step">
-                <h3>Step 3: Attach & Execute</h3>
-                <p>Join "Just a Baseplate", attach your client, and hit Execute.</p>
-            </div>
-            <div class="doc-step">
-                <h3>Step 4: Toggle UI</h3>
-                <p>Use the <b>PageDown</b> key on your keyboard to show or hide the KAIOD menu.</p>
-            </div>
+            <div class="card"><div class="card-icon">🛡️</div><h3>Anti-Fling Bypass</h3><p>Bypass anti-fling protections to land hits instantly.</p></div>
+            <div class="card"><div class="card-icon">⚡</div><h3>Speed</h3><p>Never Get Lags! Optimized execution.</p></div>
+            <div class="card"><div class="card-icon">🎯</div><h3>Custom Kill Speed</h3><p>Adjust attack speed and power.</p></div>
+            <div class="card"><div class="card-icon">🔓</div><h3>Keyless</h3><p>No keys needed. Clean UI.</p></div>
+            <div class="card"><div class="card-icon">👁️</div><h3>Target ESP</h3><p>Advanced tracking.</p></div>
+            <div class="card"><div class="card-icon">🚀</div><h3>Advanced Physics</h3><p>Drag, Fling, Freeze, Spin.</p></div>
         </div>
     </section>
 
     <section id="download" class="section reveal">
-        <div class="download-section">
+        <div class="download-section" style="text-align: center; padding: 50px; background: rgba(20, 20, 30, 0.6); border-radius: 30px;">
             <h2 class="download-title">Get KAIOD</h2>
-            <p class="download-desc">100% Free. No keys, no paywalls. Just install and execute.</p>
-            
+            <p class="download-desc">100% Free. No keys, no paywalls.</p>
             <div class="download-buttons">
-                <a href="https://rscripts.net/script/kaiod-by-askeradaman-femboyc00lkidd-Hhpp" target="_blank" class="download-btn">RScripts Link</a>
-                <a href="https://haxhell.com/scripts/universal-script-k-a-i-o-d-by-askeradaman-femboyc00lkidd" target="_blank" class="download-btn">HaxHell Link</a>
+                <a href="https://rscripts.net/script/kaiod-by-askeradaman-femboyc00lkidd-Hhpp" style="padding: 20px 40px; background: #00ff88; color: #050508; border-radius: 16px; font-weight: 800; text-decoration: none; display: inline-block; margin: 10px;" target="_blank">RScripts Link</a>
+                <a href="https://haxhell.com/scripts/universal-script-k-a-i-o-d-by-askeradaman-femboyc00lkidd" style="padding: 20px 40px; background: #00ff88; color: #050508; border-radius: 16px; font-weight: 800; text-decoration: none; display: inline-block; margin: 10px;" target="_blank">HaxHell Link</a>
             </div>
-
-            <div class="contact-email">
-                For support or contact: <a href="mailto:kaiodforhack.xd@gmail.com">kaiodforhack.xd@gmail.com</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- YENİ BÖLÜM: İLETİŞİM FORMU (Form doldur, Jitsi'ye yönlendir) -->
-    <section id="contact" class="section reveal">
-        <div class="form-section">
-            <h2 class="form-title">Join the Voice Room</h2>
-            <p class="form-desc">Tell us why you're here, and we'll connect you to our live community voice room.</p>
-            
-            <form id="contactForm">
-                <div class="form-group">
-                    <label for="name">Your Username / Name</label>
-                    <input type="text" id="name" placeholder="Enter your name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email Address (Optional)</label>
-                    <input type="email" id="email" placeholder="example@email.com">
-                </div>
-
-                <div class="form-group">
-                    <label for="reason">Reason for Contact</label>
-                    <select id="reason" required>
-                        <option value="" disabled selected>Select a reason...</option>
-                        <option value="support">Need Script Support</option>
-                        <option value="bug">Report a Bug</option>
-                        <option value="collab">Collaboration / Partnership</option>
-                        <option value="chat">Just Want to Chat</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Your Message (Optional)</label>
-                    <textarea id="message" placeholder="Write your message here..."></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Submit & Join Voice Room</button>
-                <div id="redirectNote" class="redirect-note">✓ Redirecting you to the voice room...</div>
-            </form>
         </div>
     </section>
 
     <section id="faq" class="section reveal">
-        <p class="section-desc">05 / FAQ</p>
+        <p class="section-desc">02 / FAQ</p>
         <h2 class="section-title">Before you use.</h2>
-        <p class="section-desc">Straight answers about the environment, support, and compatibility.</p>
-
-        <div class="faq-item active">
-            <div class="faq-question">Is KAIOD really free? <span>+</span></div>
-            <div class="faq-answer">Yes. All features are completely free and accessible to everyone. There are no hidden fees or premium tiers.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Does it bypass anti-fling? <span>+</span></div>
-            <div class="faq-answer">Yes! KAIOD is specifically built with advanced mechanics to bypass anti-fling protections.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">What is the main purpose of KAIOD? <span>+</span></div>
-            <div class="faq-answer">KAIOD is a universal Roblox script designed for "Just a Baseplate" and other sandbox games. It focuses on high-speed combat, drag/fling mechanics, and bypassing common defenses.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">How do I execute KAIOD? <span>+</span></div>
-            <div class="faq-answer">Copy the script link from the Download section, paste it into your preferred executor (like Wave or others), and hit Execute. The UI will appear shortly after.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">What is the UI toggle key? <span>+</span></div>
-            <div class="faq-answer">You can press the <b>PageDown</b> key on your keyboard to show or hide the KAIOD UI menu at any time.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Are there any keys needed? <span>+</span></div>
-            <div class="faq-answer">No. KAIOD is 100% keyless. You don't need to verify or go through any link shorteners to use it.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Does it work on mobile? <span>+</span></div>
-            <div class="faq-answer">KAIOD is primarily designed for PC Executors (Windows Client). However, it might work on some supported mobile executors, but PC is recommended for the best performance.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">What games does it support? <span>+</span></div>
-            <div class="faq-answer">It is a Universal script. It is fully optimized for "Just a Baseplate", but the custom physics, ESP, and combat features will work in most Roblox games.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Is it safe to use? <span>+</span></div>
-            <div class="faq-answer">KAIOD is designed with clean and stable code. However, using any third-party scripts always carries a minimal risk of account suspension if detected. Always use a main or alt account.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">How do I get support? <span>+</span></div>
-            <div class="faq-answer">You can contact us directly via our email: kaiodforhack.xd@gmail.com or fill the form above to join our voice room!</div>
-        </div>
+        <div class="faq-item active"><div class="faq-question">Is KAIOD really free? <span>+</span></div><div class="faq-answer">Yes.</div></div>
+        <div class="faq-item"><div class="faq-question">Does it bypass anti-fling? <span>+</span></div><div class="faq-answer">Yes!</div></div>
+        <div class="faq-item"><div class="faq-question">How do I get support? <span>+</span></div><div class="faq-answer">Email us: kaiodforhack.xd@gmail.com</div></div>
     </section>
 
     <footer>
-        <div class="logo" style="font-size: 1.2rem;">KAIOD</div>
-        <p>© 2026 PACKETSTORM PROJECTS. Independent software; not affiliated with Roblox Corporation.</p>
-        <div class="footer-links">
-            <a href="#features">Product</a>
-            <a href="#download">Download</a>
-            <a href="#contact">Join Voice Room</a>
-            <a href="#faq">FAQ</a>
-        </div>
+        <div class="logo">KAIOD</div>
+        <p>© 2026 PACKETSTORM PROJECTS</p>
     </footer>
 
+    <!-- Firebase ve Tüm Fonksiyonlar -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyAyh936N2Dbc3kfRE8fbzqM_h_4jdy2LEM",
+          authDomain: "kaiod-2ece1.firebaseapp.com",
+          projectId: "kaiod-2ece1",
+          storageBucket: "kaiod-2ece1.firebasestorage.app",
+          messagingSenderId: "49228647141",
+          appId: "1:49228647141:web:7ca88eb66124a9a174620c",
+          measurementId: "G-LZVHT7998W"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Sayfa yüklendiğinde kullanıcı linke tıklayıp geldiyse oturumu başlat
+        window.onload = function() {
+            if (isSignInWithEmailLink(auth, window.location.href)) {
+                let email = window.localStorage.getItem('emailForSignIn');
+                if (!email) email = window.prompt('Lütfen doğrulamak için e-posta adresinizi girin:');
+
+                signInWithEmailLink(auth, email, window.location.href)
+                    .then((result) => {
+                        window.localStorage.removeItem('emailForSignIn');
+                        alert('Giriş başarılı! Hoş geldin.');
+                        showLoggedIn(result.user.email);
+                        // URL'deki kodu temizle
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    })
+                    .catch((error) => {
+                        console.error('Giriş hatası:', error);
+                        alert('Doğrulama başarısız.');
+                    });
+            }
+        };
+
+        window.sendEmailLink = function() {
+            const email = document.getElementById('emailInput').value;
+            if (!email.includes('@') || !email.includes('.')) {
+                alert('Lütfen geçerli bir e-posta adresi girin.');
+                return;
+            }
+
+            const actionCodeSettings = {
+                url: window.location.href,
+                handleCodeInApp: true,
+            };
+
+            sendSignInLinkToEmail(auth, email, actionCodeSettings)
+                .then(() => {
+                    window.localStorage.setItem('emailForSignIn', email);
+                    alert('Doğrulama bağlantısı e-postanıza gönderildi! Lütfen mailinizi (veya spam klasörünü) kontrol edin.');
+                    closeLogin();
+                })
+                .catch((error) => {
+                    console.error('Hata:', error);
+                    alert('E-posta gönderilemedi. Firebase Authentication sekmesinden Email/Password ayarını açtığından emin ol.');
+                });
+        };
+
+        window.closeLogin = function() {
+            document.getElementById('loginModal').style.display = 'none';
+        };
+
+        window.openLogin = function() {
+            document.getElementById('loginModal').style.display = 'flex';
+        };
+
+        window.loginAction = function() {
+            const savedUser = localStorage.getItem('kaid_user');
+            if (savedUser) showLoggedIn(savedUser);
+            else openLogin();
+        };
+
+        window.showLoggedIn = function(email) {
+            document.querySelector('.user-name').textContent = email.split('@')[0];
+            document.querySelector('.user-avatar').textContent = email.charAt(0).toUpperCase();
+            document.getElementById('loginBtn').style.display = 'none';
+            document.getElementById('userProfile').style.display = 'flex';
+            document.getElementById('dashboardContent').style.display = 'block';
+            localStorage.setItem('kaid_user', email);
+        };
+
+        document.getElementById('logoutBtn')?.addEventListener('click', function() {
+            localStorage.removeItem('kaid_user');
+            location.reload();
+        });
+    </script>
+
+    <!-- Scroll Animasyonları ve FAQ -->
     <script>
-        // Scroll Reveal Animasyonu
         const revealElements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -395,10 +287,8 @@
                 }
             });
         }, { threshold: 0.1 });
-
         revealElements.forEach(el => observer.observe(el));
-
-        // FAQ Animasyonu
+        
         const faqs = document.querySelectorAll('.faq-question');
         faqs.forEach(faq => {
             faq.addEventListener('click', () => {
@@ -407,25 +297,6 @@
                 sign.textContent = faq.parentElement.classList.contains('active') ? '−' : '+';
             });
         });
-
-        // İletişim Formu - Jitsi'ye Yönlendirme
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Sayfanın yenilenmesini engelle
-            
-            const name = document.getElementById('name').value;
-            const reason = document.getElementById('reason').value;
-
-            // Kullanıcıya bilgi ver
-            const note = document.getElementById('redirectNote');
-            note.style.display = 'block';
-            note.textContent = `✓ Thanks ${name}! Redirecting you to the KAIOD voice room...`;
-
-            // 2.5 saniye sonra Jitsi Meet odasına yönlendir
-            setTimeout(function() {
-                window.location.href = "https://meet.jit.si/KAIOD";
-            }, 2500);
-        });
     </script>
-
 </body>
 </html>
