@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAIOD Project | Next-Gen Bot Systems</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: radial-gradient(circle at top, #161224 0%, #0b0914 100%); color: #f3f4f6; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow-x: hidden; }
+        
+        /* Arka Plan Işık Efekti */
+        body::before { content: ''; position: absolute; width: 400px; height: 400px; background: #00ff88; filter: blur(180px); top: -100px; opacity: 0.15; pointer-events: none; }
+
+        /* Ana Kart */
+        .container { background: rgba(18, 16, 26, 0.65); border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(16px); padding: 50px 40px; border-radius: 24px; text-align: center; max-width: 550px; width: 90%; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); position: relative; }
+        
+        /* Proje Başlığı (Neon Efekti) */
+        .logo-title { font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; background: linear-gradient(135deg, #00ff88 0%, #00bfff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 40px rgba(0, 255, 136, 0.2); }
+        
+        .tagline { color: #9ca3af; font-size: 1.1rem; margin-bottom: 35px; font-weight: 400; line-height: 1.6; }
+        
+        /* Özellik Kartları */
+        .features { display: grid; gap: 12px; margin-bottom: 35px; text-align: left; }
+        .feature-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.03); padding: 14px 20px; border-radius: 12px; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; color: #cbd5e1; }
+        .feature-item span { color: #00ff88; font-weight: bold; }
+
+        /* Havalı Buton */
+        .btn-showcase { display: inline-block; width: 100%; padding: 16px 32px; background: linear-gradient(135deg, #00ff88 0%, #02c39a 100%); color: #05050a; font-weight: 700; font-size: 1.05rem; text-decoration: none; border-radius: 14px; transition: all 0.3s ease; box-shadow: 0 0 25px rgba(0, 255, 136, 0.25); text-transform: uppercase; letter-spacing: 0.5px; }
+        .btn-showcase:hover { transform: translateY(-3px); box-shadow: 0 0 35px rgba(0, 255, 136, 0.45); filter: brightness(1.1); }
+        
+        /* Alt Bilgi */
+        .footer { margin-top: 30px; font-size: 0.8rem; color: #4b5563; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="logo-title">KAIOD</h1>
+        <p class="tagline">The Best Roblox Just A Baseplate Script</p>
+        
+        <div class="features">
+            <div class="feature-item">⚡ <span>Speed:</span>Never Get Lags!</div>
+            <div class="feature-item">🤖 <span>Kill Speed:</span>Custom Kill Speed!</div>
+            <div class="feature-item">💻 <span>Modern UI:</span>No keys! Keyless!</div>
+        </div>
+
+        <a href="https://github.com" target="_blank" class="btn-showcase">Projeleri İncele</a>
+        
+        <div class="footer">© 2026 PACKETSTORM PROJECTS</div>
+    </div>
+
+</body>
+</html>
