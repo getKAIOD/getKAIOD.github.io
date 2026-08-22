@@ -41,7 +41,7 @@
             --glow-blue: rgba(0,191,255,0.2);
         }
 
-        /* ===== GİZLİ FEMBOY MODU ===== */
+        /* ===== GİZLİ FEMBOY MODU (KAIOD yazınca) ===== */
         body.femboy-mode {
             --bg: #ffe4f1;
             --bg-2: #ffd1dc;
@@ -53,6 +53,90 @@
             --glass: rgba(255, 240, 245, 0.8);
             --glow-green: rgba(255, 105, 180, 0.2);
             --glow-blue: rgba(173, 216, 230, 0.2);
+        }
+
+        /* ===== GİZLİ Eski Okul MAVİ MODU (758303kaiod456execute123 yazınca) ===== */
+        body.old-school-mode {
+            --bg: #0000CC;
+            --bg-2: #000099;
+            --text: #FFFFFF;
+            --text-muted: #CCCCFF;
+            --primary: #FFFF00;
+            --secondary: #33FFFF;
+            --border: 2px solid #FFFFFF;
+            --glass: rgba(0, 0, 153, 0.9);
+            --glow-green: rgba(51, 255, 255, 0.2);
+            --glow-blue: rgba(51, 255, 255, 0.2);
+            
+            font-family: 'Times New Roman', Times, serif !important;
+        }
+
+        /* Retro Modun Özel Stilleri */
+        body.old-school-mode * {
+            font-family: 'Times New Roman', Times, serif !important;
+            letter-spacing: 0px;
+            text-transform: none;
+        }
+
+        body.old-school-mode .logo {
+            text-decoration: underline;
+        }
+
+        body.old-school-mode .back-to-top {
+            border-radius: 0;
+            background: white;
+            color: blue;
+            border: 2px solid black;
+        }
+
+        /* Eski usül ziyaretçi sayacı */
+        .visitor-counter {
+            display: none;
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: black;
+            color: #00FF00;
+            padding: 5px;
+            border: 2px solid white;
+            font-size: 12px;
+            z-index: 999;
+        }
+        body.old-school-mode .visitor-counter {
+            display: block;
+        }
+
+        /* Retro Gerçekler Tablosu */
+        #retro-truths {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #000099;
+            border: 4px solid #FFFFFF;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            z-index: 1000;
+            text-align: left;
+        }
+        body.old-school-mode #retro-truths {
+            display: block;
+        }
+        #retro-truths h2 {
+            text-decoration: underline;
+            margin-bottom: 10px;
+        }
+        #retro-truths table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        #retro-truths td, #retro-truths th {
+            border: 1px solid white;
+            padding: 5px;
+            font-size: 14px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; scroll-behavior: smooth; }
@@ -269,6 +353,8 @@
     <div class="glow-green"></div>
     <div class="glow-blue"></div>
     <div class="mouse-glow" id="mouseGlow"></div>
+    
+    <div class="visitor-counter">You are visitor 000001</div>
 
     <nav>
         <div class="logo">KAIOD</div>
@@ -337,8 +423,6 @@
         <p class="section-desc">A faithful recreation of the KAIOD v4.0 interface.</p>
         
         <div class="ui-preview-wrap" id="tilt-parent">
-            <!-- GERÇEK EKRAN GÖRÜNTÜNÜ BURAYA EKLE: <img src="your-screenshot.png" style="width:100%; border-radius:16px;" /> -->
-            
             <div class="real-gui" id="tilt-card">
                 <div class="real-header">
                     <div class="real-title">
@@ -482,6 +566,21 @@
         </div>
     </footer>
 
+    <!-- Retro Modda Çıkacak Gerçekler Tablosu -->
+    <div id="retro-truths">
+        <h2>ALL THE TRUTHS</h2>
+        <table>
+            <tr><th>Claim</th><th>Reality</th></tr>
+            <tr><td>50K+ Active Users</td><td>Completely fake. It's just a fixed number.</td></tr>
+            <tr><td>Anti-Fling Bypass</td><td>It's just a glitchy physics trick with CFrame.</td></tr>
+            <tr><td>Professional Developer</td><td>The developer hates making websites.</td></tr>
+            <tr><td>Keyless Script</td><td>Yes, it is keyless. That part is true!</td></tr>
+            <tr><td>PACKETSTORM PROJECTS</td><td>Just a cool name made up for vibes.</td></tr>
+        </table>
+        <br>
+        <center>Welcome to the Retro Blue Matrix. You found the secret!</center>
+    </div>
+
     <a href="#" class="back-to-top" id="backToTop">↑</a>
 
     <div id="toast-container"></div>
@@ -525,6 +624,7 @@
         // Tema Değiştirme
         function toggleTheme() {
             document.body.classList.remove('femboy-mode'); // Femboy modundan çık
+            document.body.classList.remove('old-school-mode'); // Retro moddan çık
             document.body.classList.toggle('light-mode');
             const isLight = document.body.classList.contains('light-mode');
             const knob = document.getElementById('themeKnob');
@@ -798,6 +898,9 @@
             'proton_packer', 'neutron_walker', 'electron_cloud', 'cosmic_ray_22', 'nebula_nomad', 'supernova_remnant', 'dark_matter_44', 'empty_space_55'
         ];
         const actions = [
+            'just downloaded KAIOD', 
+            'joined the server', 
+            'liked KAIOD v4.0', 
             'joined the Discord server'
         ];
 
@@ -835,8 +938,8 @@
         let keyBuffer = "";
         document.addEventListener('keydown', (e) => {
             if (e.key.length === 1) {
-                keyBuffer = (keyBuffer + e.key.toUpperCase()).slice(-5);
-                if (keyBuffer === 'KAIOD') {
+                keyBuffer = (keyBuffer + e.key.toLowerCase()).slice(-5);
+                if (keyBuffer === 'kaiod') {
                     keyBuffer = "";
                     activateFemboyMode();
                 }
@@ -844,25 +947,61 @@
         });
 
         function activateFemboyMode() {
-            // Aktif modları temizle
             document.body.classList.remove('light-mode');
+            document.body.classList.remove('old-school-mode');
             document.body.classList.add('femboy-mode');
             
-            // Anahtarı güncelle
             const knob = document.getElementById('themeKnob');
             if (knob) {
-                knob.textContent = '🌸'; // Çiçek emojisi
+                knob.textContent = '🌸';
                 knob.style.background = '#ff69b4';
                 knob.style.boxShadow = '0 0 15px #ff69b4';
             }
             
-            // Ses çal
             playClickSound();
+            showToastMessage('🌸 FEMBOY MODE ACTIVATED! 🌸');
+        }
+
+        // ==========================================
+        // GİZLİ RETRO MAVİ MOD - KLAVYE KODU: 758303kaiod456execute123
+        // ==========================================
+        let retroBuffer = "";
+        document.addEventListener('keydown', (e) => {
+            if (e.key.length === 1) {
+                // Femboy modunu engellemek için buffer'ı temizliyoruz
+                keyBuffer = "";
+                
+                retroBuffer = (retroBuffer + e.key.toLowerCase()).slice(-24);
+                if (retroBuffer === '758303kaiod456execute123') {
+                    retroBuffer = "";
+                    activateRetroMode();
+                }
+            }
+        });
+
+        function activateRetroMode() {
+            document.body.classList.remove('femboy-mode');
+            document.body.classList.remove('light-mode');
+            document.body.classList.add('old-school-mode');
             
-            // Özel bildirim göster
+            const knob = document.getElementById('themeKnob');
+            if (knob) {
+                knob.textContent = '🖥️';
+                knob.style.background = '#ffffff';
+                knob.style.color = '#0000CC';
+                knob.style.boxShadow = '0 0 15px #ffffff';
+            }
+            
+            playClickSound();
+            // Retro Tablosunu Göster
+            document.getElementById('retro-truths').style.display = 'block';
+            showToastMessage('🖥️ RETRO MODE ACTIVATED! ALL TRUTHS REVEALED!');
+        }
+
+        function showToastMessage(msg) {
             const toast = document.createElement('div');
             toast.className = 'toast';
-            toast.innerHTML = `<strong>🌸 FEMBOY MODE ACTIVATED! 🌸</strong>`;
+            toast.innerHTML = `<strong>${msg}</strong>`;
             toastContainer.appendChild(toast);
             setTimeout(() => { toast.classList.add('show'); }, 100);
             setTimeout(() => { 
@@ -870,9 +1009,6 @@
                 toast.classList.add('hide'); 
                 setTimeout(() => { toast.remove(); }, 500); 
             }, 4000);
-
-            // Kullanıcı tekrar KAIOD yazarsa kapat
-            // (İstersen burada localStorage'e kaydedip kalıcı yapabilirsin ama şimdilik basit tuttum)
         }
     </script>
 </body>
