@@ -41,7 +41,7 @@
             --glow-blue: rgba(0,191,255,0.2);
         }
 
-        /* ===== GİZLİ FEMBOY MODU (KAIOD yazınca) ===== */
+        /* Femboy Modu */
         body.femboy-mode {
             --bg: #ffe4f1;
             --bg-2: #ffd1dc;
@@ -55,7 +55,7 @@
             --glow-blue: rgba(173, 216, 230, 0.2);
         }
 
-        /* ===== GİZLİ Eski Okul MAVİ MODU (758303kaiod456execute123 yazınca) ===== */
+        /* Retro Mavi Modu */
         body.old-school-mode {
             --bg: #0000CC;
             --bg-2: #000099;
@@ -67,21 +67,16 @@
             --glass: rgba(0, 0, 153, 0.9);
             --glow-green: rgba(51, 255, 255, 0.2);
             --glow-blue: rgba(51, 255, 255, 0.2);
-            
             font-family: 'Times New Roman', Times, serif !important;
         }
 
-        /* Retro Modun Özel Stilleri */
         body.old-school-mode * {
             font-family: 'Times New Roman', Times, serif !important;
             letter-spacing: 0px;
             text-transform: none;
         }
 
-        body.old-school-mode .logo {
-            text-decoration: underline;
-        }
-
+        body.old-school-mode .logo { text-decoration: underline; }
         body.old-school-mode .back-to-top {
             border-radius: 0;
             background: white;
@@ -89,7 +84,6 @@
             border: 2px solid black;
         }
 
-        /* Eski usül ziyaretçi sayacı */
         .visitor-counter {
             display: none;
             position: fixed;
@@ -102,11 +96,8 @@
             font-size: 12px;
             z-index: 999;
         }
-        body.old-school-mode .visitor-counter {
-            display: block;
-        }
+        body.old-school-mode .visitor-counter { display: block; }
 
-        /* Retro Gerçekler Tablosu */
         #retro-truths {
             display: none;
             position: fixed;
@@ -121,26 +112,61 @@
             z-index: 1000;
             text-align: left;
         }
-        body.old-school-mode #retro-truths {
-            display: block;
-        }
-        #retro-truths h2 {
-            text-decoration: underline;
-            margin-bottom: 10px;
-        }
-        #retro-truths table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        #retro-truths td, #retro-truths th {
-            border: 1px solid white;
-            padding: 5px;
-            font-size: 14px;
+        body.old-school-mode #retro-truths { display: block; }
+        #retro-truths h2 { text-decoration: underline; margin-bottom: 10px; }
+        #retro-truths table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        #retro-truths td, #retro-truths th { border: 1px solid white; padding: 5px; font-size: 14px; }
+
+        /* ============================================= */
+        /* ============ IDIOT MODU (YENİ) ============= */
+        /* ============================================= */
+        #idiot-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: white;
+            color: black;
+            z-index: 999999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Times New Roman', Times, serif;
+            animation: idiot-flip 2s infinite;
         }
 
+        body.idiot-mode {
+            background: black !important;
+            overflow: hidden;
+        }
+
+        body.idiot-mode > *:not(#idiot-overlay) {
+            display: none !important;
+        }
+
+        body.idiot-mode #idiot-overlay {
+            display: flex;
+        }
+
+        .idiot-content h1 {
+            font-size: 4rem;
+            margin: 0;
+        }
+
+        .idiot-content .smileys {
+            font-size: 6rem;
+            margin-top: 20px;
+            letter-spacing: 20px;
+        }
+
+        @keyframes idiot-flip {
+            0% { background-color: white; color: black; }
+            50% { background-color: black; color: white; }
+            100% { background-color: white; color: black; }
+        }
+        /* ============================================= */
+
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; scroll-behavior: smooth; }
-        
         ::selection { background: var(--primary); color: #000; }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
@@ -149,39 +175,23 @@
         body { background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; overflow-x: hidden; transition: background-color 0.5s ease, color 0.5s ease; }
 
         #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-
         .glow-green { position: fixed; width: 600px; height: 600px; background: var(--glow-green); filter: blur(150px); top: -10%; left: 20%; z-index: -2; pointer-events: none; animation: float 8s infinite alternate; transition: background 0.5s; }
         .glow-blue { position: fixed; width: 500px; height: 500px; background: var(--glow-blue); filter: blur(120px); bottom: 0; right: 10%; z-index: -2; pointer-events: none; animation: float 10s infinite alternate-reverse; transition: background 0.5s; }
 
-        @keyframes float {
-            0% { transform: translateY(0px) scale(1); }
-            100% { transform: translateY(30px) scale(1.1); }
-        }
+        @keyframes float { 0% { transform: translateY(0px) scale(1); } 100% { transform: translateY(30px) scale(1.1); } }
 
         body::before {
             content: '';
             position: absolute;
             inset: 0;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
             background-size: 60px 60px;
             z-index: -3;
             mask-image: radial-gradient(circle at center, black 20%, transparent 100%);
             transition: background-image 0.5s;
         }
 
-        #loader {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #05050a;
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
+        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #05050a; z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease, visibility 0.8s ease; }
         #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
         .loader-logo { font-size: 3rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; animation: pulse-loader 1.5s infinite alternate; }
         .loader-spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
@@ -189,25 +199,12 @@
         @keyframes pulse-loader { 0% { text-shadow: 0 0 10px var(--primary); } 100% { text-shadow: 0 0 30px var(--primary), 0 0 60px var(--primary); } }
 
         #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
-        .toast {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--primary);
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            color: var(--text);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            transform: translateX(120%);
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;
-        }
+        .toast { background: var(--glass); border: 1px solid var(--border); border-left: 4px solid var(--primary); padding: 12px 20px; border-radius: 8px; font-size: 0.9rem; color: var(--text); box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px); transform: translateX(120%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s; }
         .toast.show { transform: translateX(0); opacity: 1; }
         .toast.hide { transform: translateX(120%); opacity: 0; }
         .toast strong { color: var(--secondary); }
 
         .card, .badge, .nav-btn, .real-gui, .term-top, .download-btn, input, button { transition: all 0.4s ease; }
-
         nav { position: sticky; top: 0; z-index: 100; background: var(--glass); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; transition: background 0.5s; }
         .logo { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transition: 0.3s; }
         .logo:hover { filter: drop-shadow(0 0 15px var(--primary)); }
@@ -217,9 +214,7 @@
         .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: var(--primary); transition: 0.3s; }
         .nav-links a:hover::after { width: 100%; }
 
-        .theme-switch {
-            display: flex; align-items: center; background: var(--bg-2); border: 1px solid var(--border); border-radius: 20px; padding: 4px; cursor: pointer; position: relative; width: 70px; height: 32px; transition: 0.3s;
-        }
+        .theme-switch { display: flex; align-items: center; background: var(--bg-2); border: 1px solid var(--border); border-radius: 20px; padding: 4px; cursor: pointer; position: relative; width: 70px; height: 32px; transition: 0.3s; }
         .theme-switch:hover { border-color: var(--primary); box-shadow: 0 0 10px var(--glow-green); }
         .theme-switch .knob { width: 24px; height: 24px; background: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 14px; color: #05050a; transform: translateX(0); transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), background 0.4s; box-shadow: 0 0 10px var(--primary); z-index: 2; }
         body.light-mode .theme-switch .knob { transform: translateX(38px); background: var(--secondary); box-shadow: 0 0 10px var(--secondary); }
@@ -234,11 +229,9 @@
         .nav-btn:hover { box-shadow: 0 0 20px var(--primary); transform: scale(1.05); }
 
         .hero { min-height: 95vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 20px; position: relative;}
-        
         .hero h1 { font-size: 8rem; font-weight: 800; letter-spacing: -4px; margin-bottom: 15px; background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary)); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 4s linear infinite; }
         .hero p { color: var(--text-muted); font-size: 1.4rem; margin-bottom: 40px; max-width: 800px; }
         .hero .subtitle { color: var(--text-muted); font-size: 1rem; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 20px; }
-        
         @keyframes shine { to { background-position: 200% center; } }
         
         .btn-main { padding: 20px 40px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: inline-block; margin-bottom: 20px; box-shadow: 0 0 40px var(--glow-green); cursor: pointer; }
@@ -349,7 +342,6 @@
     </div>
 
     <canvas id="particle-canvas"></canvas>
-
     <div class="glow-green"></div>
     <div class="glow-blue"></div>
     <div class="mouse-glow" id="mouseGlow"></div>
@@ -378,7 +370,6 @@
         <p class="subtitle">JUST A BASEPLATE</p>
         <h1>KAIOD</h1>
         <p>The Ultimate Scripting Experience.<br> Bypass Anti-Fling, Custom Physics, and a Beautiful Interface.</p>
-        
         <a href="#download" class="btn-main">Download Free</a>
 
         <div class="terminal-window reveal">
@@ -439,7 +430,6 @@
                 </div>
 
                 <div class="real-avatar"></div>
-                
                 <div class="real-target-text">— no target selected —</div>
                 
                 <div style="position: relative;">
@@ -581,15 +571,20 @@
         <center>Welcome to the Retro Blue Matrix. You found the secret!</center>
     </div>
 
-    <a href="#" class="back-to-top" id="backToTop">↑</a>
+    <!-- IDIOT MOD OVERLAY -->
+    <div id="idiot-overlay">
+        <div class="idiot-content">
+            <h1>you are an idiot</h1>
+            <div class="smileys">😊 😊 😊</div>
+        </div>
+    </div>
 
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
     <div id="toast-container"></div>
 
     <script>
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-            }, 1500);
+            setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 1500);
         });
 
         const revealElements = document.querySelectorAll('.reveal');
@@ -621,16 +616,13 @@
             });
         });
 
-        // Tema Değiştirme
         function toggleTheme() {
-            document.body.classList.remove('femboy-mode'); // Femboy modundan çık
-            document.body.classList.remove('old-school-mode'); // Retro moddan çık
+            document.body.classList.remove('femboy-mode');
+            document.body.classList.remove('old-school-mode');
             document.body.classList.toggle('light-mode');
             const isLight = document.body.classList.contains('light-mode');
             const knob = document.getElementById('themeKnob');
-            
             playWhooshSound();
-            
             if (isLight) {
                 knob.textContent = '☀️';
                 knob.style.background = 'var(--secondary)';
@@ -664,7 +656,6 @@
             glow.style.top = e.clientY + 'px';
         });
 
-        // Terminal Animasyonu
         const lines = [
             "> <span>Initializing KAIOD v4.0...</span>",
             "> <span>Bypassing Anti-Fling protections...</span>",
@@ -686,7 +677,6 @@
         }
         setInterval(addLine, 2000);
 
-        // Ses Efektleri
         let audioCtx;
         function getAudioContext() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -723,12 +713,9 @@
         }
 
         document.querySelectorAll('button, a').forEach(el => {
-            el.addEventListener('click', () => {
-                playClickSound();
-            });
+            el.addEventListener('click', () => { playClickSound(); });
         });
 
-        // Canvas Parçacıkları
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -789,16 +776,13 @@
 
         function connectParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
-
                 for (let j = i + 1; j < particles.length; j++) {
                     let dx = particles[i].x - particles[j].x;
                     let dy = particles[i].y - particles[j].y;
                     let dist = Math.sqrt(dx * dx + dy * dy);
-
                     if (dist < 120) {
                         const opacity = 1 - dist / 120;
                         ctx.strokeStyle = `rgba(0, 255, 136, ${opacity * 0.5})`;
@@ -817,7 +801,6 @@
         }
         connectParticles();
 
-        // 3D Tilt Efekti
         const tiltCard = document.getElementById('tilt-card');
         const tiltParent = document.getElementById('tilt-parent');
 
@@ -825,13 +808,10 @@
             const rect = tiltParent.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-
             const rotateX = (y - centerY) / 10;
             const rotateY = (x - centerX) / 10;
-
             tiltCard.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
         });
 
@@ -839,7 +819,6 @@
             tiltCard.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
         });
 
-        // Toast Bildirimleri
         const toastContainer = document.getElementById('toast-container');
         const names = [
             'xGhost_88', 'NovaBlazeX', 'SilentSage_', 'RavenWolf_', 'FrostByte_', 'ShadowStrike', 'LunarEclipse', 'Echo_Seven', 'StormChaser_', 'Phantom_Vibe', 
@@ -933,19 +912,31 @@
         setTimeout(showToast, 5000);
 
         // ==========================================
-        // GİZLİ FEMBOY MODU - KLAVYE KODU: KAIOD
+        // GİZLİ MODLAR - TEK DİNLEYİCİ
         // ==========================================
         let keyBuffer = "";
+        let retroBuffer = "";
+        let idiotBuffer = "";
+
         document.addEventListener('keydown', (e) => {
             if (e.key.length === 1) {
-                keyBuffer = (keyBuffer + e.key.toLowerCase()).slice(-5);
-                if (keyBuffer === 'kaiod') {
-                    keyBuffer = "";
-                    activateFemboyMode();
-                }
+                const lowerKey = e.key.toLowerCase();
+                
+                // Femboy Modu (KAIOD)
+                keyBuffer = (keyBuffer + lowerKey).slice(-5);
+                if (keyBuffer === 'kaiod') { keyBuffer = ""; activateFemboyMode(); }
+                
+                // Retro Mod (758303kaiod456execute123)
+                retroBuffer = (retroBuffer + lowerKey).slice(-24);
+                if (retroBuffer === '758303kaiod456execute123') { retroBuffer = ""; activateRetroMode(); }
+                
+                // Idiot Modu (idiot)
+                idiotBuffer = (idiotBuffer + lowerKey).slice(-5);
+                if (idiotBuffer === 'idiot') { idiotBuffer = ""; activateIdiotMode(); }
             }
         });
 
+        // Femboy Modunu Aktif Et
         function activateFemboyMode() {
             document.body.classList.remove('light-mode');
             document.body.classList.remove('old-school-mode');
@@ -962,23 +953,7 @@
             showToastMessage('🌸 FEMBOY MODE ACTIVATED! 🌸');
         }
 
-        // ==========================================
-        // GİZLİ RETRO MAVİ MOD - KLAVYE KODU: 758303kaiod456execute123
-        // ==========================================
-        let retroBuffer = "";
-        document.addEventListener('keydown', (e) => {
-            if (e.key.length === 1) {
-                // Femboy modunu engellemek için buffer'ı temizliyoruz
-                keyBuffer = "";
-                
-                retroBuffer = (retroBuffer + e.key.toLowerCase()).slice(-24);
-                if (retroBuffer === '758303kaiod456execute123') {
-                    retroBuffer = "";
-                    activateRetroMode();
-                }
-            }
-        });
-
+        // Retro Modu Aktif Et
         function activateRetroMode() {
             document.body.classList.remove('femboy-mode');
             document.body.classList.remove('light-mode');
@@ -993,9 +968,23 @@
             }
             
             playClickSound();
-            // Retro Tablosunu Göster
             document.getElementById('retro-truths').style.display = 'block';
             showToastMessage('🖥️ RETRO MODE ACTIVATED! ALL TRUTHS REVEALED!');
+        }
+
+        // Idiot Modunu Aktif Et
+        function activateIdiotMode() {
+            // Diğer modlardan çık
+            document.body.classList.remove('femboy-mode');
+            document.body.classList.remove('old-school-mode');
+            document.body.classList.remove('light-mode');
+            
+            // Idiot modunu aç
+            document.body.classList.add('idiot-mode');
+            document.getElementById('idiot-overlay').style.display = 'flex';
+            
+            playClickSound();
+            // Toast gösterme, çünkü her şey karardı
         }
 
         function showToastMessage(msg) {
