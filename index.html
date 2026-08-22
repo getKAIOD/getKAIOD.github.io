@@ -43,7 +43,6 @@
 
         body { background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; overflow-x: hidden; transition: background-color 0.5s ease, color 0.5s ease; }
 
-        /* Yeni: Canvas Parçacıkları */
         #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
         .glow-green { position: fixed; width: 600px; height: 600px; background: var(--glow-green); filter: blur(150px); top: -10%; left: 20%; z-index: -2; pointer-events: none; animation: float 8s infinite alternate; transition: background 0.5s; }
@@ -67,7 +66,6 @@
             transition: background-image 0.5s;
         }
 
-        /* Yeni: Yükleme Ekranı (Loader) */
         #loader {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -85,7 +83,6 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes pulse-loader { 0% { text-shadow: 0 0 10px var(--primary); } 100% { text-shadow: 0 0 30px var(--primary), 0 0 60px var(--primary); } }
 
-        /* Yeni: Toast Bildirimleri */
         #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
         .toast {
             background: var(--glass);
@@ -115,7 +112,6 @@
         .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: var(--primary); transition: 0.3s; }
         .nav-links a:hover::after { width: 100%; }
 
-        /* Havalı Tema Anahtarı */
         .theme-switch {
             display: flex; align-items: center; background: var(--bg-2); border: 1px solid var(--border); border-radius: 20px; padding: 4px; cursor: pointer; position: relative; width: 70px; height: 32px; transition: 0.3s;
         }
@@ -169,7 +165,6 @@
 
         .ui-preview-wrap { display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.3); padding: 50px; border-radius: 30px; border: 1px solid var(--border); perspective: 1000px; }
         
-        /* Yeni: 3D Tilt Efekti */
         .real-gui { width: 320px; background: #12101c; border: 2px solid #2a1a4a; border-radius: 16px; padding: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(138, 43, 226, 0.1); position: relative; color: #fff; transform-style: preserve-3d; transition: transform 0.1s ease-out; }
         .real-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
         .real-title { display: flex; align-items: center; gap: 8px; }
@@ -232,13 +227,11 @@
 </head>
 <body>
 
-    <!-- Yükleme Ekranı -->
     <div id="loader">
         <div class="loader-logo">KAIOD</div>
         <div class="loader-spinner"></div>
     </div>
 
-    <!-- Canvas Parçacıkları -->
     <canvas id="particle-canvas"></canvas>
 
     <div class="glow-green"></div>
@@ -441,18 +434,15 @@
 
     <a href="#" class="back-to-top" id="backToTop">↑</a>
 
-    <!-- Toast Konteyneri -->
     <div id="toast-container"></div>
 
     <script>
-        // 1. Loader (Yükleme Ekranı)
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loader').classList.add('hidden');
             }, 1500);
         });
 
-        // 2. Scroll Reveal
         const revealElements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -464,7 +454,6 @@
         }, { threshold: 0.1 });
         revealElements.forEach(el => observer.observe(el));
 
-        // 3. Yukarı Çık Butonu
         window.addEventListener('scroll', () => {
             const btn = document.getElementById('backToTop');
             if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
@@ -474,7 +463,6 @@
             }
         });
 
-        // 4. FAQ
         const faqs = document.querySelectorAll('.faq-question');
         faqs.forEach(faq => {
             faq.addEventListener('click', () => {
@@ -484,7 +472,6 @@
             });
         });
 
-        // 5. Havalı Tema Değiştirme + Ses
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
             const isLight = document.body.classList.contains('light-mode');
@@ -519,14 +506,12 @@
             }
         });
 
-        // 6. Mouse Glow
         document.addEventListener('mousemove', (e) => {
             const glow = document.getElementById('mouseGlow');
             glow.style.left = e.clientX + 'px';
             glow.style.top = e.clientY + 'px';
         });
 
-        // 7. Terminal Animasyonu
         const lines = [
             "> <span>Initializing KAIOD v4.0...</span>",
             "> <span>Bypassing Anti-Fling protections...</span>",
@@ -548,9 +533,6 @@
         }
         setInterval(addLine, 2000);
 
-        // ==========================================
-        // 8. BUTON SES EFEKTLERİ (Web Audio API)
-        // ==========================================
         let audioCtx;
         function getAudioContext() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -586,22 +568,17 @@
             osc.stop(ctx.currentTime + 0.3);
         }
 
-        // Tüm butonlara ve linklere tıklama sesi ekle
         document.querySelectorAll('button, a').forEach(el => {
             el.addEventListener('click', () => {
                 playClickSound();
             });
         });
 
-        // ==========================================
-        // 9. CANVAS NEON PARÇACIK ANİMASYONU
-        // ==========================================
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
         const mouse = { x: null, y: null, radius: 150 };
 
-        // Canvas boyutunu ayarla
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -609,13 +586,11 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // Mouse takibi
         window.addEventListener('mousemove', (e) => {
             mouse.x = e.clientX;
             mouse.y = e.clientY;
         });
 
-        // Parçacıkları oluştur
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
@@ -623,7 +598,6 @@
                 this.vx = (Math.random() - 0.5) * 0.5;
                 this.vy = (Math.random() - 0.5) * 0.5;
                 this.size = Math.random() * 2 + 1;
-                // Yeşil veya Mavi renk
                 const colors = ['#00ff88', '#00e5ff'];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
             }
@@ -632,11 +606,9 @@
                 this.x += this.vx;
                 this.y += this.vy;
 
-                // Sınırlarda geri döndür
                 if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
 
-                // Fareden kaçma (itme) efekti
                 let dx = mouse.x - this.x;
                 let dy = mouse.y - this.y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
@@ -655,13 +627,11 @@
             }
         }
 
-        // 50 parçacık oluştur (Mobilde daha az)
         const particleCount = window.innerWidth < 768 ? 20 : 50;
         for (let i = 0; i < particleCount; i++) {
             particles.push(new Particle());
         }
 
-        // Çizim döngüsü
         function connectParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
@@ -669,7 +639,6 @@
                 particles[i].update();
                 particles[i].draw();
 
-                // Parçacıklar arası bağlantılar
                 for (let j = i + 1; j < particles.length; j++) {
                     let dx = particles[i].x - particles[j].x;
                     let dy = particles[i].y - particles[j].y;
@@ -693,9 +662,6 @@
         }
         connectParticles();
 
-        // ==========================================
-        // 10. 3D TILT EFEKTİ (Roblox GUI Mockup)
-        // ==========================================
         const tiltCard = document.getElementById('tilt-card');
         const tiltParent = document.getElementById('tilt-parent');
 
@@ -717,12 +683,70 @@
             tiltCard.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
         });
 
-        // ==========================================
-        // 11. SAHTE CANLI BİLDİRİMLER (TOAST)
-        // ==========================================
+        // TOAST - SENİN LİSTENDEN TÜM İSİMLER
         const toastContainer = document.getElementById('toast-container');
-        const names = ['Ahmet', 'Mehmet', 'Zeynep', 'Elif', 'Kai', 'Deniz', 'Mert', 'Can', 'Aylin', 'Burak'];
-        const actions = ['az önce KAIOD\'u indirdi', 'sunucuya katıldı', 'KAIOD v4.0\'ı beğendi', 'Discord sunucusuna katıldı'];
+        const names = [
+            'xGhost_88', 'NovaBlazeX', 'SilentSage_', 'RavenWolf_', 'FrostByte_', 'ShadowStrike', 'LunarEclipse', 'Echo_Seven', 'StormChaser_', 'Phantom_Vibe', 
+            'JustJake_22', 'Maddie_Rose_', 'Chris_V_99', 'Sam_TheMan', 'Olivia_Quinn', 'Ethan_Hunt', 'Zoe_Day', 'Noah_Arc', 'Liam_Rain', 'Emma_Sky', 
+            'CoffeeKing_', 'PixelWanderer', 'NightOwl_21', 'EarlyBird_7', 'CodeMaster_X', 'Loop_Lag', 'Respawn_Now', 'GG_EzPz', 'NoobSlayer_42', 'Ace_Spade', 
+            'Arctic_Mist', 'Desert_Rose', 'Ocean_Vibes', 'Mountain_Peak', 'Twilight_Sage', 'Midnight_Rider', 'Golden_Era', 'Silver_Shade', 'Crimson_Hawk', 'Emerald_Core', 
+            'Zen_Master_0', 'Neo_Vortex', 'Cyber_Knight', 'Stealth_Echo', 'Glitch_Pop', 'Overkill_47', 'Underdog_99', 'Sidewinder_X', 'Crosshair_0', 'Reaper_Soul', 
+            'Velvet_Fox', 'Crimson_Tide', 'Shadow_Fang', 'Frost_Talon', 'Storm_Rider', 'Lunar_Moth', 'Solar_Flare', 'Vega_Star', 'Zero_Gravity', 'Onyx_King', 
+            'Ash_Blaze', 'Ember_Spirit', 'Skye_Blue', 'Blair_Reed', 'Quinn_Talon', 'Reese_Piece', 'Wren_Feather', 'Finn_Human', 'Theo_Dark', 'Milo_Ventures', 
+            'Arlo_Knox', 'Nyx_Night', 'Rogue_Agent', 'Jax_Teller', 'Max_Power', 'Kai_Storm', 'Zara_Vex', 'Axel_Rose', 'Cole_Blaze', 'Drew_Code', 
+            'Ray_Sky', 'Jay_Cee', 'Ty_Brooks', 'Eli_West', 'Ian_Rush', 'Leo_Heart', 'Ari_Gold', 'Maya_Blue', 'Sara_Haze', 'Kara_Mist', 
+            'Luke_Warm', 'Mark_One', 'Pete_Za', 'Rick_Riot', 'Morty_Time', 'Steve_Ace', 'Tony_Blaze', 'Bruce_Fox', 'Clark_Cloud', 'Diana_Rose', 
+            'Wraith_Zero', 'Specter_7', 'Havoc_One', 'Mayhem_9', 'Chaos_King', 'Pulse_Check', 'Flux_Core', 'Shift_Key', 'Node_Zero', 'Byte_Me_', 
+            'Pixel_Art', 'Vex_King', 'Haze_Cloud', 'Mist_Weaver', 'Ember_Falls', 'Ash_Knight', 'Thorn_Rose', 'Blade_Runner', 'Fang_One', 'Claw_Zero', 
+            'Talon_Strike', 'Wing_Man', 'Kite_Surf', 'Wave_One', 'Tide_Pool', 'Storm_Cell', 'Snow_Drift', 'Rain_Drop', 'Fog_Hill', 'Dusk_Dawn', 
+            'Dawn_Break', 'Nova_Burst', 'Vega_Signal', 'Orion_Belt', 'Sirius_Star', 'Draco_Flame', 'Luna_Sea', 'Sol_Star', 'Mars_Rover', 'Venus_Trap', 
+            'Jupiter_Moon', 'Saturn_Rings', 'Neptune_Wave', 'Pluto_Fade', 'Galaxy_Trip', 'Comet_Tail', 'Meteor_Strike', 'Asteroid_Belt', 'Quasar_Blaze', 'Pulsar_Beam', 
+            'Ghost_Rider', 'Shadow_Hunter', 'Night_Stalker', 'Dark_Wanderer', 'Lone_Wolf_7', 'Silent_Reader', 'Book_Worm_22', 'Film_Buff', 'Music_Man', 'Bass_Drop', 
+            'Treble_Cliff', 'Rhythm_One', 'Blues_Harp', 'Jazz_Hands', 'Rock_Solid', 'Metal_Head', 'Punk_Rock', 'Folk_Soul', 'Country_Road', 'Soul_Train', 
+            'Disco_Fever', 'Funk_Master', 'Hip_Hop_23', 'Trap_King', 'House_Beat', 'Techno_Edge', 'Dub_Step', 'Drum_Bass', 'Synth_Wave', 'Chill_Pill', 
+            'Lofi_Vibes', 'Acoustic_One', 'Piano_Man', 'Guitar_Hero', 'Bass_Line', 'Snare_Drum', 'Hi_Hat_Cat', 'Kick_Drum_7', 'Melody_Sheep', 'Harmony_Falls', 
+            'Tune_Squad', 'Note_Worthy', 'Scale_Major', 'Chord_Pro', 'Arpeggio_One', 'Staccato_X', 'Legato_Flow', 'Forte_Piano', 'Crescendo_88', 'Finale_End', 
+            'Alpha_Romeo', 'Bravo_Tango', 'Charlie_Delta', 'Echo_Foxtrot', 'Golf_Hotel', 'India_Juliet', 'Kilo_Lima', 'Mike_November', 'Oscar_Papa', 'Quebec_Romeo', 
+            'Sierra_Tango', 'Uniform_Victor', 'Whiskey_Xray', 'Yankee_Zulu', 'Foxtrot_Uni', 'Tango_One', 'Zero_Tolerance', 'One_Shot_99', 'Two_Step_22', 'Three_Leaf', 
+            'Four_Winds', 'Five_Star', 'Six_String', 'Seven_Seas', 'Eight_Ball', 'Nine_Lives', 'Ten_Thousand', 'Neon_Night', 'Vapor_Wave_', 'Retro_Grade', 
+            'Classic_Rock', 'Modern_Soul', 'Future_Bass', 'Ancient_Rune', 'Mystic_Falls', 'Crystal_Cave', 'Obsidian_Edge', 'Granite_Stone', 'Marble_Arch', 'Iron_Will', 
+            'Steel_Heart', 'Bronze_Age', 'Titan_Forge', 'Apex_One', 'Alpha_Zero', 'Omega_Nine', 'Beta_Tester', 'Gamma_Ray', 'Delta_Force_', 'Epsilon_Rise',
+            'broneed_12', 'kronfas1', 'iampizzaaltacc', 'babannehoplatan56', 'notmyrealname22', 'justhere4fun_77', 'randomdude_69', 'lostmyoldacc_99', 'neednewusername', 'mainisbanned_lol',
+            'smurfing_around_7', 'toomanyalts_34', 'why_isthis_taken', 'ihatechoosingnames', 'usernametaken_again', 'thisoneisfree_12', 'finallygotone_44', 'dontjudgeme_22', 'justlurking_00', 'never_post_33',
+            'online_always_24', 'offline_4_life', 'ping_me_maybe_8', 'dont_ping_pls', 'readreceipt_off', 'ghostmode_actv', 'invisible_guy_77', 'appear_offline_99', 'busy_do_not_disturb', 'idle_4_hours',
+            'brb_getting_snacks', 'afk_since_2023', 'sleeping_zzz_44', 'needcoffee_77', 'caffeine_deprived', 'decaf_is_bad_22', 'energydrink_man_1', 'redbull_gives_you', 'monster_ultra_55', 'pizza_in_oven_12',
+            'burger_time_99', 'fries_before_guys', 'nugget_lover_33', 'sauce_boss_88', 'ketchup_king_44', 'mustard_man_7', 'mayo_is_good_66', 'hotdog_stand_22', 'taco_tuesday_90', 'sushi_roll_11',
+            'ramen_noodle_55', 'spaghetti_code_8', 'lasagna_lover_77', 'garlic_bread_00', 'onion_rings_23', 'cheese_pull_45', 'candy_crush_32', 'choccy_milk_88', 'cereal_killer_9', 'toast_is_burnt',
+            'microwave_dinner', 'fridge_raider_69', 'leftover_lover_12', 'cold_pizza_guy', 'ice_cream_5_sec', 'melted_choco_77', 'burnt_toast_22', 'coffee_table_55', 'tv_remote_war', 'couch_potato_44',
+            'netflix_chill_33', 'youtube_rabbit_hole', 'doom_scroller_99', 'twitch_viewer_12', 'just_chatting_00', 'lfg_any_game', 'need_healer_69', 'tank_main_22', 'dps_player_77', 'support_pls_44',
+            'one_trick_pony', 'noob_slayer_11', 'get_rekt_99', 'ez_clap_77', 'gg_wp_22', 'unlucky_gamer_5', 'rng_ hated_me', 'lag_spike_king', 'ping_300_ms', 'packet_loss_33',
+            'screen_freezer', 'crash_reporter_77', 'alt_f4_mania', 'windows_updater', 'download_speed_0', 'ethernet_cable_24', 'wifi_signal_1', 'battery_low_10', 'phone_at_1_percent', 'charger_finder_55',
+            'wall_plug_man', 'power_outage_44', 'generator_broken', 'candle_lighter_77', 'flashlight_holder', 'dark_mode_eyes', 'light_mode_hater', 'night_owl_330', 'early_bird_5am', 'noon_sleeper_12',
+            'alarm_snoozer_99', 'snooze_button_77', 'clock_watcher_44', 'time_waster_22', 'procrastinator_99', 'deadline_chaser_11', 'last_minute_man', 'homework_skipper', 'essay_writer_01', 'copy_paste_king',
+            'google_searcher_77', 'wiki_reader_44', 'know_it_all_22', 'dont_know_anything', 'fake_it_till_make', 'winging_it_99', 'improv_lord_55', 'unscripted_life', 'living_on_edge_7', 'risk_taker_22',
+            'safe_player_33', 'boring_person_00', 'just_an_ordinary', 'average_joel_44', 'typical_guy_55', 'normal_dude_66', 'plain_sight_77', 'blending_in_22', 'stealth_mode_on', 'ninja_in_disguise',
+            'undercover_agent', 'secret_identity_88', 'anonymous_coward', 'masked_hero_33', 'cape_wearer_22', 'no_cape_required', 'spandex_suit_44', 'tights_fighter_77', 'boots_with_spurs', 'hat_guy_00',
+            'glasses_wearer_55', 'beard_man_66', 'bald_eagle_22', 'ponytail_dude_44', 'shaggy_dog_77', 'messy_hair_donot', 'fresh_cut_22', 'barber_shop_44', 'razor_blade_55', 'shaving_cream_66',
+            'aftershave_burn', 'cologne_splash_77', 'deodorant_man_22', 'soap_dispenser', 'towel_guy_44', 'shower_singer_55', 'bath_bomb_66', 'rubber_duck_77', 'pool_floater_22', 'beach_bum_44',
+            'sandcastle_king', 'seashell_finder', 'wave_runner_55', 'sunblock_lotion', 'tan_lines_77', 'flip_flop_man', 'sandal_guy_22', 'sneaker_head_44', 'boot_wearer_55', 'high_heels_ouch',
+            'flat_shoe_66', 'lace_tyer_77', 'velcro_fastener', 'sock_mismatch_22', 'no_show_socks', 'ankle_biter_44', 'knee_scratcher', 'elbow_bumper', 'shoulder_tapper', 'finger_pointer_55',
+            'thumb_warrior', 'fist_bumper_22', 'high_five_man', 'hand_shaker_44', 'hug_giver_77', 'personal_space_22', 'social_anxiety_44', 'awkward_silence', 'cringe_alert_55', 'face_palm_king',
+            'head_desk_77', 'eye_roll_queen', 'shoulder_shrug', 'sigh_heavy_22', 'breathe_deep_44', 'calm_down_man', 'chill_pill_55', 'relax_bro_66', 'takeiteasy_77', 'go_with_flow',
+            'whatever_happens', 'its_fine_22', 'trust_me_44', 'dont_worry_55', 'be_happy_66', 'smile_please_77', 'grumpy_cat_22', 'angry_bird_44', 'crying_emoji_55', 'laughing_myass',
+            'rolling_onfloor', 'dead_inside_77', 'living_4_memes', 'dank_memer_22', 'normie_reject', 'boomer_zoomer_44', 'gen_z_alpha_55', 'millennial_man', 'old_school_66', 'retro_gamer_77',
+            '8bit_warrior', '16bit_hero_22', 'pixel_artist_44', 'low_poly_guy', 'high_def_55', 'raytracing_off', 'potato_pc_77', 'console_peasant', 'pc_master_race_22', 'linux_user_44',
+            'windows_defender', 'macbook_air_guy', 'chromebook_net', 'tablet_tapper', 'phone_thumb_55', 'touchscreen_man', 'stylus_pen_22', 'paper_drawer_44', 'sketchy_lines_55', 'eraser_chunks',
+            'pencil_sharpener', 'glue_stick_77', 'scissor_hands_22', 'tape_roll_44', 'stapler_king_55', 'paperclip_chain', 'postit_note_55', 'highlighter_man', 'whiteboard_clean', 'marker_smell_44',
+            'dry_erase_77', 'dust_eraser_22', 'chalk_dust_44', 'blackboard_squeak', 'projector_bulb', 'remote_clicker_55', 'battery_changer', 'cable_tier_77', 'wireless_man_22', 'bluetooth_pair',
+            'headphone_jack', 'dongle_life_44', 'usb_plugger', 'charger_cord_77', 'powerbank_man_22', 'solar_charger_44', 'wind_turbine_55', 'coal_burner_66', 'nuclear_fission', 'quantum_quark',
+            'proton_packer', 'neutron_walker', 'electron_cloud', 'cosmic_ray_22', 'nebula_nomad', 'supernova_remnant', 'dark_matter_44', 'empty_space_55'
+        ];
+        const actions = [
+            'just downloaded KAIOD', 
+            'joined the server', 
+            'liked KAIOD v4.0', 
+            'joined the Discord server'
+        ];
 
         function showToast() {
             const randomName = names[Math.floor(Math.random() * names.length)];
@@ -745,11 +769,12 @@
                     toast.remove();
                 }, 500);
             }, 4000);
+
+            const nextDelay = Math.random() * 7000 + 5000;
+            setTimeout(showToast, nextDelay);
         }
 
-        // İlk bildirimi 3 saniye sonra göster, sonra 6-10 saniyede bir tekrarla
         setTimeout(showToast, 3000);
-        setInterval(showToast, 8000);
     </script>
 </body>
 </html>
