@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- Gelişmiş GUI Ayarları --- */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; scroll-behavior: smooth; }
         
         ::selection { background: #00ff88; color: #000; }
@@ -62,7 +61,7 @@
         .btn-secondary { display: inline-block; color: #fff; text-decoration: none; border: 1px solid #3f3f46; padding: 15px 30px; border-radius: 12px; font-weight: 600; transition: 0.3s; cursor: pointer; }
         .btn-secondary:hover { border-color: #00ff88; color: #00ff88; transform: translateY(-3px); }
 
-        /* --- YENİ VE GELİŞMİŞ EDITOR --- */
+        /* GELİŞMİŞ EDITOR (YENİ) */
         .editor-window { width: 100%; max-width: 800px; margin-top: 50px; background: rgba(10, 10, 18, 0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(0,255,136,0.05); overflow: hidden; text-align: left; }
         .editor-top { background: #1a1a2e; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2a2a40; }
         .editor-tabs { display: flex; gap: 8px; }
@@ -78,18 +77,16 @@
         .line-numbers { display: flex; flex-direction: column; align-items: flex-end; padding-right: 15px; color: #52525b; user-select: none; border-right: 1px solid #2a2a40; margin-right: 15px; }
         .line-number { min-width: 20px; text-align: right; }
         .code-content { color: #e4e4e7; white-space: pre; }
-        
-        /* Syntax Highlight Renkleri */
-        .kw { color: #ff79c6; } /* Anahtar kelimeler (loadstring, game, HttpGet) */
-        .fn { color: #50fa7b; } /* Fonksiyonlar */
-        .str { color: #f1fa8c; } /* Stringler */
-        .num { color: #bd93f9; } /* Sayılar */
-        .comment { color: #6272a4; } /* Yorumlar */
+
+        /* Yeni Editör Link Stilleri */
+        .editor-link { color: #00ff88; text-decoration: none; font-weight: 700; transition: 0.3s; }
+        .editor-link:hover { color: #00e5ff; text-shadow: 0 0 10px rgba(0,255,136,0.6); }
+        .editor-comment { color: #6272a4; font-style: italic; }
 
         .editor-buttons { padding: 15px; border-top: 1px solid #2a2a40; display: flex; gap: 10px; justify-content: flex-end; background: #1a1a2e; }
-        .btn-exec { padding: 8px 20px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.3s; font-family: 'Space Grotesk', sans-serif; }
-        .btn-exec:hover { box-shadow: 0 0 15px rgba(0,255,136,0.5); }
-        .btn-clear { padding: 8px 20px; background: rgba(255,255,255,0.05); color: #a1a1aa; border: 1px solid #3f3f46; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Space Grotesk', sans-serif; }
+        .btn-download { padding: 10px 25px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-weight: 800; text-decoration: none; transition: 0.3s; font-family: 'Space Grotesk', sans-serif; display: inline-block; }
+        .btn-download:hover { box-shadow: 0 0 15px rgba(0,255,136,0.5); transform: translateY(-2px); }
+        .btn-clear { padding: 10px 25px; background: rgba(255,255,255,0.05); color: #a1a1aa; border: 1px solid #3f3f46; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Space Grotesk', sans-serif; }
         .btn-clear:hover { border-color: #00ff88; color: #00ff88; }
 
         /* Bölümler */
@@ -181,12 +178,12 @@
         <a href="#download" class="btn-main">Download Free</a>
         <a href="#features" class="btn-secondary">Explore Features</a>
 
-        <!-- GELİŞMİŞ EDITOR (HUD) -->
+        <!-- YENİ EDİTÖR: DOĞRUDAN İNDİRME LİNKLERİ -->
         <div class="editor-window reveal">
             <div class="editor-top">
                 <div class="editor-tabs">
                     <div class="tab active">main.luau</div>
-                    <div class="tab">config.luau</div>
+                    <div class="tab">info.txt</div>
                     <div class="tab">+</div>
                 </div>
                 <div class="editor-controls">
@@ -200,14 +197,20 @@
                     <span class="line-number">1</span>
                     <span class="line-number">2</span>
                     <span class="line-number">3</span>
+                    <span class="line-number">4</span>
+                    <span class="line-number">5</span>
                 </div>
                 <div class="code-content">
-                    <span class="kw">loadstring</span><span class="fn">(game</span>:<span class="fn">HttpGet</span>(<span class="str">"https://gist.githubusercontent.com/loklokmmloklokmm88-hash/ec4f3ea49ad0111531144055484fcaf5/raw/KAIOD"</span>))()
+                    <span class="editor-comment">-- KAIOD v4.0 Official Download Links</span>
+                    <span class="editor-comment">-- Use the links below to get the script:</span>
+                    
+                    <span style="color: #ff79c6;">--></span> <a href="https://rscripts.net/script/kaiod-by-askeradaman-femboyc00lkidd-Hhpp" target="_blank" class="editor-link">[ RScripts.net ]</a>
+                    <span style="color: #ff79c6;">--></span> <a href="https://haxhell.com/scripts/universal-script-k-a-i-o-d-by-askeradaman-femboyc00lkidd" target="_blank" class="editor-link">[ HaxHell.com ]</a>
                 </div>
             </div>
             <div class="editor-buttons">
                 <button class="btn-clear">Clear</button>
-                <button class="btn-exec">Execute</button>
+                <a href="https://rscripts.net/script/kaiod-by-askeradaman-femboyc00lkidd-Hhpp" target="_blank" class="btn-download">Go to RScripts</a>
             </div>
         </div>
     </section>
@@ -270,7 +273,7 @@
         <p class="section-desc">05 / DOCUMENTATION</p>
         <h2 class="section-title">How to use KAIOD.</h2>
         <div class="grid-2">
-            <div class="doc-step"><h3>Step 1: Get the Script</h3><p>Copy the loadstring code from the editor.</p></div>
+            <div class="doc-step"><h3>Step 1: Get the Script</h3><p>Click on the RScripts or HaxHell link above.</p></div>
             <div class="doc-step"><h3>Step 2: Use an Executor</h3><p>Paste script into executor.</p></div>
             <div class="doc-step"><h3>Step 3: Attach & Execute</h3><p>Join game and execute.</p></div>
             <div class="doc-step"><h3>Step 4: Toggle UI</h3><p>Press PageDown.</p></div>
@@ -307,7 +310,7 @@
         </div>
         <div class="faq-item">
             <div class="faq-question">How do I execute KAIOD? <span>+</span></div>
-            <div class="faq-answer">Copy the script link from the Download section, paste it into your preferred executor (like Wave or others), and hit Execute. The UI will appear shortly after.</div>
+            <div class="faq-answer">Copy the script from the download links above, paste it into your preferred executor (like Wave or others), and hit Execute. The UI will appear shortly after.</div>
         </div>
         <div class="faq-item">
             <div class="faq-question">What is the UI toggle key? <span>+</span></div>
