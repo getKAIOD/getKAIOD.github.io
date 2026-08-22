@@ -5,205 +5,125 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KAIOD | Just A Baseplate</title>
     
-    <!-- Modern Font -->
+    <!-- Modern Fonts (Space Grotesk) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; }
+        /* Temel Sıfırlama */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; scroll-behavior: smooth; }
         
         body { 
-            background: #05050a; 
-            color: #fff; 
+            background: #0a0a0f; 
+            color: #ffffff; 
             min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            overflow-x: hidden; 
-            position: relative;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* GetWave tarzı Grid Arka Plan */
-        body::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -2;
-            mask-image: radial-gradient(circle at center, black 30%, transparent 100%);
-        }
+        /* Arka Plan Neonlar */
+        .glow-green { position: fixed; width: 500px; height: 500px; background: rgba(0,255,136,0.08); filter: blur(150px); top: -10%; left: 20%; z-index: -1; pointer-events: none; }
+        .glow-blue { position: fixed; width: 400px; height: 400px; background: rgba(0,191,255,0.08); filter: blur(120px); bottom: 0; right: 10%; z-index: -1; pointer-events: none; }
 
-        /* Neon Işıklar */
-        .glow-green {
-            position: absolute;
-            width: 500px; height: 500px;
-            background: rgba(0, 255, 136, 0.1);
-            filter: blur(150px);
-            top: 10%; left: 20%;
-            border-radius: 50%;
-            z-index: -1;
-            animation: pulse 6s infinite alternate;
+        /* Navbar */
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px;
         }
-        .glow-blue {
-            position: absolute;
-            width: 400px; height: 400px;
-            background: rgba(0, 191, 255, 0.1);
-            filter: blur(120px);
-            bottom: 0; right: 10%;
-            border-radius: 50%;
-            z-index: -1;
-            animation: pulse 8s infinite alternate-reverse;
-        }
+        .logo { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; background: linear-gradient(90deg, #00ff88, #00e5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { text-decoration: none; color: #a1a1aa; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: #00ff88; }
+        .nav-btn { padding: 10px 20px; background: #00ff88; color: #050508; border-radius: 10px; font-weight: 800; text-decoration: none; transition: 0.3s; }
+        .nav-btn:hover { box-shadow: 0 0 20px rgba(0,255,136,0.5); }
 
-        @keyframes pulse {
-            0% { opacity: 0.4; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 80px 20px;
         }
-
-        /* Ana Kart */
-        .container { 
-            background: rgba(12, 12, 18, 0.7); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            backdrop-filter: blur(20px); 
-            -webkit-backdrop-filter: blur(20px);
-            padding: 60px 50px; 
-            border-radius: 28px; 
-            text-align: center; 
-            max-width: 650px; 
-            width: 90%; 
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8); 
-            position: relative; 
-            z-index: 10;
-            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        /* Neon Başlık */
-        h1 { 
-            font-size: 4rem; 
-            font-weight: 800; 
-            letter-spacing: -1px; 
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            background: linear-gradient(90deg, #00ff88, #00e5ff, #00ff88);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 4s linear infinite;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #a1a1aa;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-        }
-
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-
-        .description {
-            color: #d4d4d8;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 40px;
-        }
-
-        /* Ana Buton (GetWave Tarzı) */
-        .btn-main { 
-            display: inline-block; 
-            width: 100%; 
-            padding: 18px; 
-            background: linear-gradient(135deg, #00ff88 0%, #00e5ff 100%); 
-            color: #050508; 
-            font-weight: 800; 
-            font-size: 1.1rem; 
-            text-decoration: none; 
-            border-radius: 16px; 
-            transition: all 0.3s ease; 
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.4); 
-            text-transform: uppercase; 
-            letter-spacing: 1.5px; 
-            margin-bottom: 35px;
-            border: none;
-            cursor: pointer;
-        }
+        .hero h1 { font-size: 6rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; background: linear-gradient(90deg, #00ff88, #00e5ff, #00ff88); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 4s linear infinite; }
+        .hero p { color: #a1a1aa; font-size: 1.5rem; margin-bottom: 40px; max-width: 800px; }
+        .hero .subtitle { color: #52525b; font-size: 1rem; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 20px; }
         
-        .btn-main:hover { 
-            transform: translateY(-3px) scale(1.02); 
-            box-shadow: 0 0 50px rgba(0, 255, 136, 0.6), 0 0 100px rgba(0, 229, 255, 0.4); 
-            filter: brightness(1.1);
-        }
+        @keyframes shine { to { background-position: 200% center; } }
 
-        /* Özellik Kutuları */
-        .features { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px; 
+        /* Buttons */
+        .btn-main { padding: 20px 40px; background: linear-gradient(135deg, #00ff88, #00e5ff); color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: 0.3s; display: inline-block; margin-bottom: 20px; }
+        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(0,255,136,0.6); }
+        .btn-secondary { display: inline-block; color: #fff; text-decoration: none; border: 1px solid #3f3f46; padding: 15px 30px; border-radius: 12px; font-weight: 600; transition: 0.3s; }
+        .btn-secondary:hover { border-color: #00ff88; color: #00ff88; }
+
+        /* Editor Mockup */
+        .editor-window {
+            width: 100%; max-width: 700px; margin-top: 50px;
+            background: rgba(20, 20, 30, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8); overflow: hidden; text-align: left;
         }
+        .editor-top { background: rgba(0,0,0,0.3); padding: 12px 16px; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); color: #71717a; font-size: 0.9rem; }
+        .editor-tabs { display: flex; gap: 10px; }
+        .editor-tab { padding: 5px 10px; background: rgba(0,0,0,0.3); border-radius: 6px; }
+        .editor-content { padding: 20px; font-family: monospace; font-size: 1.1rem; color: #d4d4d8; }
+        .editor-buttons { padding: 15px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px; justify-content: flex-end; }
+        .btn-exec { padding: 8px 20px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; }
+        .btn-clear { padding: 8px 20px; background: transparent; border: 1px solid #52525b; color: #fff; border-radius: 8px; cursor: pointer; }
+
+        /* Features Section */
+        .section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.05); }
+        .section-title { font-size: 3rem; font-weight: 800; margin-bottom: 20px; }
+        .section-desc { color: #a1a1aa; font-size: 1.2rem; margin-bottom: 50px; max-width: 800px; }
         
-        .feature-item { 
-            background: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            padding: 20px 15px; 
-            border-radius: 18px; 
-            font-size: 0.9rem; 
-            display: flex; 
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px; 
-            color: #a1a1aa; 
-            transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
-        }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
 
-        .feature-item:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 255, 136, 0.6);
-            background: rgba(0, 255, 136, 0.05);
-            color: #fff;
+        .card {
+            background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.05); padding: 30px;
+            border-radius: 20px; transition: 0.3s; cursor: default;
         }
+        .card:hover { border-color: rgba(0,255,136,0.4); transform: translateY(-5px); background: rgba(0,255,136,0.03); }
+        .card-icon { font-size: 3rem; margin-bottom: 20px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .card p { color: #a1a1aa; font-size: 0.95rem; }
 
-        .feature-icon {
-            font-size: 2rem;
-            filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5));
-        }
+        /* Pricing Section */
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
+        .price-card { background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px 30px; text-align: center; transition: 0.3s; position: relative; overflow: hidden; }
+        .price-card:hover { transform: scale(1.03); }
+        .price-card.featured { border-color: #00ff88; box-shadow: 0 0 40px rgba(0,255,136,0.2); }
+        .price-label { display: inline-block; padding: 5px 10px; background: rgba(0,255,136,0.1); color: #00ff88; border-radius: 5px; font-weight: 700; margin-bottom: 20px; font-size: 0.9rem; }
+        .price-label.best { background: rgba(0,191,255,0.1); color: #00e5ff; }
+        .price { font-size: 4rem; font-weight: 800; margin-bottom: 10px; }
+        .price span { font-size: 1rem; color: #a1a1aa; }
+        .price-features { list-style: none; margin: 30px 0; text-align: left; color: #a1a1aa; font-size: 0.95rem; }
+        .price-features li { margin-bottom: 12px; }
+        .price-features li::before { content: "✓ "; color: #00ff88; font-weight: 800; }
+        .price-btn { display: block; padding: 15px; background: #ffffff; color: #000; text-decoration: none; border-radius: 10px; font-weight: 800; transition: 0.3s; }
+        .price-btn:hover { background: #00ff88; }
 
-        .feature-item span { 
-            color: #00ff88; 
-            font-weight: 800; 
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-        }
+        /* FAQ Section */
+        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; }
+        .faq-question { font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; }
+        .faq-question:hover { color: #00ff88; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; color: #a1a1aa; }
+        .faq-item.active .faq-answer { max-height: 300px; padding-top: 20px; }
 
-        /* Alt Bilgi */
-        .footer { 
-            margin-top: 40px; 
-            font-size: 0.8rem; 
-            color: #52525b; 
-            letter-spacing: 2px; 
-            text-transform: uppercase;
-        }
+        /* Footer */
+        footer { padding: 60px 40px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #52525b; }
+        .footer-links { margin-top: 20px; display: flex; gap: 30px; justify-content: center; }
+        .footer-links a { color: #a1a1aa; text-decoration: none; }
+        .footer-links a:hover { color: #fff; }
 
-        /* Mobil uyum */
-        @media (max-width: 600px) {
-            .container { padding: 40px 20px; }
-            h1 { font-size: 2.5rem; }
-            .subtitle { font-size: 0.8rem; }
-            .features { grid-template-columns: 1fr; }
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Responsive */
+        @media (max-width: 800px) {
+            .hero h1 { font-size: 3.5rem; }
+            .grid-2, .grid-3, .pricing-grid { grid-template-columns: 1fr; }
+            nav { padding: 15px 20px; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -212,38 +132,194 @@
     <div class="glow-green"></div>
     <div class="glow-blue"></div>
 
-    <div class="container">
-        <h1>KAIOD</h1>
-        <p class="subtitle">Just A Baseplate</p>
-        
-        <p class="description">
-            The Ultimate Next-Gen Bot System for Roblox.<br>
-            Fast, Keyless, and Packed with features.
-        </p>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">KAIOD</div>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#workflow">Workflow</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <a href="#pricing" class="nav-btn">Download</a>
+    </nav>
 
-        <!-- Linki kendi GitHub'ınla değiştir -->
-        <a href="https://github.com" target="_blank" class="btn-main">Get KAIOD</a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <p class="subtitle">JUST A BASEPLATE</p>
+        <h1>KAIOD</h1>
+        <p>A full Luau experience built for the game. <br> Fast execution, broad APIs, and a modern interface.</p>
         
-        <div class="features">
-            <div class="feature-item">
-                <div class="feature-icon">⚡</div>
-                <span>Speed</span>
-                Never Get Lags!
+        <a href="#pricing" class="btn-main">Purchase license</a>
+        <a href="#" class="btn-secondary">Explore Features</a>
+
+        <!-- Editor Mockup -->
+        <div class="editor-window">
+            <div class="editor-top">
+                <div class="editor-tabs">
+                    <div class="editor-tab" style="color: #00ff88;">Untitled Tab ×</div>
+                    <div class="editor-tab">+</div>
+                </div>
+                <div style="font-size: 0.8rem;">KAIOD CLIENT</div>
             </div>
-            <div class="feature-item">
-                <div class="feature-icon">🎯</div>
-                <span>Kill Speed</span>
-                Customizable!
+            <div class="editor-content">
+                <div><span style="color:#00ff88;">print</span><span style="color:#fff;">(</span><span style="color:#fbbf24;">"Hello World!"</span><span style="color:#fff;">);</span></div>
+                <div style="margin-top:20px; color:#71717a;">-- Executing KAIOD...</div>
             </div>
-            <div class="feature-item">
-                <div class="feature-icon">🔓</div>
-                <span>Keyless</span>
-                No Keys Needed!
+            <div class="editor-buttons">
+                <button class="btn-clear">Clear</button>
+                <button class="btn-exec">Execute</button>
             </div>
         </div>
+    </section>
 
-        <div class="footer">© 2026 PACKETSTORM PROJECTS</div>
-    </div>
+    <!-- Features / Capabilities -->
+    <section id="features" class="section">
+        <p class="section-desc">01 / CAPABILITIES</p>
+        <h2 class="section-title">The environment modern scripts expect.</h2>
+        <p class="section-desc">Closures, debug, GC, metatables, signals, Drawing, filesystem, networking, crypt, teleport queues, decompilation, and client control.</p>
+        
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Speed</h3>
+                <p>Never Get Lags! Optimized for high-performance execution in game.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>Custom Kill Speed</h3>
+                <p>Adjust your attack speed and power with dedicated dual sliders.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔓</div>
+                <h3>Keyless & Modern UI</h3>
+                <p>No keys needed. Clean, modern, and stylish interface built for the latest Roblox UI.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🧠</div>
+                <h3>KAIOD AI</h3>
+                <p>Built-in AI assistant to help write, explain, fix, and rework scripts directly in the environment.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">👁️</div>
+                <h3>Target ESP</h3>
+                <p>Advanced target tracking, distance labels, and highlight boxes.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🚀</div>
+                <h3>Advanced Physics</h3>
+                <p>Drag, Fling, Freeze, Spin, and Blackhole actions with multiple modes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow / Mockup Section -->
+    <section id="workflow" class="section">
+        <p class="section-desc">02 / WORKFLOW</p>
+        <h2 class="section-title">From source to execution.</h2>
+        <p class="section-desc">Write or load a script, attach a client, execute, then read the output. No extra windows.</p>
+
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-icon">01</div>
+                <h3>Write + Execute</h3>
+                <p>Load your script into the editor, toggle your target, and hit execute.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">02</div>
+                <h3>Action Menu</h3>
+                <p>Unlock a wide variety of actions (Spin, Toss, Earthquake) and controls.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="section">
+        <p class="section-desc">03 / PRICING</p>
+        <h2 class="section-title">Pick your term.</h2>
+        <p class="section-desc">Features do not change between plans. Only the access length does.</p>
+
+        <div class="pricing-grid">
+            <!-- Weekly -->
+            <div class="price-card">
+                <div class="price-label">FLEXIBLE</div>
+                <div class="price">$4.99<span>/ 7 days</span></div>
+                <ul class="price-features">
+                    <li>Full KAIOD access</li>
+                    <li>AI and advanced APIs</li>
+                    <li>Updates while active</li>
+                </ul>
+                <a href="#" class="price-btn">Get weekly access</a>
+            </div>
+
+            <!-- Monthly (Featured) -->
+            <div class="price-card featured">
+                <div class="price-label best">MOST POPULAR</div>
+                <div class="price">$16.99<span>/ 30 days</span></div>
+                <ul class="price-features">
+                    <li>Full KAIOD access</li>
+                    <li>AI and advanced APIs</li>
+                    <li>Updates while active</li>
+                </ul>
+                <a href="#" class="price-btn" style="background: #00ff88;">Get monthly access</a>
+            </div>
+
+            <!-- Quarterly -->
+            <div class="price-card">
+                <div class="price-label">BEST VALUE</div>
+                <div class="price">$39.99<span>/ 90 days</span></div>
+                <ul class="price-features">
+                    <li>Full KAIOD access</li>
+                    <li>AI and advanced APIs</li>
+                    <li>Updates while active</li>
+                </ul>
+                <a href="#" class="price-btn">Get quarterly access</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+        <p class="section-desc">04 / FAQ</p>
+        <h2 class="section-title">Before you buy.</h2>
+        <p class="section-desc">Straight answers about plans, environment support, compatibility, delivery, and client control.</p>
+
+        <div class="faq-item active">
+            <div class="faq-question">Does every plan include the same features? <span>+</span></div>
+            <div class="faq-answer">Yes. Weekly, monthly, and quarterly licenses use the same KAIOD client and environment. Only the access length changes.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Will every script work? <span>+</span></div>
+            <div class="faq-answer">KAIOD is built on a fast Luau runtime with broad environment coverage, ensuring the majority of modern scripts run seamlessly.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">How do I receive my license? <span>+</span></div>
+            <div class="faq-answer">Licenses are delivered instantly via email upon purchase. You can also ask in Discord or contact an official reseller.</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo" style="font-size: 1.2rem;">KAIOD</div>
+        <p>© 2026 PACKETSTORM PROJECTS. Independent software; not affiliated with Roblox Corporation.</p>
+        <div class="footer-links">
+            <a href="#features">Product</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+        </div>
+    </footer>
+
+    <!-- Basit FAQ Animasyonu -->
+    <script>
+        const faqs = document.querySelectorAll('.faq-question');
+        faqs.forEach(faq => {
+            faq.addEventListener('click', () => {
+                faq.parentElement.classList.toggle('active');
+                const sign = faq.querySelector('span');
+                sign.textContent = faq.parentElement.classList.contains('active') ? '−' : '+';
+            });
+        });
+    </script>
 
 </body>
 </html>
