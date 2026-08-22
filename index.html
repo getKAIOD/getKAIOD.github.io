@@ -17,7 +17,6 @@
             --text-muted: #a1a1aa;
             --primary: #00ff88;
             --secondary: #00e5ff;
-            --accent: #8A2BE2;
             --border: rgba(255, 255, 255, 0.08);
             --glass: rgba(15, 15, 25, 0.75);
             --glow-green: rgba(0,255,136,0.12);
@@ -44,8 +43,11 @@
 
         body { background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; overflow-x: hidden; transition: background-color 0.5s ease, color 0.5s ease; }
 
-        .glow-green { position: fixed; width: 600px; height: 600px; background: var(--glow-green); filter: blur(150px); top: -10%; left: 20%; z-index: -1; pointer-events: none; animation: float 8s infinite alternate; transition: background 0.5s; }
-        .glow-blue { position: fixed; width: 500px; height: 500px; background: var(--glow-blue); filter: blur(120px); bottom: 0; right: 10%; z-index: -1; pointer-events: none; animation: float 10s infinite alternate-reverse; transition: background 0.5s; }
+        /* Yeni: Canvas Parçacıkları */
+        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
+        .glow-green { position: fixed; width: 600px; height: 600px; background: var(--glow-green); filter: blur(150px); top: -10%; left: 20%; z-index: -2; pointer-events: none; animation: float 8s infinite alternate; transition: background 0.5s; }
+        .glow-blue { position: fixed; width: 500px; height: 500px; background: var(--glow-blue); filter: blur(120px); bottom: 0; right: 10%; z-index: -2; pointer-events: none; animation: float 10s infinite alternate-reverse; transition: background 0.5s; }
 
         @keyframes float {
             0% { transform: translateY(0px) scale(1); }
@@ -60,12 +62,48 @@
                 linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
             background-size: 60px 60px;
-            z-index: -2;
+            z-index: -3;
             mask-image: radial-gradient(circle at center, black 20%, transparent 100%);
             transition: background-image 0.5s;
         }
 
-        /* Tema geçişleri için yumuşatma */
+        /* Yeni: Yükleme Ekranı (Loader) */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #05050a;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-logo { font-size: 3rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; animation: pulse-loader 1.5s infinite alternate; }
+        .loader-spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulse-loader { 0% { text-shadow: 0 0 10px var(--primary); } 100% { text-shadow: 0 0 30px var(--primary), 0 0 60px var(--primary); } }
+
+        /* Yeni: Toast Bildirimleri */
+        #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+        .toast {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            transform: translateX(120%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;
+        }
+        .toast.show { transform: translateX(0); opacity: 1; }
+        .toast.hide { transform: translateX(120%); opacity: 0; }
+        .toast strong { color: var(--secondary); }
+
         .card, .badge, .nav-btn, .real-gui, .term-top, .download-btn, input, button { transition: all 0.4s ease; }
 
         nav { position: sticky; top: 0; z-index: 100; background: var(--glass); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; transition: background 0.5s; }
@@ -76,54 +114,17 @@
         .nav-links a:hover { color: var(--primary); }
         .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: var(--primary); transition: 0.3s; }
         .nav-links a:hover::after { width: 100%; }
-        
-        /* ===== YENİ HAVALI TEMA ANAHTARI (SWITCH) ===== */
+
+        /* Havalı Tema Anahtarı */
         .theme-switch {
-            display: flex;
-            align-items: center;
-            background: var(--bg-2);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 4px;
-            cursor: pointer;
-            position: relative;
-            width: 70px;
-            height: 32px;
-            transition: 0.3s;
+            display: flex; align-items: center; background: var(--bg-2); border: 1px solid var(--border); border-radius: 20px; padding: 4px; cursor: pointer; position: relative; width: 70px; height: 32px; transition: 0.3s;
         }
         .theme-switch:hover { border-color: var(--primary); box-shadow: 0 0 10px var(--glow-green); }
-        
-        .theme-switch .knob {
-            width: 24px;
-            height: 24px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 14px;
-            color: #05050a;
-            transform: translateX(0);
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), background 0.4s;
-            box-shadow: 0 0 10px var(--primary);
-            z-index: 2;
-        }
-        
-        body.light-mode .theme-switch .knob {
-            transform: translateX(38px);
-            background: var(--secondary);
-            box-shadow: 0 0 10px var(--secondary);
-        }
-        
-        .theme-switch .icon {
-            position: absolute;
-            font-size: 14px;
-            color: var(--text-muted);
-            transition: opacity 0.3s;
-        }
+        .theme-switch .knob { width: 24px; height: 24px; background: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 14px; color: #05050a; transform: translateX(0); transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), background 0.4s; box-shadow: 0 0 10px var(--primary); z-index: 2; }
+        body.light-mode .theme-switch .knob { transform: translateX(38px); background: var(--secondary); box-shadow: 0 0 10px var(--secondary); }
+        .theme-switch .icon { position: absolute; font-size: 14px; color: var(--text-muted); transition: opacity 0.3s; }
         .theme-switch .icon-sun { left: 8px; opacity: 0; }
         .theme-switch .icon-moon { right: 8px; opacity: 1; }
-
         body.light-mode .theme-switch .icon-sun { opacity: 1; }
         body.light-mode .theme-switch .icon-moon { opacity: 0; }
 
@@ -166,8 +167,10 @@
         .card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px var(--glow-green); }
         .card-icon { font-size: 3rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--glow-green)); }
 
-        .ui-preview-wrap { display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.3); padding: 50px; border-radius: 30px; border: 1px solid var(--border); }
-        .real-gui { width: 320px; background: #12101c; border: 2px solid #2a1a4a; border-radius: 16px; padding: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(138, 43, 226, 0.1); position: relative; color: #fff; }
+        .ui-preview-wrap { display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.3); padding: 50px; border-radius: 30px; border: 1px solid var(--border); perspective: 1000px; }
+        
+        /* Yeni: 3D Tilt Efekti */
+        .real-gui { width: 320px; background: #12101c; border: 2px solid #2a1a4a; border-radius: 16px; padding: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(138, 43, 226, 0.1); position: relative; color: #fff; transform-style: preserve-3d; transition: transform 0.1s ease-out; }
         .real-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
         .real-title { display: flex; align-items: center; gap: 8px; }
         .real-logo { font-size: 1.2rem; font-weight: 800; }
@@ -229,6 +232,15 @@
 </head>
 <body>
 
+    <!-- Yükleme Ekranı -->
+    <div id="loader">
+        <div class="loader-logo">KAIOD</div>
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Canvas Parçacıkları -->
+    <canvas id="particle-canvas"></canvas>
+
     <div class="glow-green"></div>
     <div class="glow-blue"></div>
     <div class="mouse-glow" id="mouseGlow"></div>
@@ -242,7 +254,6 @@
             <li><a href="#community">Community</a></li>
             <li><a href="#download">Download</a></li>
             <li><a href="#faq">FAQ</a></li>
-            <!-- Yeni Havalı Tema Anahtarı -->
             <div class="theme-switch" onclick="toggleTheme()">
                 <span class="icon icon-sun">☀️</span>
                 <span class="icon icon-moon">🌙</span>
@@ -300,8 +311,8 @@
         <h2 class="section-title">Exactly what you see in-game.</h2>
         <p class="section-desc">A faithful recreation of the KAIOD v5.1 interface.</p>
         
-        <div class="ui-preview-wrap">
-            <div class="real-gui">
+        <div class="ui-preview-wrap" id="tilt-parent">
+            <div class="real-gui" id="tilt-card">
                 <div class="real-header">
                     <div class="real-title">
                         <span style="font-size: 1.5rem;">⚔</span>
@@ -430,7 +441,18 @@
 
     <a href="#" class="back-to-top" id="backToTop">↑</a>
 
+    <!-- Toast Konteyneri -->
+    <div id="toast-container"></div>
+
     <script>
+        // 1. Loader (Yükleme Ekranı)
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // 2. Scroll Reveal
         const revealElements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -442,6 +464,7 @@
         }, { threshold: 0.1 });
         revealElements.forEach(el => observer.observe(el));
 
+        // 3. Yukarı Çık Butonu
         window.addEventListener('scroll', () => {
             const btn = document.getElementById('backToTop');
             if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
@@ -451,6 +474,7 @@
             }
         });
 
+        // 4. FAQ
         const faqs = document.querySelectorAll('.faq-question');
         faqs.forEach(faq => {
             faq.addEventListener('click', () => {
@@ -460,28 +484,26 @@
             });
         });
 
-        // YENİ HAVALI TEMA DEĞİŞTİRME SİSTEMİ
+        // 5. Havalı Tema Değiştirme + Ses
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
             const isLight = document.body.classList.contains('light-mode');
             const knob = document.getElementById('themeKnob');
             
-            // İkonları ve knob rengini güncelle
+            playWhooshSound();
+            
             if (isLight) {
-                knob.textContent = '☀️'; // Güneş simgesi
+                knob.textContent = '☀️';
                 knob.style.background = 'var(--secondary)';
                 knob.style.boxShadow = '0 0 15px var(--secondary)';
             } else {
-                knob.textContent = '🌙'; // Ay simgesi
+                knob.textContent = '🌙';
                 knob.style.background = 'var(--primary)';
                 knob.style.boxShadow = '0 0 15px var(--primary)';
             }
-
-            // Kullanıcının tercihini hatırla
             localStorage.setItem('kaid-theme', isLight ? 'light' : 'dark');
         }
 
-        // Sayfa yüklendiğinde kayıtlı temayı uygula
         window.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('kaid-theme');
             const knob = document.getElementById('themeKnob');
@@ -497,12 +519,14 @@
             }
         });
 
+        // 6. Mouse Glow
         document.addEventListener('mousemove', (e) => {
             const glow = document.getElementById('mouseGlow');
             glow.style.left = e.clientX + 'px';
             glow.style.top = e.clientY + 'px';
         });
 
+        // 7. Terminal Animasyonu
         const lines = [
             "> <span>Initializing KAIOD v4.0...</span>",
             "> <span>Bypassing Anti-Fling protections...</span>",
@@ -522,8 +546,210 @@
                 currentLine++;
             }
         }
-        
         setInterval(addLine, 2000);
+
+        // ==========================================
+        // 8. BUTON SES EFEKTLERİ (Web Audio API)
+        // ==========================================
+        let audioCtx;
+        function getAudioContext() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            return audioCtx;
+        }
+
+        function playClickSound() {
+            const ctx = getAudioContext();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800, ctx.currentTime);
+            gain.gain.setValueAtTime(0.1, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.1);
+        }
+
+        function playWhooshSound() {
+            const ctx = getAudioContext();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(200, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.3);
+            gain.gain.setValueAtTime(0.1, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.3);
+        }
+
+        // Tüm butonlara ve linklere tıklama sesi ekle
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('click', () => {
+                playClickSound();
+            });
+        });
+
+        // ==========================================
+        // 9. CANVAS NEON PARÇACIK ANİMASYONU
+        // ==========================================
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 150 };
+
+        // Canvas boyutunu ayarla
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Mouse takibi
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        // Parçacıkları oluştur
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+                // Yeşil veya Mavi renk
+                const colors = ['#00ff88', '#00e5ff'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Sınırlarda geri döndür
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                // Fareden kaçma (itme) efekti
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= dx * 0.02 * force;
+                    this.y -= dy * 0.02 * force;
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // 50 parçacık oluştur (Mobilde daha az)
+        const particleCount = window.innerWidth < 768 ? 20 : 50;
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        // Çizim döngüsü
+        function connectParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Parçacıklar arası bağlantılar
+                for (let j = i + 1; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 120) {
+                        const opacity = 1 - dist / 120;
+                        ctx.strokeStyle = `rgba(0, 255, 136, ${opacity * 0.5})`;
+                        if (particles[i].color === '#00e5ff') {
+                            ctx.strokeStyle = `rgba(0, 229, 255, ${opacity * 0.5})`;
+                        }
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(connectParticles);
+        }
+        connectParticles();
+
+        // ==========================================
+        // 10. 3D TILT EFEKTİ (Roblox GUI Mockup)
+        // ==========================================
+        const tiltCard = document.getElementById('tilt-card');
+        const tiltParent = document.getElementById('tilt-parent');
+
+        tiltParent.addEventListener('mousemove', (e) => {
+            const rect = tiltParent.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (x - centerX) / 10;
+
+            tiltCard.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        });
+
+        tiltParent.addEventListener('mouseleave', () => {
+            tiltCard.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+        });
+
+        // ==========================================
+        // 11. SAHTE CANLI BİLDİRİMLER (TOAST)
+        // ==========================================
+        const toastContainer = document.getElementById('toast-container');
+        const names = ['Ahmet', 'Mehmet', 'Zeynep', 'Elif', 'Kai', 'Deniz', 'Mert', 'Can', 'Aylin', 'Burak'];
+        const actions = ['az önce KAIOD\'u indirdi', 'sunucuya katıldı', 'KAIOD v4.0\'ı beğendi', 'Discord sunucusuna katıldı'];
+
+        function showToast() {
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            const randomAction = actions[Math.floor(Math.random() * actions.length)];
+
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<strong>${randomName}</strong> ${randomAction}`;
+            
+            toastContainer.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.classList.add('hide');
+                setTimeout(() => {
+                    toast.remove();
+                }, 500);
+            }, 4000);
+        }
+
+        // İlk bildirimi 3 saniye sonra göster, sonra 6-10 saniyede bir tekrarla
+        setTimeout(showToast, 3000);
+        setInterval(showToast, 8000);
     </script>
 </body>
 </html>
