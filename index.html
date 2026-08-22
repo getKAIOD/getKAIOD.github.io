@@ -7,16 +7,13 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         /* --- Gelişmiş GUI Ayarları --- */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; scroll-behavior: smooth; }
         
-        /* Metin seçme rengi */
         ::selection { background: #00ff88; color: #000; }
-
-        /* Özel Kaydırma Çubuğu */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0a0a0f; }
         ::-webkit-scrollbar-thumb { background: #00ff88; border-radius: 10px; }
@@ -24,7 +21,6 @@
 
         body { background: #0a0a0f; color: #ffffff; min-height: 100vh; line-height: 1.6; overflow-x: hidden; }
 
-        /* Arka Plan Neonları */
         .glow-green { position: fixed; width: 600px; height: 600px; background: rgba(0,255,136,0.1); filter: blur(150px); top: -10%; left: 20%; z-index: -1; pointer-events: none; animation: float 8s infinite alternate; }
         .glow-blue { position: fixed; width: 500px; height: 500px; background: rgba(0,191,255,0.1); filter: blur(120px); bottom: 0; right: 10%; z-index: -1; pointer-events: none; animation: float 10s infinite alternate-reverse; }
 
@@ -45,7 +41,6 @@
             mask-image: radial-gradient(circle at center, black 20%, transparent 100%);
         }
 
-        /* Navigasyon */
         nav { position: sticky; top: 0; z-index: 100; background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; }
         .logo { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; background: linear-gradient(90deg, #00ff88, #00e5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transition: 0.3s; }
         .logo:hover { filter: drop-shadow(0 0 10px rgba(0,255,136,0.8)); }
@@ -55,7 +50,6 @@
         .nav-btn { padding: 10px 20px; background: #00ff88; color: #050508; border-radius: 10px; font-weight: 800; text-decoration: none; transition: 0.3s; cursor: pointer; border: none; }
         .nav-btn:hover { box-shadow: 0 0 20px rgba(0,255,136,0.5); transform: scale(1.05); }
 
-        /* Hero */
         .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 20px; }
         .hero h1 { font-size: 6rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; background: linear-gradient(90deg, #00ff88, #00e5ff, #00ff88); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 4s linear infinite; }
         .hero p { color: #a1a1aa; font-size: 1.5rem; margin-bottom: 40px; max-width: 800px; }
@@ -68,20 +62,41 @@
         .btn-secondary { display: inline-block; color: #fff; text-decoration: none; border: 1px solid #3f3f46; padding: 15px 30px; border-radius: 12px; font-weight: 600; transition: 0.3s; cursor: pointer; }
         .btn-secondary:hover { border-color: #00ff88; color: #00ff88; transform: translateY(-3px); }
 
-        /* Editor Mockup */
-        .editor-window { width: 100%; max-width: 700px; margin-top: 50px; background: rgba(20, 20, 30, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.8); overflow: hidden; text-align: left; }
-        .editor-top { background: rgba(0,0,0,0.3); padding: 12px 16px; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); color: #71717a; font-size: 0.9rem; }
-        .editor-content { padding: 20px; font-family: monospace; font-size: 1.1rem; color: #d4d4d8; }
-        .editor-buttons { padding: 15px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px; justify-content: flex-end; }
-        .btn-exec { padding: 8px 20px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.3s; }
+        /* --- YENİ VE GELİŞMİŞ EDITOR --- */
+        .editor-window { width: 100%; max-width: 800px; margin-top: 50px; background: rgba(10, 10, 18, 0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(0,255,136,0.05); overflow: hidden; text-align: left; }
+        .editor-top { background: #1a1a2e; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2a2a40; }
+        .editor-tabs { display: flex; gap: 8px; }
+        .tab { padding: 4px 12px; background: rgba(255,255,255,0.05); border-radius: 6px; font-size: 0.8rem; color: #a1a1aa; cursor: pointer; transition: 0.2s; }
+        .tab.active { background: rgba(0,255,136,0.2); color: #00ff88; }
+        .editor-controls { display: flex; gap: 6px; }
+        .win-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .editor-body { display: flex; padding: 20px; background: #0d0d1a; font-family: 'JetBrains Mono', monospace; font-size: 1rem; line-height: 1.8; overflow-x: auto; }
+        .line-numbers { display: flex; flex-direction: column; align-items: flex-end; padding-right: 15px; color: #52525b; user-select: none; border-right: 1px solid #2a2a40; margin-right: 15px; }
+        .line-number { min-width: 20px; text-align: right; }
+        .code-content { color: #e4e4e7; white-space: pre; }
+        
+        /* Syntax Highlight Renkleri */
+        .kw { color: #ff79c6; } /* Anahtar kelimeler (loadstring, game, HttpGet) */
+        .fn { color: #50fa7b; } /* Fonksiyonlar */
+        .str { color: #f1fa8c; } /* Stringler */
+        .num { color: #bd93f9; } /* Sayılar */
+        .comment { color: #6272a4; } /* Yorumlar */
+
+        .editor-buttons { padding: 15px; border-top: 1px solid #2a2a40; display: flex; gap: 10px; justify-content: flex-end; background: #1a1a2e; }
+        .btn-exec { padding: 8px 20px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.3s; font-family: 'Space Grotesk', sans-serif; }
         .btn-exec:hover { box-shadow: 0 0 15px rgba(0,255,136,0.5); }
+        .btn-clear { padding: 8px 20px; background: rgba(255,255,255,0.05); color: #a1a1aa; border: 1px solid #3f3f46; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Space Grotesk', sans-serif; }
+        .btn-clear:hover { border-color: #00ff88; color: #00ff88; }
 
         /* Bölümler */
         .section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.05); }
         .section-title { font-size: 3rem; font-weight: 800; margin-bottom: 20px; }
         .section-desc { color: #a1a1aa; font-size: 1.2rem; margin-bottom: 50px; max-width: 800px; }
         
-        /* Grid ve Kartlar */
         .grid-2, .grid-3 { display: grid; gap: 30px; }
         .grid-2 { grid-template-columns: repeat(2, 1fr); }
         .grid-3 { grid-template-columns: repeat(3, 1fr); }
@@ -90,14 +105,12 @@
         .card:hover { border-color: rgba(0,255,136,0.4); transform: translateY(-5px); background: rgba(0,255,136,0.03); box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0,255,136,0.1); }
         .card-icon { font-size: 3rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(0,255,136,0.5)); }
 
-        /* İstatistikler */
         .stats-section { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 20px; }
         .stat-box { text-align: center; padding: 30px; background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; transition: 0.3s; }
         .stat-box:hover { border-color: #00e5ff; transform: scale(1.05); }
         .stat-number { font-size: 3rem; font-weight: 800; background: linear-gradient(90deg, #00ff88, #00e5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .stat-label { color: #a1a1aa; margin-top: 10px; font-weight: 600; }
 
-        /* Changelog & Docs */
         .timeline-item { padding: 20px; background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; margin-bottom: 20px; transition: 0.3s; }
         .timeline-item:hover { border-color: #00ff88; transform: translateX(5px); }
         .timeline-item h3 { color: #00ff88; margin-bottom: 10px; }
@@ -106,7 +119,6 @@
         .doc-step:hover { transform: translateY(-3px); border-color: #00e5ff; background: rgba(0, 191, 255, 0.1); }
         .doc-step h3 { color: #00e5ff; margin-bottom: 10px; }
 
-        /* Download */
         .download-section { text-align: center; padding: 50px; background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; }
         .download-title { font-size: 3rem; font-weight: 800; margin-bottom: 10px; }
         .download-desc { color: #a1a1aa; margin-bottom: 30px; }
@@ -114,35 +126,31 @@
         .download-btn { padding: 20px 40px; background: #00ff88; color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: 0.3s; display: inline-block; box-shadow: 0 0 40px rgba(0,255,136,0.4); }
         .download-btn:hover { transform: scale(1.05); box-shadow: 0 0 60px rgba(0,255,136,0.6); }
 
-        /* FAQ */
         .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; transition: 0.3s; }
         .faq-question { font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; }
         .faq-question:hover { color: #00ff88; }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; color: #a1a1aa; }
         .faq-item.active .faq-answer { max-height: 300px; padding-top: 20px; }
 
-        /* Footer */
         footer { padding: 60px 40px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #52525b; position: relative; }
         .footer-links { margin-top: 20px; display: flex; gap: 30px; justify-content: center; }
         .footer-links a { color: #a1a1aa; text-decoration: none; transition: 0.3s; }
         .footer-links a:hover { color: #00ff88; }
 
-        /* Yukarı Çık Butonu */
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: #00ff88; color: #000; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; font-weight: 800; text-decoration: none; box-shadow: 0 0 20px rgba(0,255,136,0.5); opacity: 0; transition: 0.3s; z-index: 999; }
         .back-to-top.show { opacity: 1; }
         .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(0,255,136,0.7); }
 
-        /* Scroll Reveal Animasyonu */
         .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Mobil */
         @media (max-width: 800px) {
             .hero h1 { font-size: 3.5rem; }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
             .stats-section { grid-template-columns: repeat(2, 1fr); }
             nav { padding: 15px 20px; }
             .nav-links { display: none; }
+            .editor-body { font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -173,16 +181,32 @@
         <a href="#download" class="btn-main">Download Free</a>
         <a href="#features" class="btn-secondary">Explore Features</a>
 
+        <!-- GELİŞMİŞ EDITOR (HUD) -->
         <div class="editor-window reveal">
             <div class="editor-top">
-                <div style="color: #00ff88;">Untitled Tab ×</div>
-                <div style="font-size: 0.8rem;">KAIOD CLIENT</div>
+                <div class="editor-tabs">
+                    <div class="tab active">main.luau</div>
+                    <div class="tab">config.luau</div>
+                    <div class="tab">+</div>
+                </div>
+                <div class="editor-controls">
+                    <div class="win-dot dot-red"></div>
+                    <div class="win-dot dot-yellow"></div>
+                    <div class="win-dot dot-green"></div>
+                </div>
             </div>
-            <div class="editor-content">
-                <div><span style="color:#00ff88;">print</span><span style="color:#fff;">(</span><span style="color:#fbbf24;">"Hello World!"</span><span style="color:#fff;">);</span></div>
-                <div style="margin-top:20px; color:#71717a;">-- Executing KAIOD...</div>
+            <div class="editor-body">
+                <div class="line-numbers">
+                    <span class="line-number">1</span>
+                    <span class="line-number">2</span>
+                    <span class="line-number">3</span>
+                </div>
+                <div class="code-content">
+                    <span class="kw">loadstring</span><span class="fn">(game</span>:<span class="fn">HttpGet</span>(<span class="str">"https://gist.githubusercontent.com/loklokmmloklokmm88-hash/ec4f3ea49ad0111531144055484fcaf5/raw/KAIOD"</span>))()
+                </div>
             </div>
             <div class="editor-buttons">
+                <button class="btn-clear">Clear</button>
                 <button class="btn-exec">Execute</button>
             </div>
         </div>
@@ -201,7 +225,6 @@
         </div>
     </section>
 
-    <!-- YENİ BÖLÜM: İSTATİSTİKLER -->
     <section id="stats" class="section reveal">
         <p class="section-desc">02 / STATS</p>
         <h2 class="section-title">Powered by numbers.</h2>
@@ -247,7 +270,7 @@
         <p class="section-desc">05 / DOCUMENTATION</p>
         <h2 class="section-title">How to use KAIOD.</h2>
         <div class="grid-2">
-            <div class="doc-step"><h3>Step 1: Get the Script</h3><p>Download below.</p></div>
+            <div class="doc-step"><h3>Step 1: Get the Script</h3><p>Copy the loadstring code from the editor.</p></div>
             <div class="doc-step"><h3>Step 2: Use an Executor</h3><p>Paste script into executor.</p></div>
             <div class="doc-step"><h3>Step 3: Attach & Execute</h3><p>Join game and execute.</p></div>
             <div class="doc-step"><h3>Step 4: Toggle UI</h3><p>Press PageDown.</p></div>
@@ -322,12 +345,9 @@
         </div>
     </footer>
 
-    <!-- Yukarı Çık Butonu -->
     <a href="#" class="back-to-top" id="backToTop">↑</a>
 
-    <!-- Animasyon Scripti -->
     <script>
-        // Scroll Reveal
         const revealElements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -339,7 +359,6 @@
         }, { threshold: 0.1 });
         revealElements.forEach(el => observer.observe(el));
 
-        // Yukarı Çık Butonu Göster/Gizle
         window.onscroll = function() {
             const btn = document.getElementById('backToTop');
             if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
@@ -349,7 +368,6 @@
             }
         };
 
-        // FAQ
         const faqs = document.querySelectorAll('.faq-question');
         faqs.forEach(faq => {
             faq.addEventListener('click', () => {
