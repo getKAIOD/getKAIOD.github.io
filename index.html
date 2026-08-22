@@ -14,6 +14,7 @@
         
         body { background: #0a0a0f; color: #ffffff; min-height: 100vh; line-height: 1.6; overflow-x: hidden; }
 
+        /* Arka Plan Işıkları */
         .glow-green { position: fixed; width: 500px; height: 500px; background: rgba(0,255,136,0.08); filter: blur(150px); top: -10%; left: 20%; z-index: -1; pointer-events: none; }
         .glow-blue { position: fixed; width: 400px; height: 400px; background: rgba(0,191,255,0.08); filter: blur(120px); bottom: 0; right: 10%; z-index: -1; pointer-events: none; }
 
@@ -42,6 +43,7 @@
         .editor-buttons { padding: 15px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px; justify-content: flex-end; }
         .btn-exec { padding: 8px 20px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; }
 
+        /* Bölümler */
         .section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.05); }
         .section-title { font-size: 3rem; font-weight: 800; margin-bottom: 20px; }
         .section-desc { color: #a1a1aa; font-size: 1.2rem; margin-bottom: 50px; max-width: 800px; }
@@ -55,7 +57,15 @@
         .card h3 { font-size: 1.5rem; margin-bottom: 10px; }
         .card p { color: #a1a1aa; font-size: 0.95rem; }
 
-        /* Ücretsiz İndirme Bölümü */
+        /* Yeni Bölümler: Changelog & Docs */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline-item { padding: 20px; background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; margin-bottom: 20px; }
+        .timeline-item h3 { color: #00ff88; margin-bottom: 10px; }
+        
+        .doc-step { padding: 20px; background: rgba(0, 191, 255, 0.05); border: 1px solid rgba(0,191,255,0.2); border-radius: 16px; margin-bottom: 20px; }
+        .doc-step h3 { color: #00e5ff; margin-bottom: 10px; }
+
+        /* Ücretsiz İndirme */
         .download-section { text-align: center; padding: 50px; background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; }
         .download-title { font-size: 3rem; font-weight: 800; margin-bottom: 10px; }
         .download-desc { color: #a1a1aa; margin-bottom: 30px; }
@@ -64,8 +74,8 @@
         .download-btn:hover { transform: scale(1.05); box-shadow: 0 0 60px rgba(0,255,136,0.6); }
         .contact-email { margin-top: 30px; font-size: 1rem; color: #a1a1aa; }
         .contact-email a { color: #00e5ff; text-decoration: none; font-weight: 700; }
-        .contact-email a:hover { text-decoration: underline; }
 
+        /* FAQ */
         .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; }
         .faq-question { font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; }
         .faq-question:hover { color: #00ff88; }
@@ -75,7 +85,10 @@
         footer { padding: 60px 40px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #52525b; }
         .footer-links { margin-top: 20px; display: flex; gap: 30px; justify-content: center; }
         .footer-links a { color: #a1a1aa; text-decoration: none; }
-        .footer-links a:hover { color: #fff; }
+
+        /* Scroll Reveal Animasyonu (GUI İyileştirmesi) */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 800px) {
             .hero h1 { font-size: 3.5rem; }
@@ -90,11 +103,14 @@
     <div class="glow-green"></div>
     <div class="glow-blue"></div>
 
+    <!-- Navbar (Yeni Linkler Eklendi) -->
     <nav>
         <div class="logo">KAIOD</div>
         <ul class="nav-links">
             <li><a href="#features">Features</a></li>
             <li><a href="#workflow">Workflow</a></li>
+            <li><a href="#changelog">Changelog</a></li>
+            <li><a href="#docs">Docs</a></li>
             <li><a href="#download">Download</a></li>
             <li><a href="#faq">FAQ</a></li>
         </ul>
@@ -109,7 +125,7 @@
         <a href="#download" class="btn-main">Download Free</a>
         <a href="#features" class="btn-secondary">Explore Features</a>
 
-        <div class="editor-window">
+        <div class="editor-window reveal">
             <div class="editor-top">
                 <div style="color: #00ff88;">Untitled Tab ×</div>
                 <div style="font-size: 0.8rem;">KAIOD CLIENT</div>
@@ -124,7 +140,7 @@
         </div>
     </section>
 
-    <section id="features" class="section">
+    <section id="features" class="section reveal">
         <p class="section-desc">01 / CAPABILITIES</p>
         <h2 class="section-title">The environment modern scripts expect.</h2>
         <p class="section-desc">Powerful execution environment, anti-fling bypass, and advanced control. Designed to dominate the game.</p>
@@ -163,7 +179,7 @@
         </div>
     </section>
 
-    <section id="workflow" class="section">
+    <section id="workflow" class="section reveal">
         <p class="section-desc">02 / WORKFLOW</p>
         <h2 class="section-title">From source to execution.</h2>
         <p class="section-desc">Write or load a script, attach a client, execute, then read the output. No extra windows.</p>
@@ -182,8 +198,56 @@
         </div>
     </section>
 
-    <!-- Ücretsiz İndirme Bölümü -->
-    <section id="download" class="section">
+    <!-- YENİ SAYFA: CHANGELOG -->
+    <section id="changelog" class="section reveal">
+        <p class="section-desc">03 / CHANGELOG</p>
+        <h2 class="section-title">Version History.</h2>
+        <p class="section-desc">Updates and improvements made to KAIOD over time.</p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>v4.0 - Ultimate Edition</h3>
+                <p>Added Anti-Fling Bypass mechanics, improved FE sliding, and modern Glassmorphism UI.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>v3.9 - Stability Patch</h3>
+                <p>Fixed crash bugs on "Just a Baseplate", optimized drag and loop functions for smoother execution.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>v3.2 - CFrame Drag</h3>
+                <p>Implemented new CFrame-based dragging for better control and hit registration.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- YENİ SAYFA: DOCUMENTATION -->
+    <section id="docs" class="section reveal">
+        <p class="section-desc">04 / DOCUMENTATION</p>
+        <h2 class="section-title">How to use KAIOD.</h2>
+        <p class="section-desc">Follow these simple steps to get started.</p>
+
+        <div class="grid-2">
+            <div class="doc-step">
+                <h3>Step 1: Get the Script</h3>
+                <p>Copy the script from the Download section below (RScripts or HaxHell link).</p>
+            </div>
+            <div class="doc-step">
+                <h3>Step 2: Use an Executor</h3>
+                <p>Open your favorite Roblox executor (Wave, Fluxus, etc.) and paste the script into the editor.</p>
+            </div>
+            <div class="doc-step">
+                <h3>Step 3: Attach & Execute</h3>
+                <p>Join "Just a Baseplate", attach your client, and hit Execute.</p>
+            </div>
+            <div class="doc-step">
+                <h3>Step 4: Toggle UI</h3>
+                <p>Use the <b>PageDown</b> key on your keyboard to show or hide the KAIOD menu.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ücretsiz İndirme -->
+    <section id="download" class="section reveal">
         <div class="download-section">
             <h2 class="download-title">Get KAIOD</h2>
             <p class="download-desc">100% Free. No keys, no paywalls. Just install and execute.</p>
@@ -199,8 +263,8 @@
         </div>
     </section>
 
-    <section id="faq" class="section">
-        <p class="section-desc">03 / FAQ</p>
+    <section id="faq" class="section reveal">
+        <p class="section-desc">05 / FAQ</p>
         <h2 class="section-title">Before you use.</h2>
         <p class="section-desc">Straight answers about the environment, support, and compatibility.</p>
 
@@ -256,7 +320,22 @@
         </div>
     </footer>
 
+    <!-- Gelişmiş JS: Scroll Reveal ve FAQ -->
     <script>
+        // Scroll Reveal Animasyonu
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => observer.observe(el));
+
+        // FAQ Animasyonu
         const faqs = document.querySelectorAll('.faq-question');
         faqs.forEach(faq => {
             faq.addEventListener('click', () => {
