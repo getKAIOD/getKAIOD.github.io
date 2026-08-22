@@ -59,8 +59,12 @@
         .download-section { text-align: center; padding: 50px; background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; }
         .download-title { font-size: 3rem; font-weight: 800; margin-bottom: 10px; }
         .download-desc { color: #a1a1aa; margin-bottom: 30px; }
-        .download-btn { padding: 25px 60px; background: #00ff88; color: #050508; border-radius: 20px; font-weight: 800; font-size: 1.5rem; text-decoration: none; transition: 0.3s; display: inline-block; box-shadow: 0 0 40px rgba(0,255,136,0.4); }
+        .download-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .download-btn { padding: 20px 40px; background: #00ff88; color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: 0.3s; display: inline-block; box-shadow: 0 0 40px rgba(0,255,136,0.4); }
         .download-btn:hover { transform: scale(1.05); box-shadow: 0 0 60px rgba(0,255,136,0.6); }
+        .contact-email { margin-top: 30px; font-size: 1rem; color: #a1a1aa; }
+        .contact-email a { color: #00e5ff; text-decoration: none; font-weight: 700; }
+        .contact-email a:hover { text-decoration: underline; }
 
         .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; }
         .faq-question { font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; }
@@ -91,6 +95,7 @@
         <ul class="nav-links">
             <li><a href="#features">Features</a></li>
             <li><a href="#workflow">Workflow</a></li>
+            <li><a href="#download">Download</a></li>
             <li><a href="#faq">FAQ</a></li>
         </ul>
         <a href="#download" class="nav-btn">Download Free</a>
@@ -99,7 +104,7 @@
     <section class="hero">
         <p class="subtitle">JUST A BASEPLATE</p>
         <h1>KAIOD</h1>
-        <p>A full Luau experience built for the game. <br> Fast execution, broad APIs, and a modern interface.</p>
+        <p>A powerful script built to bypass anti-fling.<br> Fast execution, broad APIs, and a modern interface.</p>
         
         <a href="#download" class="btn-main">Download Free</a>
         <a href="#features" class="btn-secondary">Explore Features</a>
@@ -122,9 +127,14 @@
     <section id="features" class="section">
         <p class="section-desc">01 / CAPABILITIES</p>
         <h2 class="section-title">The environment modern scripts expect.</h2>
-        <p class="section-desc">Closures, debug, GC, metatables, signals, Drawing, filesystem, networking, crypt, teleport queues, decompilation, and client control.</p>
+        <p class="section-desc">Powerful execution environment, anti-fling bypass, and advanced control. Designed to dominate the game.</p>
         
         <div class="grid-3">
+            <div class="card">
+                <div class="card-icon">🛡️</div>
+                <h3>Anti-Fling Bypass</h3>
+                <p>Effectively bypasses anti-fling protections, ensuring your actions always land without being kicked.</p>
+            </div>
             <div class="card">
                 <div class="card-icon">⚡</div>
                 <h3>Speed</h3>
@@ -139,11 +149,6 @@
                 <div class="card-icon">🔓</div>
                 <h3>Keyless & Modern UI</h3>
                 <p>No keys needed. Clean, modern, and stylish interface built for the latest Roblox UI.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🧠</div>
-                <h3>KAIOD AI</h3>
-                <p>Built-in AI assistant to help write, explain, fix, and rework scripts directly in the environment.</p>
             </div>
             <div class="card">
                 <div class="card-icon">👁️</div>
@@ -182,8 +187,15 @@
         <div class="download-section">
             <h2 class="download-title">Get KAIOD</h2>
             <p class="download-desc">100% Free. No keys, no paywalls. Just install and execute.</p>
-            <a href="#" class="download-btn">LOAD SCRIPT</a>
-            <p style="margin-top: 20px; color: #52525b;">Windows Client • Lua Environment</p>
+            
+            <div class="download-buttons">
+                <a href="https://rscripts.net/script/kaiod-by-askeradaman-femboyc00lkidd-Hhpp" target="_blank" class="download-btn">RScripts Link</a>
+                <a href="https://haxhell.com/scripts/universal-script-k-a-i-o-d-by-askeradaman-femboyc00lkidd" target="_blank" class="download-btn">HaxHell Link</a>
+            </div>
+
+            <div class="contact-email">
+                For support or contact: <a href="mailto:kaiodforhack.xd@gmail.com">kaiodforhack.xd@gmail.com</a>
+            </div>
         </div>
     </section>
 
@@ -197,12 +209,12 @@
             <div class="faq-answer">Yes. All features are completely free and accessible to everyone. There are no hidden fees or premium tiers.</div>
         </div>
         <div class="faq-item">
-            <div class="faq-question">Will every script work? <span>+</span></div>
-            <div class="faq-answer">KAIOD is built on a fast Luau runtime with broad environment coverage, ensuring the majority of modern scripts run seamlessly.</div>
+            <div class="faq-question">Does it bypass anti-fling? <span>+</span></div>
+            <div class="faq-answer">Yes! KAIOD is specifically built with advanced mechanics to bypass anti-fling protections.</div>
         </div>
         <div class="faq-item">
             <div class="faq-question">How do I get support? <span>+</span></div>
-            <div class="faq-answer">You can ask in our official Discord or contact a moderator for immediate assistance.</div>
+            <div class="faq-answer">You can contact us directly via our email: kaiodforhack.xd@gmail.com</div>
         </div>
     </section>
 
