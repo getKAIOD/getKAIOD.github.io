@@ -3,168 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAIOD Project | Next-Gen Bot Systems</title>
+    <title>Just A Baseplate | KAIOD</title>
     
-    <!-- Google Fonts (Düzeltildi ve optimize edildi) -->
+    <!-- Modern Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         
         body { 
-            background: radial-gradient(circle at top, #161224 0%, #0b0914 100%); 
-            color: #f3f4f6; 
+            background: #050508; /* Derin siyah arka plan */
+            color: #ffffff; 
             min-height: 100vh; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             justify-content: center; 
             overflow-x: hidden; 
-            animation: fadeIn 1.2s ease-out;
-        }
-        
-        /* Arka Plan Işık Efekti (Daha yumuşak) */
-        body::before { 
-            content: ''; 
-            position: absolute; 
-            width: 500px; 
-            height: 500px; 
-            background: #00ff88; 
-            filter: blur(200px); 
-            top: -150px; 
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0.1; 
-            pointer-events: none; 
-            z-index: -1;
+            position: relative;
         }
 
-        /* Ana Kart (Yumuşak animasyon) */
+        /* GetWave tarzı grid ve neon arka plan ışımaları */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        }
+
+        .glow-1 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(0, 255, 136, 0.1);
+            filter: blur(120px);
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse 5s infinite alternate;
+        }
+
+        .glow-2 {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(0, 191, 255, 0.1);
+            filter: blur(100px);
+            bottom: 0;
+            right: 10%;
+            z-index: -1;
+            animation: pulse 7s infinite alternate-reverse;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Ana Kart */
         .container { 
-            background: rgba(18, 16, 26, 0.75); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            backdrop-filter: blur(20px); 
-            padding: 50px 40px; 
-            border-radius: 28px; 
+            background: rgba(10, 10, 15, 0.8); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(24px); 
+            -webkit-backdrop-filter: blur(24px);
+            padding: 60px 50px; 
+            border-radius: 24px; 
             text-align: center; 
-            max-width: 550px; 
+            max-width: 600px; 
             width: 90%; 
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6); 
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8); 
             position: relative; 
-            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 10;
+            animation: fadeUp 0.8s ease-out;
         }
-        
-        /* Proje Başlığı (Neon Efekti) */
-        .logo-title { 
-            font-size: 3.5rem; 
-            font-weight: 800; 
-            letter-spacing: -2px; 
-            margin-bottom: 10px; 
-            background: linear-gradient(135deg, #00ff88 0%, #00bfff 100%); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            text-shadow: 0 0 50px rgba(0, 255, 136, 0.3); 
+
+        /* Neon Başlıklar */
+        .game-title { 
+            font-size: 3rem; 
+            font-weight: 900; 
+            letter-spacing: -1px; 
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #00ff88, #00e5ff, #00ff88);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
         }
-        
+
+        .script-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #a1a1aa;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
         .tagline { 
-            color: #9ca3af; 
+            color: #d4d4d8; 
             font-size: 1.1rem; 
-            margin-bottom: 35px; 
+            margin-bottom: 40px; 
             font-weight: 400; 
             line-height: 1.6; 
         }
+
+        /* GetWave tarzı Havalı Buton */
+        .btn-showcase { 
+            display: inline-block; 
+            width: 100%; 
+            padding: 18px 32px; 
+            background: linear-gradient(135deg, #00ff88 0%, #00e5ff 100%); 
+            color: #050508; 
+            font-weight: 800; 
+            font-size: 1.1rem; 
+            text-decoration: none; 
+            border-radius: 16px; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.4); 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            margin-bottom: 30px;
+            border: none;
+            cursor: pointer;
+        }
         
+        .btn-showcase:hover { 
+            transform: translateY(-5px) scale(1.02); 
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.6), 0 0 100px rgba(0, 229, 255, 0.4); 
+        }
+
         /* Özellik Kartları */
         .features { 
             display: grid; 
-            gap: 12px; 
-            margin-bottom: 35px; 
-            text-align: left; 
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px; 
         }
         
         .feature-item { 
-            background: rgba(255, 255, 255, 0.04); 
+            background: rgba(255, 255, 255, 0.03); 
             border: 1px solid rgba(255, 255, 255, 0.05); 
-            padding: 14px 20px; 
-            border-radius: 14px; 
-            font-size: 0.95rem; 
+            padding: 20px 15px; 
+            border-radius: 16px; 
+            font-size: 0.9rem; 
             display: flex; 
-            align-items: center; 
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             gap: 10px; 
-            color: #cbd5e1; 
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            color: #a1a1aa; 
+            transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
         }
 
         .feature-item:hover {
-            transform: translateY(-3px);
-            border-color: rgba(0, 255, 136, 0.3);
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 136, 0.5);
+            background: rgba(0, 255, 136, 0.05);
+            color: #fff;
+        }
+
+        .feature-icon {
+            font-size: 1.8rem;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5));
         }
 
         .feature-item span { 
             color: #00ff88; 
-            font-weight: bold; 
-        }
-
-        /* Havalı Buton */
-        .btn-showcase { 
-            display: inline-block; 
-            width: 100%; 
-            padding: 16px 32px; 
-            background: linear-gradient(135deg, #00ff88 0%, #02c39a 100%); 
-            color: #05050a; 
-            font-weight: 700; 
-            font-size: 1.05rem; 
-            text-decoration: none; 
-            border-radius: 14px; 
-            transition: all 0.3s ease; 
-            box-shadow: 0 0 25px rgba(0, 255, 136, 0.25); 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-        }
-        
-        .btn-showcase:hover { 
-            transform: translateY(-3px) scale(1.02); 
-            box-shadow: 0 0 45px rgba(0, 255, 136, 0.5); 
-            filter: brightness(1.1); 
+            font-weight: 800; 
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
         }
         
         /* Alt Bilgi */
         .footer { 
-            margin-top: 30px; 
+            margin-top: 40px; 
             font-size: 0.8rem; 
-            color: #4b5563; 
-            letter-spacing: 1.5px; 
+            color: #52525b; 
+            letter-spacing: 2px; 
+            text-transform: uppercase;
         }
 
-        /* Animasyonlar */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* Mobil uyumluluk */
+        @media (max-width: 600px) {
+            .container { padding: 40px 20px; }
+            .game-title { font-size: 2.2rem; }
+            .features { grid-template-columns: 1fr; }
+            .footer { font-size: 0.7rem; }
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
+    <!-- Arka Plan Neon Işıkları -->
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+
     <div class="container">
-        <h1 class="logo-title">KAIOD</h1>
-        <p class="tagline">The Ultimate Roblox Baseplate Script</p>
+        <!-- Oyun ve Script Adı -->
+        <h1 class="game-title">Just A Baseplate</h1>
+        <p class="script-title">KAIOD Script</p>
         
+        <p class="tagline">Next-Gen Roblox Bot Experience. <br>Ultra-fast, keyless and seamless.</p>
+
+        <!-- Havalı CTA Butonu (Linki kendi GitHub'ınla değiştir) -->
+        <a href="https://github.com" target="_blank" class="btn-showcase">Get KAIOD</a>
+        
+        <!-- GetWave tarzı Grid Özellikler -->
         <div class="features">
-            <div class="feature-item">⚡ <span>Speed:</span> Optimized. Never Get Lags!</div>
-            <div class="feature-item">🤖 <span>Kill Speed:</span> Customizable Kill Speed!</div>
-            <div class="feature-item">💻 <span>Modern UI:</span> Keyless & User-Friendly!</div>
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <span>Speed</span>
+                Never Get Lags!
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🎯</div>
+                <span>Kill Speed</span>
+                Customizable!
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🔓</div>
+                <span>Keyless</span>
+                No Keys Needed!
+            </div>
         </div>
 
-        <!-- href kısmını kendi github adresinle değiştirebilirsin -->
-        <a href="https://github.com" target="_blank" class="btn-showcase">Explore Projects</a>
-        
         <div class="footer">© 2026 PACKETSTORM PROJECTS</div>
     </div>
 
