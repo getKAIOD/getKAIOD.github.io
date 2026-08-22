@@ -39,6 +39,9 @@
         .modal .cancel-btn { background: #3f3f46; margin-top: 10px; }
         .modal .cancel-btn:hover { box-shadow: none; }
 
+        /* CAPTCHA kutusu */
+        .captcha-box { background: rgba(0, 191, 255, 0.1); border: 1px solid #00e5ff; border-radius: 10px; padding: 12px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.2rem; font-weight: 700; color: #00e5ff; }
+
         .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 20px; }
         .hero h1 { font-size: 6rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; background: linear-gradient(90deg, #00ff88, #00e5ff, #00ff88); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 4s linear infinite; }
         .hero p { color: #a1a1aa; font-size: 1.5rem; margin-bottom: 40px; max-width: 800px; }
@@ -110,9 +113,17 @@
     <div class="modal-overlay" id="loginModal">
         <div class="modal">
             <h2>Login with Gmail</h2>
-            <p>Enter your email. We'll send you a secure magic link. Click the link in your email to login automatically.</p>
+            <p>Enter your email to unlock the exclusive dashboard and voice room.</p>
             <input type="email" id="emailInput" placeholder="example@gmail.com" required>
-            <button onclick="sendEmailLink()">Send Magic Link</button>
+            
+            <!-- CAPTCHA Alanı -->
+            <div class="captcha-box">
+                <span>🤖</span>
+                <span id="captchaQuestion">3 + 4 = ?</span>
+                <input type="number" id="captchaInput" placeholder="?" style="width: 60px; margin-bottom: 0; padding: 5px; text-align: center;">
+            </div>
+
+            <button onclick="handleLogin()">Verify & Login</button>
             <button onclick="closeLogin()" class="cancel-btn">Cancel</button>
         </div>
     </div>
@@ -203,7 +214,7 @@
         </div>
     </section>
 
-    <!-- FAQ: 10 SORU GERİ EKLENDİ -->
+    <!-- FAQ: 10 SORU -->
     <section id="faq" class="section reveal">
         <p class="section-desc">05 / FAQ</p>
         <h2 class="section-title">Before you use.</h2>
@@ -255,100 +266,9 @@
         <p>© 2026 PACKETSTORM PROJECTS</p>
     </footer>
 
-    <!-- Firebase ve Tüm Fonksiyonlar -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-        const firebaseConfig = {
-          apiKey: "AIzaSyAyh936N2Dbc3kfRE8fbzqM_h_4jdy2LEM",
-          authDomain: "kaiod-2ece1.firebaseapp.com",
-          projectId: "kaiod-2ece1",
-          storageBucket: "kaiod-2ece1.firebasestorage.app",
-          messagingSenderId: "49228647141",
-          appId: "1:49228647141:web:7ca88eb66124a9a174620c",
-          measurementId: "G-LZVHT7998W"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
-        // Sayfa yüklendiğinde kullanıcı linke tıklayıp geldiyse oturumu başlat
-        window.onload = function() {
-            if (isSignInWithEmailLink(auth, window.location.href)) {
-                let email = window.localStorage.getItem('emailForSignIn');
-                if (!email) email = window.prompt('Lütfen doğrulamak için e-posta adresinizi girin:');
-
-                signInWithEmailLink(auth, email, window.location.href)
-                    .then((result) => {
-                        window.localStorage.removeItem('emailForSignIn');
-                        alert('Giriş başarılı! Hoş geldin.');
-                        showLoggedIn(result.user.email);
-                        window.history.replaceState({}, document.title, window.location.pathname);
-                    })
-                    .catch((error) => {
-                        console.error('Giriş hatası:', error);
-                        alert('Doğrulama başarısız.');
-                    });
-            }
-        };
-
-        window.sendEmailLink = function() {
-            const email = document.getElementById('emailInput').value;
-            if (!email.includes('@') || !email.includes('.')) {
-                alert('Lütfen geçerli bir e-posta adresi girin.');
-                return;
-            }
-
-            const actionCodeSettings = {
-                url: window.location.href,
-                handleCodeInApp: true,
-            };
-
-            sendSignInLinkToEmail(auth, email, actionCodeSettings)
-                .then(() => {
-                    window.localStorage.setItem('emailForSignIn', email);
-                    alert('Doğrulama bağlantısı e-postanıza gönderildi! Lütfen mailinizi (veya spam klasörünü) kontrol edin.');
-                    closeLogin();
-                })
-                .catch((error) => {
-                    console.error('Hata:', error);
-                    // Kullanıcıya en net hatayı ver
-                    alert('E-posta gönderilemedi. Lütfen Firebase Konsolundan Authentication > Sign-in method kısmından "Email/Password" ayarını açtığından ve Authorized domains kısmına getkaiod.github.io eklediğinden emin ol.');
-                });
-        };
-
-        window.closeLogin = function() {
-            document.getElementById('loginModal').style.display = 'none';
-        };
-
-        window.openLogin = function() {
-            document.getElementById('loginModal').style.display = 'flex';
-        };
-
-        window.loginAction = function() {
-            const savedUser = localStorage.getItem('kaid_user');
-            if (savedUser) showLoggedIn(savedUser);
-            else openLogin();
-        };
-
-        window.showLoggedIn = function(email) {
-            document.querySelector('.user-name').textContent = email.split('@')[0];
-            document.querySelector('.user-avatar').textContent = email.charAt(0).toUpperCase();
-            document.getElementById('loginBtn').style.display = 'none';
-            document.getElementById('userProfile').style.display = 'flex';
-            document.getElementById('dashboardContent').style.display = 'block';
-            localStorage.setItem('kaid_user', email);
-        };
-
-        document.getElementById('logoutBtn')?.addEventListener('click', function() {
-            localStorage.removeItem('kaid_user');
-            location.reload();
-        });
-    </script>
-
-    <!-- Scroll Animasyonları ve FAQ -->
+    <!-- Firebase YOK! Yerine SAF JavaScript (CAPTCHA) -->
     <script>
+        // Scroll Animasyonları
         const revealElements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -360,6 +280,7 @@
         }, { threshold: 0.1 });
         revealElements.forEach(el => observer.observe(el));
         
+        // FAQ
         const faqs = document.querySelectorAll('.faq-question');
         faqs.forEach(faq => {
             faq.addEventListener('click', () => {
@@ -367,6 +288,86 @@
                 const sign = faq.querySelector('span');
                 sign.textContent = faq.parentElement.classList.contains('active') ? '−' : '+';
             });
+        });
+
+        // --- CAPTCHA VE LOGIN SİSTEMİ ---
+        let captchaAnswer = 0;
+
+        // CAPTCHA üretme fonksiyonu
+        function generateCaptcha() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            captchaAnswer = num1 + num2;
+            document.getElementById('captchaQuestion').innerText = num1 + " + " + num2 + " = ?";
+            document.getElementById('captchaInput').value = "";
+        }
+
+        // Giriş Modalını Aç
+        function openLogin() {
+            document.getElementById('loginModal').style.display = 'flex';
+            generateCaptcha(); // Her açılışta yeni soru sor
+        }
+
+        // Giriş Modalını Kapat
+        function closeLogin() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        // CAPTCHA ve Maili Kontrol Et
+        function handleLogin() {
+            const email = document.getElementById('emailInput').value;
+            const captchaInput = parseInt(document.getElementById('captchaInput').value);
+
+            // Mail kontrolü
+            if (!email.includes('@') || !email.includes('.')) {
+                alert('Lütfen geçerli bir e-posta adresi girin.');
+                return;
+            }
+
+            // CAPTCHA kontrolü
+            if (captchaInput !== captchaAnswer) {
+                alert('CAPTCHA cevabı yanlış! Lütfen tekrar deneyin.');
+                generateCaptcha(); // Yeni soru sor
+                return;
+            }
+
+            // Başarılı giriş
+            localStorage.setItem('kaid_user', email);
+            showLoggedIn(email);
+            closeLogin();
+        }
+
+        // Giriş yapıldığında arayüzü güncelle
+        function showLoggedIn(email) {
+            document.querySelector('.user-name').textContent = email.split('@')[0];
+            document.querySelector('.user-avatar').textContent = email.charAt(0).toUpperCase();
+            document.getElementById('loginBtn').style.display = 'none';
+            document.getElementById('userProfile').style.display = 'flex';
+            document.getElementById('dashboardContent').style.display = 'block';
+        }
+
+        // Sayfa yüklendiğinde kullanıcı kayıtlı mı kontrol et
+        window.onload = function() {
+            const savedUser = localStorage.getItem('kaid_user');
+            if (savedUser) {
+                showLoggedIn(savedUser);
+            }
+        };
+
+        // Ana sayfadaki Login butonuna basınca
+        function loginAction() {
+            const savedUser = localStorage.getItem('kaid_user');
+            if (savedUser) {
+                showLoggedIn(savedUser);
+            } else {
+                openLogin();
+            }
+        }
+
+        // Çıkış Yap
+        document.getElementById('logoutBtn')?.addEventListener('click', function() {
+            localStorage.removeItem('kaid_user');
+            location.reload();
         });
     </script>
 </body>
