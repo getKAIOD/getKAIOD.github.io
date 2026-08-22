@@ -133,7 +133,7 @@
             align-items: center;
             flex-direction: column;
             font-family: 'Times New Roman', Times, serif;
-            animation: idiot-flip 0.5s infinite; /* HIZLANDIRILDI: 2s -> 0.5s */
+            animation: idiot-flip 0.5s infinite; /* Hızlandırıldı: 2s -> 0.5s */
         }
 
         body.idiot-mode {
@@ -213,6 +213,95 @@
             100% { background-color: white; color: black; }
         }
         /* ============================================= */
+
+        /* ============================================= */
+        /* ============ YENİ: MATRIX MODU ============= */
+        /* ============================================= */
+        #matrix-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: black;
+            z-index: 99999;
+            pointer-events: none;
+        }
+        body.matrix-mode > *:not(#matrix-overlay) { display: none !important; }
+        body.matrix-mode #matrix-overlay { display: block !important; }
+
+        /* ============================================= */
+        /* ============ YENİ: PIZZA MODU ============= */
+        /* ============================================= */
+        #pizza-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 99998;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        body.pizza-mode > *:not(#pizza-overlay) { display: none !important; }
+        body.pizza-mode #pizza-overlay { display: block !important; }
+
+        /* ============================================= */
+        /* ============ YENİ: VIP MODU ============= */
+        /* ============================================= */
+        body.vip-mode {
+            --bg: #1a1a00;
+            --bg-2: #2a2a00;
+            --text: #ffd700;
+            --text-muted: #b8860b;
+            --primary: #ffd700;
+            --secondary: #ffae42;
+            --border: rgba(255, 215, 0, 0.4);
+            --glass: rgba(0, 0, 0, 0.8);
+            --glow-green: rgba(255, 215, 0, 0.2);
+            --glow-blue: rgba(255, 174, 66, 0.2);
+        }
+
+        /* ============================================= */
+        /* ============ YENİ: GHOST MODU ============= */
+        /* ============================================= */
+        body.ghost-mode {
+            background: transparent !important;
+            overflow: hidden;
+        }
+        body.ghost-mode * {
+            opacity: 0.15 !important;
+            transition: opacity 0.5s;
+        }
+        body.ghost-mode #ghost-hint {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 4rem;
+            font-weight: 800;
+            z-index: 99999;
+            background: rgba(0,0,0,0.6);
+            padding: 20px;
+            border-radius: 20px;
+            opacity: 1 !important;
+        }
+
+        /* ============================================= */
+        /* ============ KONAMI KONFETİSİ ============= */
+        /* ============================================= */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            z-index: 99999;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(720deg); }
+        }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; scroll-behavior: smooth; }
         ::selection { background: var(--primary); color: #000; }
@@ -383,6 +472,17 @@
     </style>
 </head>
 <body>
+
+    <!-- Matrix Overlay -->
+    <div id="matrix-overlay">
+        <canvas id="matrix-canvas"></canvas>
+    </div>
+
+    <!-- Pizza Overlay -->
+    <div id="pizza-overlay"></div>
+
+    <!-- Ghost Hint -->
+    <div id="ghost-hint" style="display: none;">👻</div>
 
     <div id="loader">
         <div class="loader-logo">KAIOD</div>
@@ -964,11 +1064,19 @@
         setTimeout(showToast, 5000);
 
         // ==========================================
-        // GİZLİ MODLAR - TEK DİNLEYİCİ
+        // GİZLİ MODLAR - TEK DİNLEYİCİ (YENİ MODLAR DAHİL)
         // ==========================================
         let keyBuffer = "";
         let retroBuffer = "";
         let idiotBuffer = "";
+        let matrixBuffer = "";
+        let pizzaBuffer = "";
+        let vipBuffer = "";
+        let ghostBuffer = "";
+        let rickrollBuffer = "";
+        let konamiBuffer = []; // Konami için dizi kullanıyoruz
+
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 
         document.addEventListener('keydown', (e) => {
             if (e.key.length === 1) {
@@ -985,6 +1093,34 @@
                 // Idiot Modu (idiot)
                 idiotBuffer = (idiotBuffer + lowerKey).slice(-5);
                 if (idiotBuffer === 'idiot') { idiotBuffer = ""; activateIdiotMode(); }
+                
+                // Matrix Modu (matrix)
+                matrixBuffer = (matrixBuffer + lowerKey).slice(-6);
+                if (matrixBuffer === 'matrix') { matrixBuffer = ""; activateMatrixMode(); }
+                
+                // Pizza Modu (pizza)
+                pizzaBuffer = (pizzaBuffer + lowerKey).slice(-5);
+                if (pizzaBuffer === 'pizza') { pizzaBuffer = ""; activatePizzaMode(); }
+                
+                // VIP Modu (vip)
+                vipBuffer = (vipBuffer + lowerKey).slice(-3);
+                if (vipBuffer === 'vip') { vipBuffer = ""; activateVipMode(); }
+                
+                // Ghost Modu (ghost)
+                ghostBuffer = (ghostBuffer + lowerKey).slice(-5);
+                if (ghostBuffer === 'ghost') { ghostBuffer = ""; activateGhostMode(); }
+                
+                // Rickroll Modu (rickroll)
+                rickrollBuffer = (rickrollBuffer + lowerKey).slice(-8);
+                if (rickrollBuffer === 'rickroll') { rickrollBuffer = ""; activateRickrollMode(); }
+            }
+
+            // Konami Kodu (Ok tuşları + B + A)
+            konamiBuffer.push(e.key);
+            konamiBuffer = konamiBuffer.slice(-konamiCode.length);
+            if (JSON.stringify(konamiBuffer) === JSON.stringify(konamiCode)) {
+                konamiBuffer = [];
+                activateKonamiMode();
             }
         });
 
@@ -1034,6 +1170,140 @@
             document.getElementById('idiot-overlay').style.display = 'flex';
             
             playClickSound();
+        }
+
+        // Matrix Modunu Aktif Et
+        function activateMatrixMode() {
+            // Önceki modları kapat
+            document.body.classList.remove('femboy-mode');
+            document.body.classList.remove('old-school-mode');
+            document.body.classList.remove('idiot-mode');
+            document.body.classList.add('matrix-mode');
+            
+            const overlay = document.getElementById('matrix-overlay');
+            overlay.style.display = 'block';
+
+            // Canvas ayarları
+            const canvas = document.getElementById('matrix-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const fontSize = 16;
+            const columns = canvas.width / fontSize;
+            const drops = [];
+            for (let x = 0; x < columns; x++) drops[x] = 1;
+
+            function drawMatrix() {
+                ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "#0F0"; // Yeşil kodlar
+                ctx.font = fontSize + "px monospace";
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            if (window.matrixInterval) clearInterval(window.matrixInterval);
+            window.matrixInterval = setInterval(drawMatrix, 50);
+            showToastMessage("🟢 MATRIX MODE ACTIVATED!");
+        }
+
+        // Pizza Modunu Aktif Et
+        function activatePizzaMode() {
+            document.body.classList.remove('femboy-mode');
+            document.body.classList.remove('old-school-mode');
+            document.body.classList.remove('idiot-mode');
+            document.body.classList.remove('matrix-mode');
+            document.body.classList.add('pizza-mode');
+            
+            const overlay = document.getElementById('pizza-overlay');
+            overlay.style.display = 'block';
+
+            // Pizza yağmuru (Emoji kullanıyoruz)
+            let pizzaInterval = setInterval(() => {
+                const pizza = document.createElement('div');
+                pizza.style.position = 'absolute';
+                pizza.style.left = Math.random() * 100 + 'vw';
+                pizza.style.fontSize = (Math.random() * 5 + 2) + 'rem';
+                pizza.style.animation = 'fall ' + (Math.random() * 3 + 2) + 's linear';
+                pizza.innerText = '🍕';
+                overlay.appendChild(pizza);
+                setTimeout(() => pizza.remove(), 5000);
+            }, 100);
+            
+            window.pizzaInterval = pizzaInterval;
+            showToastMessage("🍕 PIZZA MODE ACTIVATED!");
+        }
+
+        // VIP Modunu Aktif Et
+        function activateVipMode() {
+            document.body.classList.remove('femboy-mode');
+            document.body.classList.remove('old-school-mode');
+            document.body.classList.remove('idiot-mode');
+            document.body.classList.remove('matrix-mode');
+            document.body.classList.remove('pizza-mode');
+            document.body.classList.add('vip-mode');
+            
+            const knob = document.getElementById('themeKnob');
+            if (knob) {
+                knob.textContent = '👑';
+                knob.style.background = '#ffd700';
+                knob.style.boxShadow = '0 0 15px #ffd700';
+            }
+            
+            playClickSound();
+            showToastMessage("👑 VIP MODE ACTIVATED!");
+        }
+
+        // Ghost Modunu Aktif Et
+        function activateGhostMode() {
+            document.body.classList.remove('femboy-mode');
+            document.body.classList.remove('old-school-mode');
+            document.body.classList.remove('idiot-mode');
+            document.body.classList.remove('matrix-mode');
+            document.body.classList.remove('pizza-mode');
+            document.body.classList.remove('vip-mode');
+            document.body.classList.add('ghost-mode');
+            
+            const hint = document.getElementById('ghost-hint');
+            hint.style.display = 'block';
+            hint.innerText = '👻 GHOST MODE';
+            
+            playClickSound();
+            showToastMessage("👻 GHOST MODE ACTIVATED!");
+        }
+
+        // Rickroll Modunu Aktif Et
+        function activateRickrollMode() {
+            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+            showToastMessage("🎵 RICKROLL! NEVER GONNA GIVE YOU UP!");
+        }
+
+        // Konami Modunu Aktif Et (Konfeti)
+        function activateKonamiMode() {
+            playClickSound();
+            showToastMessage("🎉 KONAMI CODE! PARTY TIME!");
+
+            // Konfeti oluştur
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff8800'];
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
         }
 
         function showToastMessage(msg) {
