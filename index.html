@@ -90,7 +90,6 @@
         .btn-main { padding: 20px 40px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: inline-block; margin-bottom: 20px; box-shadow: 0 0 40px var(--glow-green); cursor: pointer; }
         .btn-main:hover { transform: translateY(-5px); box-shadow: 0 0 80px var(--primary); }
 
-        /* Canlı Terminal */
         .terminal-window { width: 100%; max-width: 700px; margin-top: 50px; background: #0d0d1a; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; text-align: left; font-family: 'JetBrains Mono', monospace; box-shadow: 0 30px 60px rgba(0,0,0,0.8); position: relative;}
         .term-top { background: #1a1a2e; padding: 10px 16px; display: flex; justify-content: space-between; border-bottom: 1px solid #2a2a40; }
         .term-dots { display: flex; gap: 6px; }
@@ -116,16 +115,90 @@
         .card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px var(--glow-green); }
         .card-icon { font-size: 3rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--glow-green)); }
 
-        /* Yeni: UI Preview Mockup */
+        /* YENİ UI PREVIEW - GERÇEK KAIOD v5.1 */
         .ui-preview-wrap { display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.3); padding: 50px; border-radius: 30px; border: 1px solid var(--border); }
-        .mockup { width: 300px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 16px; padding: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,255,136,0.1); border: 2px solid var(--primary); }
-        .mock-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; color: var(--text); font-weight: 800; }
-        .mock-title { font-size: 1.2rem; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .mock-btn { background: var(--primary); color: #000; padding: 5px 10px; border-radius: 5px; font-weight: 800; }
-        .mock-avatar { width: 50px; height: 50px; background: var(--secondary); border-radius: 50%; margin: 20px auto; box-shadow: 0 0 20px var(--secondary); }
-        .mock-slider { width: 100%; height: 10px; background: #333; border-radius: 10px; margin-bottom: 15px; position: relative; }
-        .mock-slider-fill { position: absolute; width: 70%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 10px; box-shadow: 0 0 10px var(--primary); }
-        .mock-action { background: #ff4757; color: #fff; text-align: center; padding: 10px; border-radius: 8px; font-weight: 800; margin-top: 10px; }
+        .real-gui {
+            width: 320px;
+            background: #12101c;
+            border: 2px solid #2a1a4a;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(138, 43, 226, 0.1);
+            position: relative;
+            color: #fff;
+        }
+        .real-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .real-title { display: flex; align-items: center; gap: 8px; }
+        .real-logo { font-size: 1.2rem; font-weight: 800; }
+        .real-logo-sub { font-size: 0.7rem; color: #a1a1aa; margin-top: 2px; }
+        .real-buttons { display: flex; gap: 8px; }
+        .real-v31 { background: #2a1a4a; border: 1px solid #8A2BE2; color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; }
+        .real-x { background: transparent; color: #a1a1aa; font-size: 1.2rem; font-weight: 800; cursor: pointer; }
+        
+        .real-avatar {
+            width: 140px;
+            height: 140px;
+            border: 3px solid #8A2BE2;
+            border-radius: 50%;
+            margin: 20px auto;
+            background: #1e1b2e;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .real-target-text { text-align: center; color: #8A2BE2; font-size: 0.9rem; font-weight: 600; margin-bottom: 25px; }
+        
+        .real-input {
+            background: #1e1b2e;
+            border: 1px solid #3a2a5a;
+            border-radius: 12px;
+            padding: 15px 15px 15px 45px;
+            color: #fff;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            position: relative;
+            outline: none;
+        }
+        .real-input::placeholder { color: #6b5a8a; }
+        .real-input-icon { position: absolute; left: 15px; top: 15px; font-size: 1.2rem; }
+
+        .real-kill-btn {
+            width: 100%;
+            background: #d90429;
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(217, 4, 41, 0.5);
+            cursor: pointer;
+            border: none;
+            color: white;
+        }
+        .real-kill-btn:hover { background: #ff0f3c; transform: scale(0.98); }
+
+        .real-features-btn {
+            width: 100%;
+            background: #5c2a9e;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(92, 42, 158, 0.5);
+            cursor: pointer;
+            border: none;
+            color: white;
+        }
+        .real-features-btn:hover { background: #7b3fc7; transform: scale(0.98); }
 
         .compare-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         .compare-table th, .compare-table td { padding: 15px; border-bottom: 1px solid var(--border); text-align: center; }
@@ -232,29 +305,42 @@
         </div>
     </section>
 
-    <!-- YENİ: UI PREVIEW MOCKUP -->
+    <!-- YENİ: BİREBİR KAIOD v5.1 UI PREVIEW -->
     <section id="ui-preview" class="section reveal">
         <p class="section-desc">02 / INTERFACE</p>
-        <h2 class="section-title">A GUI that looks incredible.</h2>
-        <p class="section-desc">A sleek, glassmorphic design with dual sliders, smooth animations, and a beautiful aesthetic.</p>
+        <h2 class="section-title">Exactly what you see in-game.</h2>
+        <p class="section-desc">A faithful recreation of the KAIOD v5.1 interface.</p>
         
         <div class="ui-preview-wrap">
-            <div class="mockup">
-                <div class="mock-header">
-                    <span class="mock-title">K A I O D</span>
-                    <div class="mock-btn">X</div>
+            <!-- Gerçek GUI Mockup -->
+            <div class="real-gui">
+                <div class="real-header">
+                    <div class="real-title">
+                        <span style="font-size: 1.5rem;">⚔</span>
+                        <div>
+                            <div class="real-logo">KAIOD</div>
+                            <div class="real-logo-sub">Ultimate · v5.1</div>
+                        </div>
+                    </div>
+                    <div class="real-buttons">
+                        <div class="real-v31">v31</div>
+                        <div class="real-x">✕</div>
+                    </div>
                 </div>
-                <div class="mock-avatar"></div>
-                <div style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Target: Random Player</div>
-                <div class="mock-slider">
-                    <div class="mock-slider-fill"></div>
+
+                <div class="real-avatar">
+                    <!-- Avatar burada olacak -->
                 </div>
-                <div style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">Attack Speed</div>
-                <div class="mock-slider">
-                    <div class="mock-slider-fill" style="width: 40%;"></div>
+                
+                <div class="real-target-text">— no target selected —</div>
+                
+                <div style="position: relative;">
+                    <span class="real-input-icon">🎯</span>
+                    <input type="text" class="real-input" placeholder="Name or 'random'" disabled>
                 </div>
-                <div style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Attack Power</div>
-                <div class="mock-action">☠ KILL</div>
+
+                <button class="real-kill-btn">💀 KILL</button>
+                <button class="real-features-btn">More Features</button>
             </div>
         </div>
     </section>
