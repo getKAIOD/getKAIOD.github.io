@@ -23,31 +23,13 @@
         .nav-links a:hover { color: #00ff88; }
         .nav-btn { padding: 10px 20px; background: #00ff88; color: #050508; border-radius: 10px; font-weight: 800; text-decoration: none; transition: 0.3s; cursor: pointer; border: none; }
         .nav-btn:hover { box-shadow: 0 0 20px rgba(0,255,136,0.5); }
-        
-        .user-profile { display: none; align-items: center; gap: 10px; }
-        .user-avatar { width: 30px; height: 30px; border-radius: 50%; background: #00e5ff; display: flex; justify-content: center; align-items: center; font-weight: 800; color: #000; }
-        .user-name { font-size: 0.9rem; font-weight: 700; color: #fff; }
-
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 999; justify-content: center; align-items: center; }
-        .modal { background: #12121a; border: 1px solid rgba(0,255,136,0.3); border-radius: 20px; padding: 40px; width: 400px; max-width: 90%; text-align: center; box-shadow: 0 0 50px rgba(0,255,136,0.3); position: relative; }
-        .modal h2 { margin-bottom: 20px; }
-        .modal p { font-size: 0.9rem; color: #a1a1aa; margin-bottom: 15px; }
-        .modal input { width: 100%; padding: 15px; margin-bottom: 15px; background: #1e1e2e; border: 1px solid #52525b; border-radius: 10px; color: #fff; outline: none; }
-        .modal input:focus { border-color: #00ff88; }
-        .modal button { width: 100%; padding: 15px; background: #00ff88; color: #050508; border-radius: 10px; font-weight: 800; cursor: pointer; border: none; margin-top: 5px; transition: 0.3s; }
-        .modal button:hover { box-shadow: 0 0 20px rgba(0,255,136,0.5); }
-        .modal .cancel-btn { background: #3f3f46; margin-top: 10px; }
-        .modal .cancel-btn:hover { box-shadow: none; }
-
-        /* CAPTCHA kutusu */
-        .captcha-box { background: rgba(0, 191, 255, 0.1); border: 1px solid #00e5ff; border-radius: 10px; padding: 12px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.2rem; font-weight: 700; color: #00e5ff; }
 
         .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 20px; }
         .hero h1 { font-size: 6rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; background: linear-gradient(90deg, #00ff88, #00e5ff, #00ff88); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 4s linear infinite; }
         .hero p { color: #a1a1aa; font-size: 1.5rem; margin-bottom: 40px; max-width: 800px; }
         @keyframes shine { to { background-position: 200% center; } }
         
-        .btn-main { padding: 20px 40px; background: linear-gradient(135deg, #00ff88, #00e5ff); color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: 0.3s; display: inline-block; margin-bottom: 20px; box-shadow: 0 0 30px rgba(0,255,136,0.4); cursor: pointer; border: none; }
+        .btn-main { padding: 20px 40px; background: linear-gradient(135deg, #00ff88, #00e5ff); color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: 0.3s; display: inline-block; margin-bottom: 20px; box-shadow: 0 0 30px rgba(0,255,136,0.4); cursor: pointer; }
         .btn-main:hover { transform: translateY(-5px); box-shadow: 0 0 60px rgba(0,255,136,0.6); }
         .btn-secondary { display: inline-block; color: #fff; text-decoration: none; border: 1px solid #3f3f46; padding: 15px 30px; border-radius: 12px; font-weight: 600; transition: 0.3s; cursor: pointer; }
         .btn-secondary:hover { border-color: #00ff88; color: #00ff88; }
@@ -61,10 +43,6 @@
         .card { background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; transition: 0.3s; cursor: default; }
         .card:hover { border-color: rgba(0,255,136,0.4); transform: translateY(-5px); }
         .card-icon { font-size: 3rem; margin-bottom: 20px; }
-
-        .dashboard-section { display: none; background: rgba(0, 191, 255, 0.05); border: 2px solid rgba(0, 191, 255, 0.2); border-radius: 30px; padding: 40px; margin-bottom: 50px; }
-        .dashboard-title { color: #00e5ff; margin-bottom: 10px; font-size: 2.5rem; }
-        .voice-btn { padding: 20px 50px; background: linear-gradient(135deg, #00ff88, #00e5ff); color: #000; border-radius: 16px; font-weight: 800; font-size: 1.5rem; text-decoration: none; transition: 0.3s; display: inline-block; margin-top: 20px; }
 
         .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; }
         .faq-question { font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; }
@@ -99,66 +77,16 @@
             <li><a href="#download">Download</a></li>
             <li><a href="#faq">FAQ</a></li>
         </ul>
-        <div class="nav-actions">
-            <a href="#download" class="nav-btn">Download Free</a>
-            <button id="loginBtn" onclick="openLogin()" class="nav-btn" style="background: #00e5ff;">Login with Gmail</button>
-            <div id="userProfile" class="user-profile">
-                <div class="user-avatar">G</div>
-                <span class="user-name">Guest</span>
-                <button id="logoutBtn" style="background: none; border: 1px solid #52525b; color: #fff; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Logout</button>
-            </div>
-        </div>
+        <a href="#download" class="nav-btn">Download Free</a>
     </nav>
-
-    <div class="modal-overlay" id="loginModal">
-        <div class="modal">
-            <h2>Login with Gmail</h2>
-            <p>Enter your email to unlock the exclusive dashboard and voice room.</p>
-            <input type="email" id="emailInput" placeholder="example@gmail.com" required>
-            
-            <!-- CAPTCHA Alanı -->
-            <div class="captcha-box">
-                <span>🤖</span>
-                <span id="captchaQuestion">3 + 4 = ?</span>
-                <input type="number" id="captchaInput" placeholder="?" style="width: 60px; margin-bottom: 0; padding: 5px; text-align: center;">
-            </div>
-
-            <button onclick="handleLogin()">Verify & Login</button>
-            <button onclick="closeLogin()" class="cancel-btn">Cancel</button>
-        </div>
-    </div>
 
     <section class="hero">
         <p class="subtitle">JUST A BASEPLATE</p>
         <h1>KAIOD</h1>
         <p>A powerful script built to bypass anti-fling.<br> Fast execution, broad APIs, and a modern interface.</p>
-        <button onclick="loginAction()" class="btn-main">Login to Voice Chat</button>
-        <a href="#features" class="btn-secondary">Explore Features</a>
-    </section>
-
-    <section id="dashboard" class="section">
-        <div class="dashboard-section" id="dashboardContent">
-            <h2 class="dashboard-title">🚀 Exclusive Member Dashboard</h2>
-            <p class="dashboard-desc" style="color: #a1a1aa; margin-bottom: 20px;">You are logged in! Enjoy exclusive perks.</p>
-            
-            <h3 style="color: #fff; margin-bottom: 15px;">Join Live Voice Room</h3>
-            <a href="https://meet.jit.si/KAIOD" target="_blank" class="voice-btn">🔊 Join KAIOD Voice Room</a>
-
-            <div class="grid-2" style="margin-top: 40px;">
-                <div class="card">
-                    <div class="card-icon">💬</div>
-                    <h3>Exclusive Discord</h3>
-                    <p>Join our official Discord community for support, leaks, and chatting.</p>
-                    <a href="#" class="btn-secondary" style="margin-top: 15px; display: inline-block;">Join Server</a>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🛡️</div>
-                    <h3>KAIOD v4.1 (BETA)</h3>
-                    <p>Test the upcoming ultra-fast Anti-Fling Bypass update before everyone else!</p>
-                    <a href="#download" class="btn-secondary" style="margin-top: 15px; display: inline-block;">Get Beta Access</a>
-                </div>
-            </div>
-        </div>
+        
+        <a href="#download" class="btn-main">Download Free</a>
+        <a href="https://meet.jit.si/KAIOD" target="_blank" class="btn-secondary">🔊 Join Voice Room</a>
     </section>
 
     <section id="features" class="section reveal">
@@ -205,8 +133,8 @@
 
     <section id="download" class="section reveal">
         <div class="download-section" style="text-align: center; padding: 50px; background: rgba(20, 20, 30, 0.6); border-radius: 30px;">
-            <h2 class="download-title">Get KAIOD</h2>
-            <p class="download-desc">100% Free. No keys, no paywalls.</p>
+            <h2 class="download-title" style="margin-bottom: 10px;">Get KAIOD</h2>
+            <p style="color: #a1a1aa; margin-bottom: 30px;">100% Free. No keys, no paywalls.</p>
             <div class="download-buttons">
                 <a href="https://rscripts.net/script/kaiod-by-askeradaman-femboyc00lkidd-Hhpp" style="padding: 20px 40px; background: #00ff88; color: #050508; border-radius: 16px; font-weight: 800; text-decoration: none; display: inline-block; margin: 10px;" target="_blank">RScripts Link</a>
                 <a href="https://haxhell.com/scripts/universal-script-k-a-i-o-d-by-askeradaman-femboyc00lkidd" style="padding: 20px 40px; background: #00ff88; color: #050508; border-radius: 16px; font-weight: 800; text-decoration: none; display: inline-block; margin: 10px;" target="_blank">HaxHell Link</a>
@@ -257,7 +185,7 @@
         </div>
         <div class="faq-item">
             <div class="faq-question">How do I get support? <span>+</span></div>
-            <div class="faq-answer">You can contact us directly via our email: kaiodforhack.xd@gmail.com or by logging in via Gmail to join the voice room!</div>
+            <div class="faq-answer">You can contact us directly via our email: kaiodforhack.xd@gmail.com or join the voice room to chat!</div>
         </div>
     </section>
 
@@ -266,9 +194,8 @@
         <p>© 2026 PACKETSTORM PROJECTS</p>
     </footer>
 
-    <!-- Firebase YOK! Yerine SAF JavaScript (CAPTCHA) -->
+    <!-- Sadece Animasyon Scripti -->
     <script>
-        // Scroll Animasyonları
         const revealElements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -280,7 +207,6 @@
         }, { threshold: 0.1 });
         revealElements.forEach(el => observer.observe(el));
         
-        // FAQ
         const faqs = document.querySelectorAll('.faq-question');
         faqs.forEach(faq => {
             faq.addEventListener('click', () => {
@@ -288,86 +214,6 @@
                 const sign = faq.querySelector('span');
                 sign.textContent = faq.parentElement.classList.contains('active') ? '−' : '+';
             });
-        });
-
-        // --- CAPTCHA VE LOGIN SİSTEMİ ---
-        let captchaAnswer = 0;
-
-        // CAPTCHA üretme fonksiyonu
-        function generateCaptcha() {
-            const num1 = Math.floor(Math.random() * 10) + 1;
-            const num2 = Math.floor(Math.random() * 10) + 1;
-            captchaAnswer = num1 + num2;
-            document.getElementById('captchaQuestion').innerText = num1 + " + " + num2 + " = ?";
-            document.getElementById('captchaInput').value = "";
-        }
-
-        // Giriş Modalını Aç
-        function openLogin() {
-            document.getElementById('loginModal').style.display = 'flex';
-            generateCaptcha(); // Her açılışta yeni soru sor
-        }
-
-        // Giriş Modalını Kapat
-        function closeLogin() {
-            document.getElementById('loginModal').style.display = 'none';
-        }
-
-        // CAPTCHA ve Maili Kontrol Et
-        function handleLogin() {
-            const email = document.getElementById('emailInput').value;
-            const captchaInput = parseInt(document.getElementById('captchaInput').value);
-
-            // Mail kontrolü
-            if (!email.includes('@') || !email.includes('.')) {
-                alert('Lütfen geçerli bir e-posta adresi girin.');
-                return;
-            }
-
-            // CAPTCHA kontrolü
-            if (captchaInput !== captchaAnswer) {
-                alert('CAPTCHA cevabı yanlış! Lütfen tekrar deneyin.');
-                generateCaptcha(); // Yeni soru sor
-                return;
-            }
-
-            // Başarılı giriş
-            localStorage.setItem('kaid_user', email);
-            showLoggedIn(email);
-            closeLogin();
-        }
-
-        // Giriş yapıldığında arayüzü güncelle
-        function showLoggedIn(email) {
-            document.querySelector('.user-name').textContent = email.split('@')[0];
-            document.querySelector('.user-avatar').textContent = email.charAt(0).toUpperCase();
-            document.getElementById('loginBtn').style.display = 'none';
-            document.getElementById('userProfile').style.display = 'flex';
-            document.getElementById('dashboardContent').style.display = 'block';
-        }
-
-        // Sayfa yüklendiğinde kullanıcı kayıtlı mı kontrol et
-        window.onload = function() {
-            const savedUser = localStorage.getItem('kaid_user');
-            if (savedUser) {
-                showLoggedIn(savedUser);
-            }
-        };
-
-        // Ana sayfadaki Login butonuna basınca
-        function loginAction() {
-            const savedUser = localStorage.getItem('kaid_user');
-            if (savedUser) {
-                showLoggedIn(savedUser);
-            } else {
-                openLogin();
-            }
-        }
-
-        // Çıkış Yap
-        document.getElementById('logoutBtn')?.addEventListener('click', function() {
-            localStorage.removeItem('kaid_user');
-            location.reload();
         });
     </script>
 </body>
