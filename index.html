@@ -14,17 +14,29 @@
         
         body { background: #0a0a0f; color: #ffffff; min-height: 100vh; line-height: 1.6; overflow-x: hidden; }
 
-        /* Arka Plan Işıkları */
-        .glow-green { position: fixed; width: 500px; height: 500px; background: rgba(0,255,136,0.08); filter: blur(150px); top: -10%; left: 20%; z-index: -1; pointer-events: none; }
-        .glow-blue { position: fixed; width: 400px; height: 400px; background: rgba(0,191,255,0.08); filter: blur(120px); bottom: 0; right: 10%; z-index: -1; pointer-events: none; }
+        /* Arka Plan Neonları ve Grid Deseni */
+        .glow-green { position: fixed; width: 600px; height: 600px; background: rgba(0,255,136,0.08); filter: blur(150px); top: -10%; left: 20%; z-index: -1; pointer-events: none; }
+        .glow-blue { position: fixed; width: 500px; height: 500px; background: rgba(0,191,255,0.08); filter: blur(120px); bottom: 0; right: 10%; z-index: -1; pointer-events: none; }
 
-        nav { position: sticky; top: 0; z-index: 100; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; }
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: -2;
+            mask-image: radial-gradient(circle at center, black 20%, transparent 100%);
+        }
+
+        nav { position: sticky; top: 0; z-index: 100; background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; }
         .logo { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; background: linear-gradient(90deg, #00ff88, #00e5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .nav-links { display: flex; gap: 30px; list-style: none; }
         .nav-links a { text-decoration: none; color: #a1a1aa; font-weight: 600; transition: 0.3s; }
-        .nav-links a:hover { color: #00ff88; }
+        .nav-links a:hover { color: #00ff88; text-shadow: 0 0 10px rgba(0,255,136,0.5); }
         .nav-btn { padding: 10px 20px; background: #00ff88; color: #050508; border-radius: 10px; font-weight: 800; text-decoration: none; transition: 0.3s; }
-        .nav-btn:hover { box-shadow: 0 0 20px rgba(0,255,136,0.5); }
+        .nav-btn:hover { box-shadow: 0 0 20px rgba(0,255,136,0.5); transform: scale(1.05); }
 
         .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 20px; }
         .hero h1 { font-size: 6rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; background: linear-gradient(90deg, #00ff88, #00e5ff, #00ff88); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 4s linear infinite; }
@@ -32,10 +44,10 @@
         .hero .subtitle { color: #52525b; font-size: 1rem; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 20px; }
         @keyframes shine { to { background-position: 200% center; } }
 
-        .btn-main { padding: 20px 40px; background: linear-gradient(135deg, #00ff88, #00e5ff); color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: 0.3s; display: inline-block; margin-bottom: 20px; }
-        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(0,255,136,0.6); }
+        .btn-main { padding: 20px 40px; background: linear-gradient(135deg, #00ff88, #00e5ff); color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: 0.3s; display: inline-block; margin-bottom: 20px; box-shadow: 0 0 30px rgba(0,255,136,0.4); }
+        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 0 60px rgba(0,255,136,0.6); }
         .btn-secondary { display: inline-block; color: #fff; text-decoration: none; border: 1px solid #3f3f46; padding: 15px 30px; border-radius: 12px; font-weight: 600; transition: 0.3s; }
-        .btn-secondary:hover { border-color: #00ff88; color: #00ff88; }
+        .btn-secondary:hover { border-color: #00ff88; color: #00ff88; transform: translateY(-3px); }
 
         .editor-window { width: 100%; max-width: 700px; margin-top: 50px; background: rgba(20, 20, 30, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.8); overflow: hidden; text-align: left; }
         .editor-top { background: rgba(0,0,0,0.3); padding: 12px 16px; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); color: #71717a; font-size: 0.9rem; }
@@ -43,7 +55,6 @@
         .editor-buttons { padding: 15px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px; justify-content: flex-end; }
         .btn-exec { padding: 8px 20px; background: #00ff88; color: #000; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; }
 
-        /* Bölümler */
         .section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.05); }
         .section-title { font-size: 3rem; font-weight: 800; margin-bottom: 20px; }
         .section-desc { color: #a1a1aa; font-size: 1.2rem; margin-bottom: 50px; max-width: 800px; }
@@ -52,20 +63,20 @@
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
 
         .card { background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; transition: 0.3s; cursor: default; }
-        .card:hover { border-color: rgba(0,255,136,0.4); transform: translateY(-5px); background: rgba(0,255,136,0.03); }
+        .card:hover { border-color: rgba(0,255,136,0.4); transform: translateY(-5px); background: rgba(0,255,136,0.03); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
         .card-icon { font-size: 3rem; margin-bottom: 20px; }
         .card h3 { font-size: 1.5rem; margin-bottom: 10px; }
         .card p { color: #a1a1aa; font-size: 0.95rem; }
 
-        /* Yeni Bölümler: Changelog & Docs */
         .timeline { position: relative; max-width: 800px; margin: 0 auto; }
-        .timeline-item { padding: 20px; background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; margin-bottom: 20px; }
+        .timeline-item { padding: 20px; background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; margin-bottom: 20px; transition: 0.3s; }
+        .timeline-item:hover { border-color: #00ff88; }
         .timeline-item h3 { color: #00ff88; margin-bottom: 10px; }
         
-        .doc-step { padding: 20px; background: rgba(0, 191, 255, 0.05); border: 1px solid rgba(0,191,255,0.2); border-radius: 16px; margin-bottom: 20px; }
+        .doc-step { padding: 20px; background: rgba(0, 191, 255, 0.05); border: 1px solid rgba(0,191,255,0.2); border-radius: 16px; margin-bottom: 20px; transition: 0.3s; }
+        .doc-step:hover { transform: translateY(-3px); border-color: #00e5ff; }
         .doc-step h3 { color: #00e5ff; margin-bottom: 10px; }
 
-        /* Ücretsiz İndirme */
         .download-section { text-align: center; padding: 50px; background: rgba(20, 20, 30, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; }
         .download-title { font-size: 3rem; font-weight: 800; margin-bottom: 10px; }
         .download-desc { color: #a1a1aa; margin-bottom: 30px; }
@@ -75,7 +86,21 @@
         .contact-email { margin-top: 30px; font-size: 1rem; color: #a1a1aa; }
         .contact-email a { color: #00e5ff; text-decoration: none; font-weight: 700; }
 
-        /* FAQ */
+        /* İletişim Formu Bölümü */
+        .form-section { background: rgba(20, 20, 30, 0.7); border: 1px solid rgba(255,255,255,0.1); padding: 50px; border-radius: 30px; max-width: 800px; margin: 0 auto; }
+        .form-title { font-size: 2.5rem; margin-bottom: 10px; background: linear-gradient(90deg, #00ff88, #00e5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .form-desc { color: #a1a1aa; margin-bottom: 30px; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: #d4d4d8; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-family: inherit; outline: none; transition: 0.3s; font-size: 1rem; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: #00ff88; box-shadow: 0 0 15px rgba(0,255,136,0.2); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        
+        .submit-btn { width: 100%; padding: 20px; background: linear-gradient(135deg, #00ff88, #00e5ff); color: #050508; border: none; border-radius: 16px; font-weight: 800; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(0,255,136,0.6); }
+        .redirect-note { margin-top: 15px; font-size: 0.9rem; color: #00e5ff; display: none; }
+
         .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; }
         .faq-question { font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; }
         .faq-question:hover { color: #00ff88; }
@@ -84,9 +109,9 @@
 
         footer { padding: 60px 40px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #52525b; }
         .footer-links { margin-top: 20px; display: flex; gap: 30px; justify-content: center; }
-        .footer-links a { color: #a1a1aa; text-decoration: none; }
+        .footer-links a { color: #a1a1aa; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: #00ff88; }
 
-        /* Scroll Reveal Animasyonu (GUI İyileştirmesi) */
         .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -95,6 +120,7 @@
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
             nav { padding: 15px 20px; }
             .nav-links { display: none; }
+            .form-section { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -103,7 +129,6 @@
     <div class="glow-green"></div>
     <div class="glow-blue"></div>
 
-    <!-- Navbar (Yeni Linkler Eklendi) -->
     <nav>
         <div class="logo">KAIOD</div>
         <ul class="nav-links">
@@ -112,6 +137,7 @@
             <li><a href="#changelog">Changelog</a></li>
             <li><a href="#docs">Docs</a></li>
             <li><a href="#download">Download</a></li>
+            <li><a href="#contact">Contact</a></li>
             <li><a href="#faq">FAQ</a></li>
         </ul>
         <a href="#download" class="nav-btn">Download Free</a>
@@ -198,7 +224,6 @@
         </div>
     </section>
 
-    <!-- YENİ SAYFA: CHANGELOG -->
     <section id="changelog" class="section reveal">
         <p class="section-desc">03 / CHANGELOG</p>
         <h2 class="section-title">Version History.</h2>
@@ -220,7 +245,6 @@
         </div>
     </section>
 
-    <!-- YENİ SAYFA: DOCUMENTATION -->
     <section id="docs" class="section reveal">
         <p class="section-desc">04 / DOCUMENTATION</p>
         <h2 class="section-title">How to use KAIOD.</h2>
@@ -246,7 +270,6 @@
         </div>
     </section>
 
-    <!-- Ücretsiz İndirme -->
     <section id="download" class="section reveal">
         <div class="download-section">
             <h2 class="download-title">Get KAIOD</h2>
@@ -260,6 +283,46 @@
             <div class="contact-email">
                 For support or contact: <a href="mailto:kaiodforhack.xd@gmail.com">kaiodforhack.xd@gmail.com</a>
             </div>
+        </div>
+    </section>
+
+    <!-- YENİ BÖLÜM: İLETİŞİM FORMU (Form doldur, Jitsi'ye yönlendir) -->
+    <section id="contact" class="section reveal">
+        <div class="form-section">
+            <h2 class="form-title">Join the Voice Room</h2>
+            <p class="form-desc">Tell us why you're here, and we'll connect you to our live community voice room.</p>
+            
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Your Username / Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address (Optional)</label>
+                    <input type="email" id="email" placeholder="example@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="reason">Reason for Contact</label>
+                    <select id="reason" required>
+                        <option value="" disabled selected>Select a reason...</option>
+                        <option value="support">Need Script Support</option>
+                        <option value="bug">Report a Bug</option>
+                        <option value="collab">Collaboration / Partnership</option>
+                        <option value="chat">Just Want to Chat</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Message (Optional)</label>
+                    <textarea id="message" placeholder="Write your message here..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit & Join Voice Room</button>
+                <div id="redirectNote" class="redirect-note">✓ Redirecting you to the voice room...</div>
+            </form>
         </div>
     </section>
 
@@ -306,7 +369,7 @@
         </div>
         <div class="faq-item">
             <div class="faq-question">How do I get support? <span>+</span></div>
-            <div class="faq-answer">You can contact us directly via our email: kaiodforhack.xd@gmail.com</div>
+            <div class="faq-answer">You can contact us directly via our email: kaiodforhack.xd@gmail.com or fill the form above to join our voice room!</div>
         </div>
     </section>
 
@@ -316,11 +379,11 @@
         <div class="footer-links">
             <a href="#features">Product</a>
             <a href="#download">Download</a>
+            <a href="#contact">Join Voice Room</a>
             <a href="#faq">FAQ</a>
         </div>
     </footer>
 
-    <!-- Gelişmiş JS: Scroll Reveal ve FAQ -->
     <script>
         // Scroll Reveal Animasyonu
         const revealElements = document.querySelectorAll('.reveal');
@@ -343,6 +406,24 @@
                 const sign = faq.querySelector('span');
                 sign.textContent = faq.parentElement.classList.contains('active') ? '−' : '+';
             });
+        });
+
+        // İletişim Formu - Jitsi'ye Yönlendirme
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Sayfanın yenilenmesini engelle
+            
+            const name = document.getElementById('name').value;
+            const reason = document.getElementById('reason').value;
+
+            // Kullanıcıya bilgi ver
+            const note = document.getElementById('redirectNote');
+            note.style.display = 'block';
+            note.textContent = `✓ Thanks ${name}! Redirecting you to the KAIOD voice room...`;
+
+            // 2.5 saniye sonra Jitsi Meet odasına yönlendir
+            setTimeout(function() {
+                window.location.href = "https://meet.jit.si/KAIOD";
+            }, 2500);
         });
     </script>
 
