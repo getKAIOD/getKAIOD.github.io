@@ -42,10 +42,10 @@
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
-        body { background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; overflow-x: hidden; transition: 0.3s; }
+        body { background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; overflow-x: hidden; transition: background-color 0.5s ease, color 0.5s ease; }
 
-        .glow-green { position: fixed; width: 600px; height: 600px; background: var(--glow-green); filter: blur(150px); top: -10%; left: 20%; z-index: -1; pointer-events: none; animation: float 8s infinite alternate; }
-        .glow-blue { position: fixed; width: 500px; height: 500px; background: var(--glow-blue); filter: blur(120px); bottom: 0; right: 10%; z-index: -1; pointer-events: none; animation: float 10s infinite alternate-reverse; }
+        .glow-green { position: fixed; width: 600px; height: 600px; background: var(--glow-green); filter: blur(150px); top: -10%; left: 20%; z-index: -1; pointer-events: none; animation: float 8s infinite alternate; transition: background 0.5s; }
+        .glow-blue { position: fixed; width: 500px; height: 500px; background: var(--glow-blue); filter: blur(120px); bottom: 0; right: 10%; z-index: -1; pointer-events: none; animation: float 10s infinite alternate-reverse; transition: background 0.5s; }
 
         @keyframes float {
             0% { transform: translateY(0px) scale(1); }
@@ -62,9 +62,13 @@
             background-size: 60px 60px;
             z-index: -2;
             mask-image: radial-gradient(circle at center, black 20%, transparent 100%);
+            transition: background-image 0.5s;
         }
 
-        nav { position: sticky; top: 0; z-index: 100; background: var(--glass); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; }
+        /* Tema geçişleri için yumuşatma */
+        .card, .badge, .nav-btn, .real-gui, .term-top, .download-btn, input, button { transition: all 0.4s ease; }
+
+        nav { position: sticky; top: 0; z-index: 100; background: var(--glass); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; transition: background 0.5s; }
         .logo { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transition: 0.3s; }
         .logo:hover { filter: drop-shadow(0 0 15px var(--primary)); }
         .nav-links { display: flex; gap: 25px; list-style: none; align-items: center;}
@@ -73,8 +77,55 @@
         .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: var(--primary); transition: 0.3s; }
         .nav-links a:hover::after { width: 100%; }
         
-        .theme-toggle { background: var(--bg-2); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 8px 15px; cursor: pointer; font-weight: 700; font-size: 0.9rem; transition: 0.3s;}
-        .theme-toggle:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+        /* ===== YENİ HAVALI TEMA ANAHTARI (SWITCH) ===== */
+        .theme-switch {
+            display: flex;
+            align-items: center;
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 4px;
+            cursor: pointer;
+            position: relative;
+            width: 70px;
+            height: 32px;
+            transition: 0.3s;
+        }
+        .theme-switch:hover { border-color: var(--primary); box-shadow: 0 0 10px var(--glow-green); }
+        
+        .theme-switch .knob {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            color: #05050a;
+            transform: translateX(0);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), background 0.4s;
+            box-shadow: 0 0 10px var(--primary);
+            z-index: 2;
+        }
+        
+        body.light-mode .theme-switch .knob {
+            transform: translateX(38px);
+            background: var(--secondary);
+            box-shadow: 0 0 10px var(--secondary);
+        }
+        
+        .theme-switch .icon {
+            position: absolute;
+            font-size: 14px;
+            color: var(--text-muted);
+            transition: opacity 0.3s;
+        }
+        .theme-switch .icon-sun { left: 8px; opacity: 0; }
+        .theme-switch .icon-moon { right: 8px; opacity: 1; }
+
+        body.light-mode .theme-switch .icon-sun { opacity: 1; }
+        body.light-mode .theme-switch .icon-moon { opacity: 0; }
 
         .nav-btn { padding: 10px 20px; background: var(--primary); color: #050508; border-radius: 10px; font-weight: 800; text-decoration: none; transition: 0.3s; cursor: pointer; }
         .nav-btn:hover { box-shadow: 0 0 20px var(--primary); transform: scale(1.05); }
@@ -115,18 +166,8 @@
         .card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px var(--glow-green); }
         .card-icon { font-size: 3rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--glow-green)); }
 
-        /* UI PREVIEW - KAIOD v5.1 */
         .ui-preview-wrap { display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.3); padding: 50px; border-radius: 30px; border: 1px solid var(--border); }
-        .real-gui {
-            width: 320px;
-            background: #12101c;
-            border: 2px solid #2a1a4a;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(138, 43, 226, 0.1);
-            position: relative;
-            color: #fff;
-        }
+        .real-gui { width: 320px; background: #12101c; border: 2px solid #2a1a4a; border-radius: 16px; padding: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(138, 43, 226, 0.1); position: relative; color: #fff; }
         .real-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
         .real-title { display: flex; align-items: center; gap: 8px; }
         .real-logo { font-size: 1.2rem; font-weight: 800; }
@@ -152,7 +193,6 @@
         .no { color: var(--text-muted); font-size: 1.2rem;}
         .compare-table tr:hover { background: rgba(0,255,136,0.03); }
 
-        /* GÜNCELLENMİŞ TOPLULUK */
         .community-badges { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;}
         .badge { display: flex; align-items: center; gap: 10px; padding: 20px; background: var(--glass); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text); transition: 0.3s; }
         .badge:hover { transform: translateY(-5px); border-color: var(--secondary); box-shadow: 0 0 20px var(--glow-blue); }
@@ -176,7 +216,7 @@
         .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        .mouse-glow { pointer-events: none; position: fixed; top: 0; left: 0; width: 500px; height: 500px; background: radial-gradient(circle, var(--glow-green), transparent 70%); transform: translate(-50%, -50%); z-index: 0; opacity: 0.5;}
+        .mouse-glow { pointer-events: none; position: fixed; top: 0; left: 0; width: 500px; height: 500px; background: radial-gradient(circle, var(--glow-green), transparent 70%); transform: translate(-50%, -50%); z-index: 0; opacity: 0.5; transition: background 0.5s;}
 
         @media (max-width: 800px) {
             .hero h1 { font-size: 3.5rem; }
@@ -202,7 +242,12 @@
             <li><a href="#community">Community</a></li>
             <li><a href="#download">Download</a></li>
             <li><a href="#faq">FAQ</a></li>
-            <button class="theme-toggle" onclick="toggleTheme()">THEME</button>
+            <!-- Yeni Havalı Tema Anahtarı -->
+            <div class="theme-switch" onclick="toggleTheme()">
+                <span class="icon icon-sun">☀️</span>
+                <span class="icon icon-moon">🌙</span>
+                <div class="knob" id="themeKnob">🌙</div>
+            </div>
         </ul>
         <a href="#download" class="nav-btn">Download Free</a>
     </nav>
@@ -320,7 +365,6 @@
         </table>
     </section>
 
-    <!-- GÜNCELLENMİŞ TOPLULUK BÖLÜMÜ -->
     <section id="community" class="section reveal">
         <p class="section-desc">04 / COMMUNITY</p>
         <h2 class="section-title">Join the Community.</h2>
@@ -416,15 +460,42 @@
             });
         });
 
+        // YENİ HAVALI TEMA DEĞİŞTİRME SİSTEMİ
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
-            const btn = document.querySelector('.theme-toggle');
-            if (document.body.classList.contains('light-mode')) {
-                btn.innerText = 'DARK';
+            const isLight = document.body.classList.contains('light-mode');
+            const knob = document.getElementById('themeKnob');
+            
+            // İkonları ve knob rengini güncelle
+            if (isLight) {
+                knob.textContent = '☀️'; // Güneş simgesi
+                knob.style.background = 'var(--secondary)';
+                knob.style.boxShadow = '0 0 15px var(--secondary)';
             } else {
-                btn.innerText = 'LIGHT';
+                knob.textContent = '🌙'; // Ay simgesi
+                knob.style.background = 'var(--primary)';
+                knob.style.boxShadow = '0 0 15px var(--primary)';
             }
+
+            // Kullanıcının tercihini hatırla
+            localStorage.setItem('kaid-theme', isLight ? 'light' : 'dark');
         }
+
+        // Sayfa yüklendiğinde kayıtlı temayı uygula
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('kaid-theme');
+            const knob = document.getElementById('themeKnob');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                knob.textContent = '☀️';
+                knob.style.background = 'var(--secondary)';
+                knob.style.boxShadow = '0 0 15px var(--secondary)';
+            } else {
+                knob.textContent = '🌙';
+                knob.style.background = 'var(--primary)';
+                knob.style.boxShadow = '0 0 15px var(--primary)';
+            }
+        });
 
         document.addEventListener('mousemove', (e) => {
             const glow = document.getElementById('mouseGlow');
