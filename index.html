@@ -28,6 +28,11 @@
             --glass: rgba(15, 15, 25, 0.75);
             --glow-green: rgba(0,255,136,0.12);
             --glow-blue: rgba(0,191,255,0.12);
+            
+            /* Yeni 10/10 Shade/Gölge Değişkenleri */
+            --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(0, 0, 0, 0.5);
+            --shadow-btn: 0 0 30px var(--glow-green), 0 10px 20px rgba(0, 0, 0, 0.4);
+            --border-glow: 1px solid rgba(0, 255, 136, 0.25);
         }
 
         body.light-mode {
@@ -36,273 +41,66 @@
             --text: #18181b;
             --text-muted: #52525b;
             --border: rgba(0, 0, 0, 0.1);
-            --glass: rgba(255, 255, 255, 0.8);
+            --glass: rgba(255, 255, 255, 0.85);
             --glow-green: rgba(0,255,136,0.2);
             --glow-blue: rgba(0,191,255,0.2);
         }
 
-        /* ===== GİZLİ FEMBOY MODU (femboy yazınca) ===== */
-        body.femboy-mode {
-            --bg: #ffe4f1;
-            --bg-2: #ffd1dc;
-            --text: #4a0e2e;
-            --text-muted: #915a6b;
-            --primary: #ff69b4;
-            --secondary: #00e5ff;
-            --border: rgba(255, 105, 180, 0.3);
-            --glass: rgba(255, 240, 245, 0.8);
-            --glow-green: rgba(255, 105, 180, 0.2);
-            --glow-blue: rgba(173, 216, 230, 0.2);
-        }
+        /* Yeni Modlar */
+        body.femboy-mode { --bg: #ffe4f1; --bg-2: #ffd1dc; --text: #4a0e2e; --text-muted: #915a6b; --primary: #ff69b4; --secondary: #00e5ff; --border: rgba(255, 105, 180, 0.3); --glass: rgba(255, 240, 245, 0.8); --glow-green: rgba(255, 105, 180, 0.2); --glow-blue: rgba(173, 216, 230, 0.2); }
+        body.old-school-mode { --bg: #0000CC; --bg-2: #000099; --text: #FFFFFF; --text-muted: #CCCCFF; --primary: #FFFF00; --secondary: #33FFFF; --border: 2px solid #FFFFFF; --glass: rgba(0, 0, 153, 0.9); --glow-green: rgba(51, 255, 255, 0.2); --glow-blue: rgba(51, 255, 255, 0.2); font-family: 'Times New Roman', Times, serif !important; }
+        body.old-school-mode * { font-family: 'Times New Roman', Times, serif !important; letter-spacing: 0px; text-transform: none; }
+        
+        /* VIP Modu */
+        body.vip-mode { --bg: #12100a; --bg-2: #1f1b12; --text: #fff8d6; --text-muted: #d4b97a; --primary: #FFD700; --secondary: #FF8C00; --border: rgba(255, 215, 0, 0.4); --glass: rgba(30, 25, 15, 0.8); --glow-green: rgba(255, 215, 0, 0.3); --glow-blue: rgba(255, 140, 0, 0.3); }
+        
+        /* Hayalet Modu */
+        body.ghost-mode { opacity: 0.2; pointer-events: none; transition: opacity 0.5s; }
 
-        /* ===== GİZLİ Eski Okul MAVİ MODU (758303kaiod456execute123 yazınca) ===== */
-        body.old-school-mode {
-            --bg: #0000CC;
-            --bg-2: #000099;
-            --text: #FFFFFF;
-            --text-muted: #CCCCFF;
-            --primary: #FFFF00;
-            --secondary: #33FFFF;
-            --border: 2px solid #FFFFFF;
-            --glass: rgba(0, 0, 153, 0.9);
-            --glow-green: rgba(51, 255, 255, 0.2);
-            --glow-blue: rgba(51, 255, 255, 0.2);
-            
-            font-family: 'Times New Roman', Times, serif !important;
-        }
-
-        body.old-school-mode * {
-            font-family: 'Times New Roman', Times, serif !important;
-            letter-spacing: 0px;
-            text-transform: none;
-        }
-
+        /* Eski Okul Stil Detayları */
         body.old-school-mode .logo { text-decoration: underline; }
-        body.old-school-mode .back-to-top {
-            border-radius: 0;
-            background: white;
-            color: blue;
-            border: 2px solid black;
-        }
-
-        .visitor-counter {
-            display: none;
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            background: black;
-            color: #00FF00;
-            padding: 5px;
-            border: 2px solid white;
-            font-size: 12px;
-            z-index: 999;
-        }
+        body.old-school-mode .back-to-top { border-radius: 0; background: white; color: blue; border: 2px solid black; }
         body.old-school-mode .visitor-counter { display: block; }
 
-        #retro-truths {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #000099;
-            border: 4px solid #FFFFFF;
-            padding: 20px;
-            width: 80%;
-            max-width: 600px;
-            z-index: 1000;
-            text-align: left;
-        }
+        .visitor-counter { display: none; position: fixed; bottom: 10px; left: 10px; background: black; color: #00FF00; padding: 5px; border: 2px solid white; font-size: 12px; z-index: 999; }
+
+        #retro-truths { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #000099; border: 4px solid #FFFFFF; padding: 20px; width: 80%; max-width: 600px; z-index: 1000; text-align: left; }
         body.old-school-mode #retro-truths { display: block; }
         #retro-truths h2 { text-decoration: underline; margin-bottom: 10px; }
         #retro-truths table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         #retro-truths td, #retro-truths th { border: 1px solid white; padding: 5px; font-size: 14px; }
 
-        /* ============================================= */
-        /* ============ IDIOT MODU (idiot yazınca) ===== */
-        /* ============================================= */
-        #idiot-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background-color: white;
-            color: black;
-            z-index: 999999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            font-family: 'Times New Roman', Times, serif;
-            animation: idiot-flip 0.5s infinite; /* Hızlandırıldı: 2s -> 0.5s */
-        }
-
-        body.idiot-mode {
-            background: black !important;
-            overflow: hidden;
-        }
-
-        body.idiot-mode > *:not(#idiot-overlay) {
-            display: none !important;
-        }
-
-        body.idiot-mode #idiot-overlay {
-            display: flex;
-        }
-
-        /* İçerik tam ortada */
-        .idiot-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .idiot-content h1 {
-            font-size: 5rem;
-            margin: 0;
-            margin-bottom: 50px;
-            letter-spacing: 2px;
-        }
-
-        /* CSS ile Çizilmiş Gülen Yüzler */
-        .smileys {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .smiley {
-            width: 120px;
-            height: 120px;
-            border: 5px solid currentColor;
-            border-radius: 50%;
-            position: relative;
-        }
-
-        /* Gözler */
-        .smiley::before,
-        .smiley::after {
-            content: '';
-            position: absolute;
-            top: 35px;
-            width: 12px;
-            height: 18px;
-            background: currentColor;
-            border-radius: 50%;
-        }
+        /* IDIOT MODU */
+        #idiot-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: white; color: black; z-index: 999999; justify-content: center; align-items: center; flex-direction: column; font-family: 'Times New Roman', Times, serif; animation: idiot-flip 0.5s infinite; }
+        body.idiot-mode { background: black !important; overflow: hidden; }
+        body.idiot-mode > *:not(#idiot-overlay) { display: none !important; }
+        body.idiot-mode #idiot-overlay { display: flex; }
+        
+        .idiot-content { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
+        .idiot-content h1 { font-size: 5rem; margin: 0; margin-bottom: 50px; letter-spacing: 2px; }
+        .smileys { display: flex; gap: 30px; justify-content: center; align-items: center; }
+        .smiley { width: 120px; height: 120px; border: 5px solid currentColor; border-radius: 50%; position: relative; }
+        .smiley::before, .smiley::after { content: ''; position: absolute; top: 35px; width: 12px; height: 18px; background: currentColor; border-radius: 50%; }
         .smiley::before { left: 30px; }
         .smiley::after { right: 30px; }
+        .smiley .mouth { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); width: 60px; height: 30px; border-bottom: 5px solid currentColor; border-radius: 0 0 50px 50px; }
 
-        /* Gülümseme (Ağız) */
-        .smiley .mouth {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 30px;
-            border-bottom: 5px solid currentColor;
-            border-radius: 0 0 50px 50px;
-        }
-
-        @keyframes idiot-flip {
-            0% { background-color: white; color: black; }
-            50% { background-color: black; color: white; }
-            100% { background-color: white; color: black; }
-        }
-        /* ============================================= */
-
-        /* ============================================= */
-        /* ============ YENİ: MATRIX MODU ============= */
-        /* ============================================= */
-        #matrix-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: black;
-            z-index: 99999;
-            pointer-events: none;
-        }
+        /* MATRIX MODU */
+        #matrix-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 999999; pointer-events: none; }
         body.matrix-mode > *:not(#matrix-overlay) { display: none !important; }
         body.matrix-mode #matrix-overlay { display: block !important; }
 
-        /* ============================================= */
-        /* ============ YENİ: PIZZA MODU ============= */
-        /* ============================================= */
-        #pizza-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            z-index: 99998;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        body.pizza-mode > *:not(#pizza-overlay) { display: none !important; }
-        body.pizza-mode #pizza-overlay { display: block !important; }
+        /* PIZZA MODU */
+        #pizza-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999999; }
+        .falling-pizza { position: absolute; font-size: 3rem; top: -10%; animation: fall linear infinite; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        /* ============================================= */
-        /* ============ YENİ: VIP MODU ============= */
-        /* ============================================= */
-        body.vip-mode {
-            --bg: #1a1a00;
-            --bg-2: #2a2a00;
-            --text: #ffd700;
-            --text-muted: #b8860b;
-            --primary: #ffd700;
-            --secondary: #ffae42;
-            --border: rgba(255, 215, 0, 0.4);
-            --glass: rgba(0, 0, 0, 0.8);
-            --glow-green: rgba(255, 215, 0, 0.2);
-            --glow-blue: rgba(255, 174, 66, 0.2);
-        }
+        /* KONAMI (Konfeti) */
+        #confetti-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999999; overflow: hidden; }
+        .confetti { position: absolute; width: 10px; height: 10px; border-radius: 2px; top: -10px; animation: confetti-fall linear infinite; }
+        @keyframes confetti-fall { to { transform: translateY(110vh) rotate(720deg); } }
 
-        /* ============================================= */
-        /* ============ YENİ: GHOST MODU ============= */
-        /* ============================================= */
-        body.ghost-mode {
-            background: transparent !important;
-            overflow: hidden;
-        }
-        body.ghost-mode * {
-            opacity: 0.15 !important;
-            transition: opacity 0.5s;
-        }
-        body.ghost-mode #ghost-hint {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #fff;
-            font-size: 4rem;
-            font-weight: 800;
-            z-index: 99999;
-            background: rgba(0,0,0,0.6);
-            padding: 20px;
-            border-radius: 20px;
-            opacity: 1 !important;
-        }
-
-        /* ============================================= */
-        /* ============ KONAMI KONFETİSİ ============= */
-        /* ============================================= */
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background-color: #f00;
-            z-index: 99999;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            0% { transform: translateY(-100vh) rotate(0deg); }
-            100% { transform: translateY(100vh) rotate(720deg); }
-        }
-
+        /* 10/10 GUI İyileştirmeleri */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; scroll-behavior: smooth; }
         ::selection { background: var(--primary); color: #000; }
         ::-webkit-scrollbar { width: 8px; }
@@ -317,16 +115,7 @@
 
         @keyframes float { 0% { transform: translateY(0px) scale(1); } 100% { transform: translateY(30px) scale(1.1); } }
 
-        body::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-            z-index: -3;
-            mask-image: radial-gradient(circle at center, black 20%, transparent 100%);
-            transition: background-image 0.5s;
-        }
+        body::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; z-index: -3; mask-image: radial-gradient(circle at center, black 20%, transparent 100%); }
 
         #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #05050a; z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease, visibility 0.8s ease; }
         #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
@@ -342,13 +131,16 @@
         .toast strong { color: var(--secondary); }
 
         .card, .badge, .nav-btn, .real-gui, .term-top, .download-btn, input, button { transition: all 0.4s ease; }
+        
         nav { position: sticky; top: 0; z-index: 100; background: var(--glass); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; transition: background 0.5s; }
+        nav::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--primary), transparent, var(--secondary)); opacity: 0.6; }
+        
         .logo { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transition: 0.3s; }
         .logo:hover { filter: drop-shadow(0 0 15px var(--primary)); }
         .nav-links { display: flex; gap: 25px; list-style: none; align-items: center;}
         .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 600; transition: 0.3s; position: relative; }
         .nav-links a:hover { color: var(--primary); }
-        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: var(--primary); transition: 0.3s; }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: var(--primary); transition: 0.3s; box-shadow: 0 0 8px var(--primary); }
         .nav-links a:hover::after { width: 100%; }
 
         .theme-switch { display: flex; align-items: center; background: var(--bg-2); border: 1px solid var(--border); border-radius: 20px; padding: 4px; cursor: pointer; position: relative; width: 70px; height: 32px; transition: 0.3s; }
@@ -356,23 +148,24 @@
         .theme-switch .knob { width: 24px; height: 24px; background: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 14px; color: #05050a; transform: translateX(0); transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), background 0.4s; box-shadow: 0 0 10px var(--primary); z-index: 2; }
         body.light-mode .theme-switch .knob { transform: translateX(38px); background: var(--secondary); box-shadow: 0 0 10px var(--secondary); }
         body.femboy-mode .theme-switch .knob { transform: translateX(38px); background: #ff69b4; box-shadow: 0 0 10px #ff69b4; }
+        body.vip-mode .theme-switch .knob { transform: translateX(38px); background: #FFD700; box-shadow: 0 0 15px #FFD700; }
         .theme-switch .icon { position: absolute; font-size: 14px; color: var(--text-muted); transition: opacity 0.3s; }
         .theme-switch .icon-sun { left: 8px; opacity: 0; }
         .theme-switch .icon-moon { right: 8px; opacity: 1; }
         body.light-mode .theme-switch .icon-sun { opacity: 1; }
         body.light-mode .theme-switch .icon-moon { opacity: 0; }
 
-        .nav-btn { padding: 10px 20px; background: var(--primary); color: #050508; border-radius: 10px; font-weight: 800; text-decoration: none; transition: 0.3s; cursor: pointer; }
-        .nav-btn:hover { box-shadow: 0 0 20px var(--primary); transform: scale(1.05); }
+        .nav-btn { padding: 10px 20px; background: var(--primary); color: #050508; border-radius: 10px; font-weight: 800; text-decoration: none; transition: 0.3s; cursor: pointer; box-shadow: 0 0 15px var(--glow-green); }
+        .nav-btn:hover { box-shadow: 0 0 25px var(--primary); transform: scale(1.05); }
 
         .hero { min-height: 95vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 20px; position: relative;}
-        .hero h1 { font-size: 8rem; font-weight: 800; letter-spacing: -4px; margin-bottom: 15px; background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary)); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 4s linear infinite; }
+        .hero h1 { font-size: 8rem; font-weight: 800; letter-spacing: -4px; margin-bottom: 15px; background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary)); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 4s linear infinite; filter: drop-shadow(0 0 20px var(--glow-green)); }
         .hero p { color: var(--text-muted); font-size: 1.4rem; margin-bottom: 40px; max-width: 800px; }
         .hero .subtitle { color: var(--text-muted); font-size: 1rem; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 20px; }
         @keyframes shine { to { background-position: 200% center; } }
         
-        .btn-main { padding: 20px 40px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: inline-block; margin-bottom: 20px; box-shadow: 0 0 40px var(--glow-green); cursor: pointer; }
-        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 0 80px var(--primary); }
+        .btn-main { padding: 20px 40px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #050508; border-radius: 16px; font-weight: 800; font-size: 1.2rem; text-decoration: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: inline-block; margin-bottom: 20px; box-shadow: var(--shadow-btn); cursor: pointer; }
+        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 0 60px var(--primary); }
 
         .terminal-window { width: 100%; max-width: 700px; margin-top: 50px; background: #0d0d1a; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; text-align: left; font-family: 'JetBrains Mono', monospace; box-shadow: 0 30px 60px rgba(0,0,0,0.8); position: relative;}
         .term-top { background: #1a1a2e; padding: 10px 16px; display: flex; justify-content: space-between; border-bottom: 1px solid #2a2a40; }
@@ -389,14 +182,14 @@
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         .section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); }
-        .section-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; }
+        .section-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--glow-green)); }
         .section-desc { color: var(--text-muted); font-size: 1.2rem; margin-bottom: 50px; max-width: 800px; }
         
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
 
-        .card { background: var(--glass); border: 1px solid var(--border); padding: 30px; border-radius: 20px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; }
-        .card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px var(--glow-green); }
+        .card { background: var(--glass); border: 1px solid var(--border); padding: 30px; border-radius: 20px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; box-shadow: var(--shadow-card); }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px var(--glow-green); background: rgba(0,255,136,0.03); }
         .card-icon { font-size: 3rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--glow-green)); }
 
         .ui-preview-wrap { display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.3); padding: 50px; border-radius: 30px; border: 1px solid var(--border); perspective: 1000px; }
@@ -438,7 +231,7 @@
         .compare-table tr:hover { background: rgba(0,255,136,0.03); }
 
         .community-badges { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;}
-        .badge { display: flex; align-items: center; gap: 10px; padding: 20px; background: var(--glass); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text); transition: 0.3s; }
+        .badge { display: flex; align-items: center; gap: 10px; padding: 20px; background: var(--glass); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text); transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
         .badge:hover { transform: translateY(-5px); border-color: var(--secondary); box-shadow: 0 0 20px var(--glow-blue); }
         .badge-icon { font-size: 2rem; }
 
@@ -472,17 +265,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Matrix Overlay -->
-    <div id="matrix-overlay">
-        <canvas id="matrix-canvas"></canvas>
-    </div>
-
-    <!-- Pizza Overlay -->
-    <div id="pizza-overlay"></div>
-
-    <!-- Ghost Hint -->
-    <div id="ghost-hint" style="display: none;">👻</div>
 
     <div id="loader">
         <div class="loader-logo">KAIOD</div>
@@ -719,7 +501,7 @@
         <center>Welcome to the Retro Blue Matrix. You found the secret!</center>
     </div>
 
-    <!-- IDIOT MOD OVERLAY (CSS İLE ÇİZİLMİŞ YÜZLER) -->
+    <!-- IDIOT MOD OVERLAY -->
     <div id="idiot-overlay">
         <div class="idiot-content">
             <h1>you are an idiot</h1>
@@ -730,6 +512,17 @@
             </div>
         </div>
     </div>
+
+    <!-- MATRIX OVERLAY -->
+    <div id="matrix-overlay">
+        <canvas id="matrix-canvas"></canvas>
+    </div>
+
+    <!-- PIZZA CONTAINER -->
+    <div id="pizza-container"></div>
+
+    <!-- KONAMI CONFETTI -->
+    <div id="confetti-container"></div>
 
     <a href="#" class="back-to-top" id="backToTop">↑</a>
     <div id="toast-container"></div>
@@ -771,6 +564,8 @@
         function toggleTheme() {
             document.body.classList.remove('femboy-mode');
             document.body.classList.remove('old-school-mode');
+            document.body.classList.remove('vip-mode');
+            document.body.classList.remove('ghost-mode');
             document.body.classList.toggle('light-mode');
             const isLight = document.body.classList.contains('light-mode');
             const knob = document.getElementById('themeKnob');
@@ -1064,97 +859,84 @@
         setTimeout(showToast, 5000);
 
         // ==========================================
-        // GİZLİ MODLAR - TEK DİNLEYİCİ (YENİ MODLAR DAHİL)
+        // GİZLİ MODLAR - TEK DİNLEYİCİ
         // ==========================================
         let keyBuffer = "";
         let retroBuffer = "";
         let idiotBuffer = "";
         let matrixBuffer = "";
         let pizzaBuffer = "";
-        let vipBuffer = "";
         let ghostBuffer = "";
-        let rickrollBuffer = "";
-        let konamiBuffer = []; // Konami için dizi kullanıyoruz
-
-        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let vipBuffer = "";
+        let konamiBuffer = [];
+        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 
         document.addEventListener('keydown', (e) => {
+            // Konami Kodu Kontrolü
+            konamiBuffer.push(e.key);
+            konamiBuffer = konamiBuffer.slice(-10);
+            if (konamiBuffer.every((v, i) => v === konamiCode[i])) { activateKonamiMode(); }
+
             if (e.key.length === 1) {
                 const lowerKey = e.key.toLowerCase();
                 
-                // Femboy Modu (femboy yazınca)
                 keyBuffer = (keyBuffer + lowerKey).slice(-6);
                 if (keyBuffer === 'femboy') { keyBuffer = ""; activateFemboyMode(); }
                 
-                // Retro Mod (758303kaiod456execute123)
                 retroBuffer = (retroBuffer + lowerKey).slice(-24);
                 if (retroBuffer === '758303kaiod456execute123') { retroBuffer = ""; activateRetroMode(); }
                 
-                // Idiot Modu (idiot)
                 idiotBuffer = (idiotBuffer + lowerKey).slice(-5);
                 if (idiotBuffer === 'idiot') { idiotBuffer = ""; activateIdiotMode(); }
                 
-                // Matrix Modu (matrix)
                 matrixBuffer = (matrixBuffer + lowerKey).slice(-6);
                 if (matrixBuffer === 'matrix') { matrixBuffer = ""; activateMatrixMode(); }
-                
-                // Pizza Modu (pizza)
+
                 pizzaBuffer = (pizzaBuffer + lowerKey).slice(-5);
                 if (pizzaBuffer === 'pizza') { pizzaBuffer = ""; activatePizzaMode(); }
-                
-                // VIP Modu (vip)
+
                 vipBuffer = (vipBuffer + lowerKey).slice(-3);
                 if (vipBuffer === 'vip') { vipBuffer = ""; activateVipMode(); }
-                
-                // Ghost Modu (ghost)
+
                 ghostBuffer = (ghostBuffer + lowerKey).slice(-5);
                 if (ghostBuffer === 'ghost') { ghostBuffer = ""; activateGhostMode(); }
-                
-                // Rickroll Modu (rickroll)
-                rickrollBuffer = (rickrollBuffer + lowerKey).slice(-8);
-                if (rickrollBuffer === 'rickroll') { rickrollBuffer = ""; activateRickrollMode(); }
-            }
 
-            // Konami Kodu (Ok tuşları + B + A)
-            konamiBuffer.push(e.key);
-            konamiBuffer = konamiBuffer.slice(-konamiCode.length);
-            if (JSON.stringify(konamiBuffer) === JSON.stringify(konamiCode)) {
-                konamiBuffer = [];
-                activateKonamiMode();
+                if (lowerKey === 'r' && (e.ctrlKey || e.metaKey)) {
+                    // Sayfa yenileme kısayolu ile çakışmasın, rickroll'u sadece "rickroll" yazınca yapalım
+                    let rickBuffer = (e.target.value || "").toLowerCase();
+                    // Bu biraz karışık, basitçe rickroll yazınca yapacağız
+                    if (rickBuffer.includes('rickroll')) { window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank'); }
+                }
+                
+                // Rickroll Buffer
+                if (!keyBuffer.includes('femboy') && !retroBuffer.includes('758303') && !idiotBuffer.includes('idiot') && !matrixBuffer.includes('matrix')) {
+                   // Rickroll için "rickroll" yaz
+                   if (e.key.toLowerCase()) {
+                       // "rickroll" için ayrı buffer
+                       if (typeof rickrollBuffer === 'undefined') { rickrollBuffer = ""; }
+                       rickrollBuffer = (rickrollBuffer + lowerKey).slice(-8);
+                       if (rickrollBuffer === 'rickroll') { rickrollBuffer = ""; activateRickRoll(); }
+                   }
+                }
             }
         });
 
         // Femboy Modunu Aktif Et
         function activateFemboyMode() {
-            document.body.classList.remove('light-mode');
-            document.body.classList.remove('old-school-mode');
+            document.body.classList.remove('light-mode', 'old-school-mode', 'vip-mode', 'ghost-mode');
             document.body.classList.add('femboy-mode');
-            
             const knob = document.getElementById('themeKnob');
-            if (knob) {
-                knob.textContent = '🌸';
-                knob.style.background = '#ff69b4';
-                knob.style.boxShadow = '0 0 15px #ff69b4';
-            }
-            
+            if (knob) { knob.textContent = '🌸'; knob.style.background = '#ff69b4'; knob.style.boxShadow = '0 0 15px #ff69b4'; }
             playClickSound();
             showToastMessage('🌸 FEMBOY MODE ACTIVATED! 🌸');
         }
 
         // Retro Modu Aktif Et
         function activateRetroMode() {
-            document.body.classList.remove('femboy-mode');
-            document.body.classList.remove('light-mode');
+            document.body.classList.remove('femboy-mode', 'light-mode', 'vip-mode', 'ghost-mode');
             document.body.classList.add('old-school-mode');
-            
             const knob = document.getElementById('themeKnob');
-            if (knob) {
-                knob.textContent = '🖥️';
-                knob.style.background = '#ffffff';
-                knob.style.color = '#0000CC';
-                knob.style.boxShadow = '0 0 15px #ffffff';
-            }
-            
+            if (knob) { knob.textContent = '🖥️'; knob.style.background = '#ffffff'; knob.style.color = '#0000CC'; knob.style.boxShadow = '0 0 15px #ffffff'; }
             playClickSound();
             document.getElementById('retro-truths').style.display = 'block';
             showToastMessage('🖥️ RETRO MODE ACTIVATED! ALL TRUTHS REVEALED!');
@@ -1162,28 +944,18 @@
 
         // Idiot Modunu Aktif Et
         function activateIdiotMode() {
-            document.body.classList.remove('femboy-mode');
-            document.body.classList.remove('old-school-mode');
-            document.body.classList.remove('light-mode');
-            
+            document.body.classList.remove('femboy-mode', 'old-school-mode', 'light-mode', 'vip-mode', 'ghost-mode');
             document.body.classList.add('idiot-mode');
             document.getElementById('idiot-overlay').style.display = 'flex';
-            
             playClickSound();
         }
 
         // Matrix Modunu Aktif Et
         function activateMatrixMode() {
-            // Önceki modları kapat
-            document.body.classList.remove('femboy-mode');
-            document.body.classList.remove('old-school-mode');
-            document.body.classList.remove('idiot-mode');
+            document.body.classList.remove('femboy-mode', 'old-school-mode', 'light-mode', 'vip-mode', 'ghost-mode');
             document.body.classList.add('matrix-mode');
+            document.getElementById('matrix-overlay').style.display = 'block';
             
-            const overlay = document.getElementById('matrix-overlay');
-            overlay.style.display = 'block';
-
-            // Canvas ayarları
             const canvas = document.getElementById('matrix-canvas');
             const ctx = canvas.getContext('2d');
             canvas.width = window.innerWidth;
@@ -1198,112 +970,81 @@
             function drawMatrix() {
                 ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = "#0F0"; // Yeşil kodlar
+                ctx.fillStyle = "#0F0";
                 ctx.font = fontSize + "px monospace";
 
                 for (let i = 0; i < drops.length; i++) {
                     const text = chars[Math.floor(Math.random() * chars.length)];
                     ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                        drops[i] = 0;
-                    }
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                     drops[i]++;
                 }
             }
-            if (window.matrixInterval) clearInterval(window.matrixInterval);
-            window.matrixInterval = setInterval(drawMatrix, 50);
+            if (typeof matrixInterval !== 'undefined') clearInterval(matrixInterval);
+            matrixInterval = setInterval(drawMatrix, 50);
             showToastMessage("🟢 MATRIX MODE ACTIVATED!");
         }
 
         // Pizza Modunu Aktif Et
         function activatePizzaMode() {
-            document.body.classList.remove('femboy-mode');
-            document.body.classList.remove('old-school-mode');
-            document.body.classList.remove('idiot-mode');
-            document.body.classList.remove('matrix-mode');
-            document.body.classList.add('pizza-mode');
-            
-            const overlay = document.getElementById('pizza-overlay');
-            overlay.style.display = 'block';
-
-            // Pizza yağmuru (Emoji kullanıyoruz)
-            let pizzaInterval = setInterval(() => {
-                const pizza = document.createElement('div');
-                pizza.style.position = 'absolute';
-                pizza.style.left = Math.random() * 100 + 'vw';
-                pizza.style.fontSize = (Math.random() * 5 + 2) + 'rem';
-                pizza.style.animation = 'fall ' + (Math.random() * 3 + 2) + 's linear';
-                pizza.innerText = '🍕';
-                overlay.appendChild(pizza);
-                setTimeout(() => pizza.remove(), 5000);
-            }, 100);
-            
-            window.pizzaInterval = pizzaInterval;
-            showToastMessage("🍕 PIZZA MODE ACTIVATED!");
+            const pizzaContainer = document.getElementById('pizza-container');
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const pizza = document.createElement('div');
+                    pizza.className = 'falling-pizza';
+                    pizza.innerHTML = '🍕';
+                    pizza.style.left = Math.random() * 100 + 'vw';
+                    pizza.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    pizza.style.fontSize = (Math.random() * 2 + 2) + 'rem';
+                    pizzaContainer.appendChild(pizza);
+                    setTimeout(() => pizza.remove(), 4000);
+                }, i * 200);
+            }
+            playClickSound();
+            showToastMessage('🍕 PIZZA PARTY ACTIVATED!');
         }
 
         // VIP Modunu Aktif Et
         function activateVipMode() {
-            document.body.classList.remove('femboy-mode');
-            document.body.classList.remove('old-school-mode');
-            document.body.classList.remove('idiot-mode');
-            document.body.classList.remove('matrix-mode');
-            document.body.classList.remove('pizza-mode');
+            document.body.classList.remove('femboy-mode', 'old-school-mode', 'light-mode', 'ghost-mode');
             document.body.classList.add('vip-mode');
-            
             const knob = document.getElementById('themeKnob');
-            if (knob) {
-                knob.textContent = '👑';
-                knob.style.background = '#ffd700';
-                knob.style.boxShadow = '0 0 15px #ffd700';
-            }
-            
+            if (knob) { knob.textContent = '👑'; knob.style.background = '#FFD700'; knob.style.boxShadow = '0 0 20px #FFD700'; }
             playClickSound();
-            showToastMessage("👑 VIP MODE ACTIVATED!");
+            showToastMessage('👑 VIP MODE ACTIVATED! GOLDEN AURA ENGAGED.');
         }
 
         // Ghost Modunu Aktif Et
         function activateGhostMode() {
-            document.body.classList.remove('femboy-mode');
-            document.body.classList.remove('old-school-mode');
-            document.body.classList.remove('idiot-mode');
-            document.body.classList.remove('matrix-mode');
-            document.body.classList.remove('pizza-mode');
-            document.body.classList.remove('vip-mode');
             document.body.classList.add('ghost-mode');
-            
-            const hint = document.getElementById('ghost-hint');
-            hint.style.display = 'block';
-            hint.innerText = '👻 GHOST MODE';
-            
             playClickSound();
-            showToastMessage("👻 GHOST MODE ACTIVATED!");
-        }
-
-        // Rickroll Modunu Aktif Et
-        function activateRickrollMode() {
-            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
-            showToastMessage("🎵 RICKROLL! NEVER GONNA GIVE YOU UP!");
+            showToastMessage('👻 GHOST MODE ACTIVATED!');
         }
 
         // Konami Modunu Aktif Et (Konfeti)
         function activateKonamiMode() {
-            playClickSound();
-            showToastMessage("🎉 KONAMI CODE! PARTY TIME!");
-
-            // Konfeti oluştur
-            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff8800'];
-            for (let i = 0; i < 150; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                confetti.style.animationDelay = Math.random() * 2 + 's';
-                document.body.appendChild(confetti);
-                setTimeout(() => confetti.remove(), 5000);
+            const confettiContainer = document.getElementById('confetti-container');
+            const colors = ['#00ff88', '#00e5ff', '#ff69b4', '#FFD700', '#ff0000'];
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confettiContainer.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 30);
             }
+            playClickSound();
+            showToastMessage('🎉 KONAMI CODE ACTIVATED! CELEBRATION TIME!');
+        }
+
+        // Rickroll Modunu Aktif Et
+        function activateRickRoll() {
+            playClickSound();
+            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+            showToastMessage('🎵 NEVER GONNA GIVE YOU UP!');
         }
 
         function showToastMessage(msg) {
